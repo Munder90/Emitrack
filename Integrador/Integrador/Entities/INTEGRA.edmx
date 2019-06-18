@@ -1,0 +1,1030 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="INTEGRAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CARRITO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="10" />
+          <Property Name="Total" Type="int" />
+        </EntityType>
+        <EntityType Name="CARRITO_D">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Carrito" Type="int" />
+          <Property Name="Producto" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Total" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ESTADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Abreb" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MUNICIPIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="int" />
+        </EntityType>
+        <EntityType Name="PAGO_T">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Fecha_Mo" Type="date" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Precio_A" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Precio_V" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_T">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_TIPO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producto" Type="int" />
+          <Property Name="Tipo" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Apellido_P" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Apellido_M" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_N" Type="date" Nullable="false" />
+          <Property Name="T_Usuario" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pregunta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Respuesta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Imagen" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO_DIR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Calle" Type="varchar" MaxLength="50" />
+          <Property Name="Numero_Ext" Type="varchar" MaxLength="50" />
+          <Property Name="Numero_Int" Type="varchar" MaxLength="50" />
+          <Property Name="Colonia" Type="varchar" MaxLength="50" />
+          <Property Name="Municipio" Type="int" />
+          <Property Name="Estado" Type="int" />
+          <Property Name="CP" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="USUARIO_T">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="10" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Entrega" Type="bit" />
+          <Property Name="Direccion" Type="int" />
+          <Property Name="Metod_Pago" Type="int" />
+          <Property Name="Factura" Type="bit" />
+        </EntityType>
+        <EntityType Name="VENTA_D">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Venta" Type="int" />
+          <Property Name="Producto" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_CARRITO_D_ID_Carrito">
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="0..1" />
+          <End Role="CARRITO_D" Type="Self.CARRITO_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARRITO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARRITO_D">
+              <PropertyRef Name="ID_Carrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARRITO_D_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="CARRITO_D" Type="Self.CARRITO_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARRITO_D">
+              <PropertyRef Name="Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARRITO_Usuario">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARRITO">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MUNICIPIO_Estado">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
+          <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MUNICIPIO">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_TIPO_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="PRODUCTO_TIPO" Type="Self.PRODUCTO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO_TIPO">
+              <PropertyRef Name="Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_TIPO_Tipo">
+          <End Role="PRODUCTO_T" Type="Self.PRODUCTO_T" Multiplicity="0..1" />
+          <End Role="PRODUCTO_TIPO" Type="Self.PRODUCTO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO_T">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO_TIPO">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_DIR_Estado">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_DIR">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_DIR_Municipio">
+          <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="0..1" />
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MUNICIPIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_DIR">
+              <PropertyRef Name="Municipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_DIR_Usuario">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_DIR">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_T_Usuario">
+          <End Role="USUARIO_T" Type="Self.USUARIO_T" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_T">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="T_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_D_ID_Venta">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="0..1" />
+          <End Role="VENTA_D" Type="Self.VENTA_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA_D">
+              <PropertyRef Name="ID_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_D_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="VENTA_D" Type="Self.VENTA_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA_D">
+              <PropertyRef Name="Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_Direccion">
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_DIR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="Direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_Metod_Pago">
+          <End Role="PAGO_T" Type="Self.PAGO_T" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAGO_T">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="Metod_Pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_Usuario">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="INTEGRAModelStoreContainer">
+          <EntitySet Name="CARRITO" EntityType="Self.CARRITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CARRITO_D" EntityType="Self.CARRITO_D" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MUNICIPIO" EntityType="Self.MUNICIPIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAGO_T" EntityType="Self.PAGO_T" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO_T" EntityType="Self.PRODUCTO_T" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO_TIPO" EntityType="Self.PRODUCTO_TIPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO_DIR" EntityType="Self.USUARIO_DIR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO_T" EntityType="Self.USUARIO_T" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTA_D" EntityType="Self.VENTA_D" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CARRITO_D_ID_Carrito" Association="Self.FK_CARRITO_D_ID_Carrito">
+            <End Role="CARRITO" EntitySet="CARRITO" />
+            <End Role="CARRITO_D" EntitySet="CARRITO_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARRITO_D_Producto" Association="Self.FK_CARRITO_D_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="CARRITO_D" EntitySet="CARRITO_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARRITO_Usuario" Association="Self.FK_CARRITO_Usuario">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="CARRITO" EntitySet="CARRITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MUNICIPIO_Estado" Association="Self.FK_MUNICIPIO_Estado">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="MUNICIPIO" EntitySet="MUNICIPIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_TIPO_Producto" Association="Self.FK_PRODUCTO_TIPO_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="PRODUCTO_TIPO" EntitySet="PRODUCTO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_TIPO_Tipo" Association="Self.FK_PRODUCTO_TIPO_Tipo">
+            <End Role="PRODUCTO_T" EntitySet="PRODUCTO_T" />
+            <End Role="PRODUCTO_TIPO" EntitySet="PRODUCTO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_DIR_Estado" Association="Self.FK_USUARIO_DIR_Estado">
+            <End Role="ESTADO" EntitySet="ESTADO" />
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_DIR_Municipio" Association="Self.FK_USUARIO_DIR_Municipio">
+            <End Role="MUNICIPIO" EntitySet="MUNICIPIO" />
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_DIR_Usuario" Association="Self.FK_USUARIO_DIR_Usuario">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_T_Usuario" Association="Self.FK_USUARIO_T_Usuario">
+            <End Role="USUARIO_T" EntitySet="USUARIO_T" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_D_ID_Venta" Association="Self.FK_VENTA_D_ID_Venta">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="VENTA_D" EntitySet="VENTA_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_D_Producto" Association="Self.FK_VENTA_D_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="VENTA_D" EntitySet="VENTA_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_Direccion" Association="Self.FK_VENTA_Direccion">
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_Metod_Pago" Association="Self.FK_VENTA_Metod_Pago">
+            <End Role="PAGO_T" EntitySet="PAGO_T" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_Usuario" Association="Self.FK_VENTA_Usuario">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="INTEGRAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CARRITO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Int32" />
+          <NavigationProperty Name="CARRITO_D" Relationship="Self.FK_CARRITO_D_ID_Carrito" FromRole="CARRITO" ToRole="CARRITO_D" />
+          <NavigationProperty Name="USUARIO1" Relationship="Self.FK_CARRITO_Usuario" FromRole="CARRITO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="CARRITO_D">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Carrito" Type="Int32" />
+          <Property Name="Producto" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Total" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CARRITO" Relationship="Self.FK_CARRITO_D_ID_Carrito" FromRole="CARRITO_D" ToRole="CARRITO" />
+          <NavigationProperty Name="PRODUCTO1" Relationship="Self.FK_CARRITO_D_Producto" FromRole="CARRITO_D" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="ESTADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Abreb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MUNICIPIOs" Relationship="Self.FK_MUNICIPIO_Estado" FromRole="ESTADO" ToRole="MUNICIPIO" />
+          <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Estado" FromRole="ESTADO" ToRole="USUARIO_DIR" />
+        </EntityType>
+        <EntityType Name="MUNICIPIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Int32" />
+          <NavigationProperty Name="ESTADO1" Relationship="Self.FK_MUNICIPIO_Estado" FromRole="MUNICIPIO" ToRole="ESTADO" />
+          <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Municipio" FromRole="MUNICIPIO" ToRole="USUARIO_DIR" />
+        </EntityType>
+        <EntityType Name="PAGO_T">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="VENTAs" Relationship="Self.FK_VENTA_Metod_Pago" FromRole="PAGO_T" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Mo" Type="DateTime" Precision="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Precio_A" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Precio_V" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="CARRITO_D" Relationship="Self.FK_CARRITO_D_Producto" FromRole="PRODUCTO" ToRole="CARRITO_D" />
+          <NavigationProperty Name="PRODUCTO_TIPO" Relationship="Self.FK_PRODUCTO_TIPO_Producto" FromRole="PRODUCTO" ToRole="PRODUCTO_TIPO" />
+          <NavigationProperty Name="VENTA_D" Relationship="Self.FK_VENTA_D_Producto" FromRole="PRODUCTO" ToRole="VENTA_D" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_T">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="PRODUCTO_TIPO" Relationship="Self.FK_PRODUCTO_TIPO_Tipo" FromRole="PRODUCTO_T" ToRole="PRODUCTO_TIPO" />
+        </EntityType>
+        <EntityType Name="PRODUCTO_TIPO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producto" Type="Int32" />
+          <Property Name="Tipo" Type="Int32" />
+          <NavigationProperty Name="PRODUCTO1" Relationship="Self.FK_PRODUCTO_TIPO_Producto" FromRole="PRODUCTO_TIPO" ToRole="PRODUCTO" />
+          <NavigationProperty Name="PRODUCTO_T" Relationship="Self.FK_PRODUCTO_TIPO_Tipo" FromRole="PRODUCTO_TIPO" ToRole="PRODUCTO_T" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido_P" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido_M" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_N" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="T_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pregunta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Respuesta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CARRITOes" Relationship="Self.FK_CARRITO_Usuario" FromRole="USUARIO" ToRole="CARRITO" />
+          <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Usuario" FromRole="USUARIO" ToRole="USUARIO_DIR" />
+          <NavigationProperty Name="USUARIO_T" Relationship="Self.FK_USUARIO_T_Usuario" FromRole="USUARIO" ToRole="USUARIO_T" />
+          <NavigationProperty Name="VENTAs" Relationship="Self.FK_VENTA_Usuario" FromRole="USUARIO" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="USUARIO_DIR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Numero_Ext" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Numero_Int" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Municipio" Type="Int32" />
+          <Property Name="Estado" Type="Int32" />
+          <Property Name="CP" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="ESTADO1" Relationship="Self.FK_USUARIO_DIR_Estado" FromRole="USUARIO_DIR" ToRole="ESTADO" />
+          <NavigationProperty Name="MUNICIPIO1" Relationship="Self.FK_USUARIO_DIR_Municipio" FromRole="USUARIO_DIR" ToRole="MUNICIPIO" />
+          <NavigationProperty Name="USUARIO1" Relationship="Self.FK_USUARIO_DIR_Usuario" FromRole="USUARIO_DIR" ToRole="USUARIO" />
+          <NavigationProperty Name="VENTAs" Relationship="Self.FK_VENTA_Direccion" FromRole="USUARIO_DIR" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="USUARIO_T">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIOs" Relationship="Self.FK_USUARIO_T_Usuario" FromRole="USUARIO_T" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Entrega" Type="Boolean" />
+          <Property Name="Direccion" Type="Int32" />
+          <Property Name="Metod_Pago" Type="Int32" />
+          <Property Name="Factura" Type="Boolean" />
+          <NavigationProperty Name="PAGO_T" Relationship="Self.FK_VENTA_Metod_Pago" FromRole="VENTA" ToRole="PAGO_T" />
+          <NavigationProperty Name="USUARIO1" Relationship="Self.FK_VENTA_Usuario" FromRole="VENTA" ToRole="USUARIO" />
+          <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_VENTA_Direccion" FromRole="VENTA" ToRole="USUARIO_DIR" />
+          <NavigationProperty Name="VENTA_D" Relationship="Self.FK_VENTA_D_ID_Venta" FromRole="VENTA" ToRole="VENTA_D" />
+        </EntityType>
+        <EntityType Name="VENTA_D">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Venta" Type="Int32" />
+          <Property Name="Producto" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="PRODUCTO1" Relationship="Self.FK_VENTA_D_Producto" FromRole="VENTA_D" ToRole="PRODUCTO" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK_VENTA_D_ID_Venta" FromRole="VENTA_D" ToRole="VENTA" />
+        </EntityType>
+        <Association Name="FK_CARRITO_D_ID_Carrito">
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="0..1" />
+          <End Role="CARRITO_D" Type="Self.CARRITO_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARRITO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARRITO_D">
+              <PropertyRef Name="ID_Carrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARRITO_Usuario">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARRITO">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARRITO_D_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="CARRITO_D" Type="Self.CARRITO_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARRITO_D">
+              <PropertyRef Name="Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MUNICIPIO_Estado">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
+          <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MUNICIPIO">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_DIR_Estado">
+          <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_DIR">
+              <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_DIR_Municipio">
+          <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="0..1" />
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MUNICIPIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_DIR">
+              <PropertyRef Name="Municipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_Metod_Pago">
+          <End Role="PAGO_T" Type="Self.PAGO_T" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAGO_T">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="Metod_Pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_TIPO_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="PRODUCTO_TIPO" Type="Self.PRODUCTO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO_TIPO">
+              <PropertyRef Name="Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_D_Producto">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="VENTA_D" Type="Self.VENTA_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA_D">
+              <PropertyRef Name="Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_TIPO_Tipo">
+          <End Role="PRODUCTO_T" Type="Self.PRODUCTO_T" Multiplicity="0..1" />
+          <End Role="PRODUCTO_TIPO" Type="Self.PRODUCTO_TIPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO_T">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO_TIPO">
+              <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_DIR_Usuario">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_DIR">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_T_Usuario">
+          <End Role="USUARIO_T" Type="Self.USUARIO_T" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_T">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="T_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_Usuario">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_Direccion">
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="0..1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_DIR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="Direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTA_D_ID_Venta">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="0..1" />
+          <End Role="VENTA_D" Type="Self.VENTA_D" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA_D">
+              <PropertyRef Name="ID_Venta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="INTEGRAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CARRITOes" EntityType="Self.CARRITO" />
+          <EntitySet Name="CARRITO_D" EntityType="Self.CARRITO_D" />
+          <EntitySet Name="ESTADOes" EntityType="Self.ESTADO" />
+          <EntitySet Name="MUNICIPIOs" EntityType="Self.MUNICIPIO" />
+          <EntitySet Name="PAGO_T" EntityType="Self.PAGO_T" />
+          <EntitySet Name="PRODUCTOes" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="PRODUCTO_T" EntityType="Self.PRODUCTO_T" />
+          <EntitySet Name="PRODUCTO_TIPO" EntityType="Self.PRODUCTO_TIPO" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="USUARIOs" EntityType="Self.USUARIO" />
+          <EntitySet Name="USUARIO_DIR" EntityType="Self.USUARIO_DIR" />
+          <EntitySet Name="USUARIO_T" EntityType="Self.USUARIO_T" />
+          <EntitySet Name="VENTAs" EntityType="Self.VENTA" />
+          <EntitySet Name="VENTA_D" EntityType="Self.VENTA_D" />
+          <AssociationSet Name="FK_CARRITO_D_ID_Carrito" Association="Self.FK_CARRITO_D_ID_Carrito">
+            <End Role="CARRITO" EntitySet="CARRITOes" />
+            <End Role="CARRITO_D" EntitySet="CARRITO_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARRITO_Usuario" Association="Self.FK_CARRITO_Usuario">
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+            <End Role="CARRITO" EntitySet="CARRITOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARRITO_D_Producto" Association="Self.FK_CARRITO_D_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+            <End Role="CARRITO_D" EntitySet="CARRITO_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MUNICIPIO_Estado" Association="Self.FK_MUNICIPIO_Estado">
+            <End Role="ESTADO" EntitySet="ESTADOes" />
+            <End Role="MUNICIPIO" EntitySet="MUNICIPIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_DIR_Estado" Association="Self.FK_USUARIO_DIR_Estado">
+            <End Role="ESTADO" EntitySet="ESTADOes" />
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_DIR_Municipio" Association="Self.FK_USUARIO_DIR_Municipio">
+            <End Role="MUNICIPIO" EntitySet="MUNICIPIOs" />
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_Metod_Pago" Association="Self.FK_VENTA_Metod_Pago">
+            <End Role="PAGO_T" EntitySet="PAGO_T" />
+            <End Role="VENTA" EntitySet="VENTAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_TIPO_Producto" Association="Self.FK_PRODUCTO_TIPO_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+            <End Role="PRODUCTO_TIPO" EntitySet="PRODUCTO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_D_Producto" Association="Self.FK_VENTA_D_Producto">
+            <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+            <End Role="VENTA_D" EntitySet="VENTA_D" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_TIPO_Tipo" Association="Self.FK_PRODUCTO_TIPO_Tipo">
+            <End Role="PRODUCTO_T" EntitySet="PRODUCTO_T" />
+            <End Role="PRODUCTO_TIPO" EntitySet="PRODUCTO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_DIR_Usuario" Association="Self.FK_USUARIO_DIR_Usuario">
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_T_Usuario" Association="Self.FK_USUARIO_T_Usuario">
+            <End Role="USUARIO_T" EntitySet="USUARIO_T" />
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_Usuario" Association="Self.FK_VENTA_Usuario">
+            <End Role="USUARIO" EntitySet="USUARIOs" />
+            <End Role="VENTA" EntitySet="VENTAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_Direccion" Association="Self.FK_VENTA_Direccion">
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+            <End Role="VENTA" EntitySet="VENTAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTA_D_ID_Venta" Association="Self.FK_VENTA_D_ID_Venta">
+            <End Role="VENTA" EntitySet="VENTAs" />
+            <End Role="VENTA_D" EntitySet="VENTA_D" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="INTEGRAModelStoreContainer" CdmEntityContainer="INTEGRAEntities">
+          <EntitySetMapping Name="CARRITOes">
+            <EntityTypeMapping TypeName="INTEGRAModel.CARRITO">
+              <MappingFragment StoreEntitySet="CARRITO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARRITO_D">
+            <EntityTypeMapping TypeName="INTEGRAModel.CARRITO_D">
+              <MappingFragment StoreEntitySet="CARRITO_D">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Carrito" ColumnName="ID_Carrito" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADOes">
+            <EntityTypeMapping TypeName="INTEGRAModel.ESTADO">
+              <MappingFragment StoreEntitySet="ESTADO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Abreb" ColumnName="Abreb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MUNICIPIOs">
+            <EntityTypeMapping TypeName="INTEGRAModel.MUNICIPIO">
+              <MappingFragment StoreEntitySet="MUNICIPIO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAGO_T">
+            <EntityTypeMapping TypeName="INTEGRAModel.PAGO_T">
+              <MappingFragment StoreEntitySet="PAGO_T">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOes">
+            <EntityTypeMapping TypeName="INTEGRAModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Fecha_Mo" ColumnName="Fecha_Mo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio_A" ColumnName="Precio_A" />
+                <ScalarProperty Name="Precio_V" ColumnName="Precio_V" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO_T">
+            <EntityTypeMapping TypeName="INTEGRAModel.PRODUCTO_T">
+              <MappingFragment StoreEntitySet="PRODUCTO_T">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO_TIPO">
+            <EntityTypeMapping TypeName="INTEGRAModel.PRODUCTO_TIPO">
+              <MappingFragment StoreEntitySet="PRODUCTO_TIPO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="INTEGRAModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOs">
+            <EntityTypeMapping TypeName="INTEGRAModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido_P" ColumnName="Apellido_P" />
+                <ScalarProperty Name="Apellido_M" ColumnName="Apellido_M" />
+                <ScalarProperty Name="Fecha_N" ColumnName="Fecha_N" />
+                <ScalarProperty Name="T_Usuario" ColumnName="T_Usuario" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
+                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO_DIR">
+            <EntityTypeMapping TypeName="INTEGRAModel.USUARIO_DIR">
+              <MappingFragment StoreEntitySet="USUARIO_DIR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Numero_Ext" ColumnName="Numero_Ext" />
+                <ScalarProperty Name="Numero_Int" ColumnName="Numero_Int" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO_T">
+            <EntityTypeMapping TypeName="INTEGRAModel.USUARIO_T">
+              <MappingFragment StoreEntitySet="USUARIO_T">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTAs">
+            <EntityTypeMapping TypeName="INTEGRAModel.VENTA">
+              <MappingFragment StoreEntitySet="VENTA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Entrega" ColumnName="Entrega" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Metod_Pago" ColumnName="Metod_Pago" />
+                <ScalarProperty Name="Factura" ColumnName="Factura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTA_D">
+            <EntityTypeMapping TypeName="INTEGRAModel.VENTA_D">
+              <MappingFragment StoreEntitySet="VENTA_D">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Venta" ColumnName="ID_Venta" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
