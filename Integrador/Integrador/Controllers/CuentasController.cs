@@ -67,6 +67,8 @@ namespace Integrador.Controllers
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Response.Cookies.Add(authCookie);
+                Session["usuario"] = user.ID;
+                ViewBag.Usuario = Session["usuario"].ToString();
                 ////return RedirectToAction("Index", "Home");
                 if (returnUrl != null)
                 {
@@ -126,7 +128,7 @@ namespace Integrador.Controllers
 
                     return Redirect(returnUrl);
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Dashboard", "Usuario", new { id = user.ID });
             }
 
             else

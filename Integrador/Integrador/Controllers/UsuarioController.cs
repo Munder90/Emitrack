@@ -15,13 +15,22 @@ namespace Integrador.Controllers
         // GET: Usuario
         public ActionResult Index()
         {
-            return RedirectToAction("Index","Home");
+            ViewBag.Usuario = Session["usuario"].ToString();
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Usuario/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            string usuario = Session["usuario"].ToString();
+            if (usuario == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Usuario/Create
@@ -145,6 +154,12 @@ namespace Integrador.Controllers
             {
                 return View();
             }
+        }
+
+        // GET: Usuario/Dashboard/5
+        public ActionResult Dashboard(string id)
+        {
+            return View();
         }
 
         public bool ExisteUsuario(string user)

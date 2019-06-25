@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Estilos/EstiloIndex/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/Estilos/EstiloIndex/css/shop-homepage.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a href="@Url.Action("Index", "Home")" class="brand-logo">
+                <img src="~/images/EmiTrack.png" width="130" height="65" style="padding-top: 8px; padding-left: 8px; " />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    @*<li class="nav-item active">
+                            <a class="nav-link" href="#">
+                                Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>*@
+
+                    @if (ViewBag.Usuario != null)
+                    {
+                        <li>@Html.ActionLink("Perfil", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li>@Html.ActionLink("Cerrar", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Cuentas", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li>@Html.ActionLink("Registro", "Registro", "Usuario", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br />
+    <hr />
+
+    
+    <!-- Footer -->
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Emitrack</p>
+        </footer>
+    </div>
+    <!--<footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+        </div>
+        <!-- /.container
+    </footer>-->
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Estilos/EstiloIndex/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Estilos/EstiloIndex/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
