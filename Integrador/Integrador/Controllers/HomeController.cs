@@ -13,6 +13,12 @@ namespace Integrador.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            try
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+            }
+            catch (Exception) { }
             return View();
         }
 

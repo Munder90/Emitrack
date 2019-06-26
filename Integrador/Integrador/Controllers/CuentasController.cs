@@ -62,14 +62,15 @@ namespace Integrador.Controllers
             {
                 FormsAuthentication.SetAuthCookie(model.ID, false);
 
-                ////var authTicket = new FormsAuthenticationTicket(1, user.ID, DateTime.Now, DateTime.Now.AddMinutes(20), false, user.MIEMBROS.FirstOrDefault().ROL.NOMBRE);
                 var authTicket = new FormsAuthenticationTicket(1, user.ID.ToUpper(), DateTime.Now, DateTime.Now.AddDays(1), false, "Administrador");
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                 HttpContext.Response.Cookies.Add(authCookie);
                 Session["usuario"] = user.ID;
+                Session["tipo"] = user.T_Usuario;
+
                 ViewBag.Usuario = Session["usuario"].ToString();
-                ////return RedirectToAction("Index", "Home");
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 if (returnUrl != null)
                 {
                     bool us = false;
@@ -136,6 +137,12 @@ namespace Integrador.Controllers
                 ModelState.AddModelError("", "Usuario/contraseña incorrecta.");
                 return View(model);
             }
+        }
+        public ActionResult LogOut()
+        {
+            Session["usuario"] = null;
+            Session["tipo"] = null;
+            return RedirectToAction("Index", "Home");
         }
     }
 }

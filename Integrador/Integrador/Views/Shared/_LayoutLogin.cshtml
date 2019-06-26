@@ -6,13 +6,9 @@
     <title>@ViewBag.Title</title>
 
     <link href="~/Estilos/Dash-Login/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template-->
     <link href="~/Estilos/Dash-Login/css/sb-admin.css" rel="stylesheet">
 </head>
 <body>
-
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
             <a href="@Url.Action("Index", "Home")" class="brand-logo">
@@ -23,22 +19,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    @*<li class="nav-item active">
-                            <a class="nav-link" href="#">
-                                Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>*@
-
                     @if (ViewBag.Usuario != null)
                     {
                         <li></li>

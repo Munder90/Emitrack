@@ -1,7 +1,14 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    //if (ViewBag.Usuario == null)
+    //{
+    //Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    //}
+    //else
+    //{
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+    //}
 }
 
 <!-- Page Content -->
@@ -9,9 +16,9 @@
 
     <div class="row">
 
-        <div class="col-lg-3">
+        <div class="col-lg-2">
 
-            <br /><br /><br />
+            @*<br /><br /><br />
             <div class="list-group">
                 <a href="#" class="list-group-item">Category 1</a>
                 <a href="#" class="list-group-item">Category 2</a>
@@ -22,7 +29,7 @@
             <div class="list-group">
                 <a href="#" class="list-group-item">Contacto</a>
                 <a href="#" class="list-group-item">Acerca De</a>
-            </div>
+            </div>*@
 
         </div>
         <!-- /.col-lg-3 -->

@@ -16,21 +16,31 @@ namespace Integrador.Controllers
         public ActionResult Index()
         {
             ViewBag.Usuario = Session["usuario"].ToString();
+            ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
             return RedirectToAction("Index", "Home");
         }
 
         // GET: Usuario/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            string usuario = Session["usuario"].ToString();
-            if (usuario == null)
+            if (id != null)
             {
-                return View();
+                USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                Usuario us = new Usuario
+                {
+                    ID1 = u.ID,
+                    Email = u.Email,
+                    Nombre = u.Nombre,
+                    Apellido_P = u.Apellido_P,
+                    Apellido_M = u.Apellido_M,
+                    Fecha_N = u.Fecha_N.Date,
+                    Pregunta = u.Pregunta
+                };
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                return View(us);
             }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Usuario/Create
@@ -113,17 +123,19 @@ namespace Integrador.Controllers
         }
 
         // GET: Usuario/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
             return View();
         }
 
         // POST: Usuario/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, FormCollection collection)
         {
             try
             {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");
@@ -135,14 +147,14 @@ namespace Integrador.Controllers
         }
 
         // GET: Usuario/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             return View();
         }
 
         // POST: Usuario/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
@@ -159,7 +171,24 @@ namespace Integrador.Controllers
         // GET: Usuario/Dashboard/5
         public ActionResult Dashboard(string id)
         {
-            return View();
+            if (id != null)
+            {
+                USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                Usuario us = new Usuario
+                {
+                    ID1 = u.ID,
+                    Email = u.Email,
+                    Nombre = u.Nombre,
+                    Apellido_P = u.Apellido_P,
+                    Apellido_M = u.Apellido_M,
+                    Fecha_N = u.Fecha_N.Date,
+                    Pregunta = u.Pregunta
+                };
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                return View(us);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         public bool ExisteUsuario(string user)

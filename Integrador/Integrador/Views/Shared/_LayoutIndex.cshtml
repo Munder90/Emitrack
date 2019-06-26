@@ -42,7 +42,7 @@
 
                     @if (ViewBag.Usuario != null)
                     {
-                        <li>@Html.ActionLink("Perfil", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        <li>@Html.ActionLink("Perfil", "Dashboard", "Usuario", new { id = ViewBag.Usuario }, new { @class = "navbar-brand" })</li>
                         <li>@Html.ActionLink("Cerrar", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
                     }
                     else

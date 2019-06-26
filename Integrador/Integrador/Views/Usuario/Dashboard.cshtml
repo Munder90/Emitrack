@@ -1,8 +1,66 @@
-﻿
+﻿@model Integrador.Models.Usuario
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
 
-<h2>Dashboard</h2>
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">
+                    <small>@ViewBag.usuario</small>
+                </h1>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre", disabled = "disabled" } })
+                        @Html.LabelFor(model => model.Nombre, "Nombre", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Apellido_P, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Paterno", disabled = "disabled" } })
+                        @Html.LabelFor(model => model.Apellido_P, "Apellido Paterno", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Apellido_M, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Materno", disabled = "disabled" } })
+                        @Html.LabelFor(model => model.Apellido_M, "Apellido Materno", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Fecha_N, new { htmlAttributes = new { @class = "form-control", @type = "date", @placeholder = "Fecha de Nacimiento", disabled = "disabled" } })
+                        @Html.LabelFor(model => model.Fecha_N, "Fecha de Nacimiento", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", disabled = "disabled" } })
+                        @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Pregunta, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pregunta", disabled = "disabled" } })
+                        @Html.LabelFor(model => model.Pregunta, "Pregunta", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.ActionLink("Editar Datos", "Edit", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                    @Html.ActionLink("Direcciones de Envío", "Dir", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                    @Html.ActionLink("Cambiar Pregunta", "Pregunta", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                    @Html.ActionLink("Cambiar Contraseña", "Pass", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
