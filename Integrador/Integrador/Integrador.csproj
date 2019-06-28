@@ -2297,6 +2297,10 @@
     <Content Include="Views\Usuario\Registro.cshtml" />
     <Content Include="Views\Shared\_LayoutDash.cshtml" />
     <Content Include="Views\Usuario\Dashboard.cshtml" />
+    <Content Include="Views\Usuario\Details.cshtml" />
+    <Content Include="Views\Usuario\_DashDetalle.cshtml" />
+    <Content Include="Views\Usuario\Edit.cshtml" />
+    <Content Include="Views\Usuario\Direccion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

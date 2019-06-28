@@ -125,7 +125,24 @@ namespace Integrador.Controllers
         // GET: Usuario/Edit/5
         public ActionResult Edit(string id)
         {
-            return View();
+            if (id != null)
+            {
+                USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                Usuario us = new Usuario
+                {
+                    ID1 = u.ID,
+                    Email = u.Email,
+                    Nombre = u.Nombre,
+                    Apellido_P = u.Apellido_P,
+                    Apellido_M = u.Apellido_M,
+                    Fecha_N = u.Fecha_N.Date,
+                    Pregunta = u.Pregunta
+                };
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                return View(us);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Usuario/Edit/5
@@ -189,6 +206,106 @@ namespace Integrador.Controllers
                 return View(us);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Direccion(string id)
+        {
+            if (id != null)
+            {
+                List<USUARIO_DIR> d = db.USUARIO_DIR.Where(x => x.Usuario == id).ToList();
+                List<Usuarios_Dir> ud = new List<Usuarios_Dir>();
+
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                return View(ud);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult Direccion(string id, FormCollection collection)
+        {
+            try
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult DireccionEdit(string id)
+        {
+            if (id != null)
+            {
+                USUARIO_DIR d = db.USUARIO_DIR.Where(x => x.Usuario == id).FirstOrDefault();
+                Usuarios_Dir ud = new Usuarios_Dir();
+
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                return View(ud);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult DireccionEdit(string id, FormCollection collection)
+        {
+            try
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Pass(string id)
+        {
+            if (id != null)
+            {
+                USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                Usuario us = new Usuario
+                {
+                    ID1 = u.ID,
+                    Email = u.Email,
+                    Nombre = u.Nombre,
+                    Apellido_P = u.Apellido_P,
+                    Apellido_M = u.Apellido_M,
+                    Fecha_N = u.Fecha_N.Date,
+                };
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                return View(us);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult Pass(string id, FormCollection collection)
+        {
+            try
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         public bool ExisteUsuario(string user)

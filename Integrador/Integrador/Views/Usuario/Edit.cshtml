@@ -1,8 +1,13 @@
 ﻿@model Integrador.Models.Usuario
+
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
     <div id="page-wrapper">
         <div id="page-inner">
@@ -20,28 +25,32 @@
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Nombre, "Nombre", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre" } })
+                            @Html.ValidationMessageFor(model => model.ID1, "", new { @class = "text-danger" })
                             @*@Html.LabelFor(model => model.Nombre, "Nombre", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Apellido_P, "Apellido Paterno", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Apellido_P, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Paterno", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Apellido_P, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Paterno" } })
+                            @Html.ValidationMessageFor(model => model.ID1, "", new { @class = "text-danger" })
                             @*@Html.LabelFor(model => model.Apellido_P, "Apellido Paterno", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Apellido_M, "Apellido Materno", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Apellido_M, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Materno", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Apellido_M, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Materno" } })
+                            @Html.ValidationMessageFor(model => model.ID1, "", new { @class = "text-danger" })
                             @*@Html.LabelFor(model => model.Apellido_M, "Apellido Materno", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Fecha_N, "Fecha de Nacimiento", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Fecha_N, new { htmlAttributes = new { @class = "form-control", @type = "date", @placeholder = "Fecha de Nacimiento", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Fecha_N, new { htmlAttributes = new { @class = "form-control", @type = "date", @placeholder = "Fecha de Nacimiento" } })
+                            @Html.ValidationMessageFor(model => model.ID1, "", new { @class = "text-danger" })
                             @*@Html.LabelFor(model => model.Fecha_N, "Fecha de Nacimiento", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
@@ -49,21 +58,18 @@
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.ID1, "", new { @class = "text-danger" })
                             @*@Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="form-label-group">
-                            @Html.LabelFor(model => model.Pregunta, "Pregunta", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Pregunta, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pregunta", disabled = "disabled" } })
-                            @*@Html.LabelFor(model => model.Pregunta, "Pregunta", htmlAttributes: new { @class = "control-label" })*@
-                        </div>
+                        <input type="submit" value="Salvar" class="btn btn-primary btn-block" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        @Html.ActionLink("Editar Datos", "Edit", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                        @Html.ActionLink("Direcciones de Envío", "Direccion", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                        @Html.ActionLink("Datos", "Dashboard", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                        @Html.ActionLink("Direcciones de Envío", "Dir", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
                         @Html.ActionLink("Cambiar Pregunta", "Pregunta", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
                         @Html.ActionLink("Cambiar Contraseña", "Pass", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
                     </div>
@@ -71,3 +77,13 @@
             </div>
         </div>
     </div>
+}
+
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
