@@ -124,22 +124,33 @@
                             <a @*class="active-menu"*@ href="@Url.Action("Dashboard", "Usuario", new { id = ViewBag.usuario })"><i class="fa fa-dashboard"></i> Usuario</a>
                         </li>
                         @*<li>
-                            <a href="#"><i class="fa fa-edit"></i> Editar Datos</a>
-                        </li>*@
+                <a href="#"><i class="fa fa-edit"></i> Editar Datos</a>
+            </li>*@
                         if (ViewBag.Tipo == 1)
                         {
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o"></i> Charts</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-qrcode"></i> Reportes</a>
-                        </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-qrcode"></i> Reportes<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="@Url.Action("Productos", "Report")">Productos</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Clientes</a>
+                                    </li>
+                                    @*<li>
+                                        <a href="#">Categoria 2</a>
+                                    </li>*@
+                                </ul>
+                            </li>
                         }
                         if (ViewBag.Tipo == 2)
                         {
-                        <li>
-                            <a href="#"><i class="fa fa-table"></i> Mis Compras</a>
-                        </li>
+                            <li>
+                                <a href="#"><i class="fa fa-table"></i> Mis Compras</a>
+                            </li>
                         }
                     }
 
@@ -162,21 +173,21 @@
                                 <a href="#">Categoria 2</a>
                             </li>
                             @*<li>
-            <a href="#">Second Level Link<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
-                <li>
-                    <a href="#">Third Level Link</a>
-                </li>
-                <li>
-                    <a href="#">Third Level Link</a>
-                </li>
-                <li>
-                    <a href="#">Third Level Link</a>
-                </li>
+                    <a href="#">Second Level Link<span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li>
+                            <a href="#">Third Level Link</a>
+                        </li>
+                        <li>
+                            <a href="#">Third Level Link</a>
+                        </li>
+                        <li>
+                            <a href="#">Third Level Link</a>
+                        </li>
 
-            </ul>
+                    </ul>
 
-        </li>*@
+                </li>*@
                         </ul>
                     </li>
                     <li>

@@ -17,6 +17,7 @@ namespace Integrador.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MUNICIPIO()
         {
+            this.LOCALIDADs = new HashSet<LOCALIDAD>();
             this.USUARIO_DIR = new HashSet<USUARIO_DIR>();
         }
     
@@ -25,6 +26,8 @@ namespace Integrador.Entities
         public Nullable<int> Estado { get; set; }
     
         public virtual ESTADO ESTADO1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LOCALIDAD> LOCALIDADs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_DIR> USUARIO_DIR { get; set; }
     }

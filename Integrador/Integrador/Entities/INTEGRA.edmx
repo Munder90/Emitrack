@@ -29,14 +29,22 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="Abreb" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LOCALIDAD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CP" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Municipio" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MUNICIPIO">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="70" />
           <Property Name="Estado" Type="int" />
         </EntityType>
         <EntityType Name="PAGO_T">
@@ -113,7 +121,7 @@
           <Property Name="Calle" Type="varchar" MaxLength="50" />
           <Property Name="Numero_Ext" Type="varchar" MaxLength="50" />
           <Property Name="Numero_Int" Type="varchar" MaxLength="50" />
-          <Property Name="Colonia" Type="varchar" MaxLength="50" />
+          <Property Name="Colonia" Type="int" />
           <Property Name="Municipio" Type="int" />
           <Property Name="Estado" Type="int" />
           <Property Name="CP" Type="int" />
@@ -185,6 +193,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LOCALIDAD_Municipio">
+          <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="1" />
+          <End Role="LOCALIDAD" Type="Self.LOCALIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MUNICIPIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOCALIDAD">
+              <PropertyRef Name="Municipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MUNICIPIO_Estado">
           <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="0..1" />
           <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="*" />
@@ -218,6 +238,18 @@
             </Principal>
             <Dependent Role="PRODUCTO_TIPO">
               <PropertyRef Name="Tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_DIR_Colonia">
+          <End Role="LOCALIDAD" Type="Self.LOCALIDAD" Multiplicity="0..1" />
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOCALIDAD">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_DIR">
+              <PropertyRef Name="Colonia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -333,6 +365,7 @@
           <EntitySet Name="CARRITO" EntityType="Self.CARRITO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CARRITO_D" EntityType="Self.CARRITO_D" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOCALIDAD" EntityType="Self.LOCALIDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MUNICIPIO" EntityType="Self.MUNICIPIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAGO_T" EntityType="Self.PAGO_T" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
@@ -356,6 +389,10 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="CARRITO" EntitySet="CARRITO" />
           </AssociationSet>
+          <AssociationSet Name="FK_LOCALIDAD_Municipio" Association="Self.FK_LOCALIDAD_Municipio">
+            <End Role="MUNICIPIO" EntitySet="MUNICIPIO" />
+            <End Role="LOCALIDAD" EntitySet="LOCALIDAD" />
+          </AssociationSet>
           <AssociationSet Name="FK_MUNICIPIO_Estado" Association="Self.FK_MUNICIPIO_Estado">
             <End Role="ESTADO" EntitySet="ESTADO" />
             <End Role="MUNICIPIO" EntitySet="MUNICIPIO" />
@@ -367,6 +404,10 @@
           <AssociationSet Name="FK_PRODUCTO_TIPO_Tipo" Association="Self.FK_PRODUCTO_TIPO_Tipo">
             <End Role="PRODUCTO_T" EntitySet="PRODUCTO_T" />
             <End Role="PRODUCTO_TIPO" EntitySet="PRODUCTO_TIPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_DIR_Colonia" Association="Self.FK_USUARIO_DIR_Colonia">
+            <End Role="LOCALIDAD" EntitySet="LOCALIDAD" />
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
           </AssociationSet>
           <AssociationSet Name="FK_USUARIO_DIR_Estado" Association="Self.FK_USUARIO_DIR_Estado">
             <End Role="ESTADO" EntitySet="ESTADO" />
@@ -438,18 +479,29 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Abreb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MUNICIPIOs" Relationship="Self.FK_MUNICIPIO_Estado" FromRole="ESTADO" ToRole="MUNICIPIO" />
           <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Estado" FromRole="ESTADO" ToRole="USUARIO_DIR" />
+        </EntityType>
+        <EntityType Name="LOCALIDAD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CP" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Municipio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MUNICIPIO1" Relationship="Self.FK_LOCALIDAD_Municipio" FromRole="LOCALIDAD" ToRole="MUNICIPIO" />
+          <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Colonia" FromRole="LOCALIDAD" ToRole="USUARIO_DIR" />
         </EntityType>
         <EntityType Name="MUNICIPIO">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="Int32" />
           <NavigationProperty Name="ESTADO1" Relationship="Self.FK_MUNICIPIO_Estado" FromRole="MUNICIPIO" ToRole="ESTADO" />
+          <NavigationProperty Name="LOCALIDADs" Relationship="Self.FK_LOCALIDAD_Municipio" FromRole="MUNICIPIO" ToRole="LOCALIDAD" />
           <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Municipio" FromRole="MUNICIPIO" ToRole="USUARIO_DIR" />
         </EntityType>
         <EntityType Name="PAGO_T">
@@ -537,12 +589,13 @@
           <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Numero_Ext" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Numero_Int" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Colonia" Type="Int32" />
           <Property Name="Municipio" Type="Int32" />
           <Property Name="Estado" Type="Int32" />
           <Property Name="CP" Type="Int32" />
           <Property Name="Activo" Type="Boolean" />
           <NavigationProperty Name="ESTADO1" Relationship="Self.FK_USUARIO_DIR_Estado" FromRole="USUARIO_DIR" ToRole="ESTADO" />
+          <NavigationProperty Name="LOCALIDAD" Relationship="Self.FK_USUARIO_DIR_Colonia" FromRole="USUARIO_DIR" ToRole="LOCALIDAD" />
           <NavigationProperty Name="MUNICIPIO1" Relationship="Self.FK_USUARIO_DIR_Municipio" FromRole="USUARIO_DIR" ToRole="MUNICIPIO" />
           <NavigationProperty Name="USUARIO1" Relationship="Self.FK_USUARIO_DIR_Usuario" FromRole="USUARIO_DIR" ToRole="USUARIO" />
           <NavigationProperty Name="VENTAs" Relationship="Self.FK_VENTA_Direccion" FromRole="USUARIO_DIR" ToRole="VENTA" />
@@ -641,6 +694,30 @@
             </Principal>
             <Dependent Role="USUARIO_DIR">
               <PropertyRef Name="Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCALIDAD_Municipio">
+          <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="1" />
+          <End Role="LOCALIDAD" Type="Self.LOCALIDAD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MUNICIPIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LOCALIDAD">
+              <PropertyRef Name="Municipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USUARIO_DIR_Colonia">
+          <End Role="LOCALIDAD" Type="Self.LOCALIDAD" Multiplicity="0..1" />
+          <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOCALIDAD">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_DIR">
+              <PropertyRef Name="Colonia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -768,6 +845,7 @@
           <EntitySet Name="CARRITOes" EntityType="Self.CARRITO" />
           <EntitySet Name="CARRITO_D" EntityType="Self.CARRITO_D" />
           <EntitySet Name="ESTADOes" EntityType="Self.ESTADO" />
+          <EntitySet Name="LOCALIDADs" EntityType="Self.LOCALIDAD" />
           <EntitySet Name="MUNICIPIOs" EntityType="Self.MUNICIPIO" />
           <EntitySet Name="PAGO_T" EntityType="Self.PAGO_T" />
           <EntitySet Name="PRODUCTOes" EntityType="Self.PRODUCTO" />
@@ -797,6 +875,14 @@
           </AssociationSet>
           <AssociationSet Name="FK_USUARIO_DIR_Estado" Association="Self.FK_USUARIO_DIR_Estado">
             <End Role="ESTADO" EntitySet="ESTADOes" />
+            <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCALIDAD_Municipio" Association="Self.FK_LOCALIDAD_Municipio">
+            <End Role="MUNICIPIO" EntitySet="MUNICIPIOs" />
+            <End Role="LOCALIDAD" EntitySet="LOCALIDADs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USUARIO_DIR_Colonia" Association="Self.FK_USUARIO_DIR_Colonia">
+            <End Role="LOCALIDAD" EntitySet="LOCALIDADs" />
             <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
           </AssociationSet>
           <AssociationSet Name="FK_USUARIO_DIR_Municipio" Association="Self.FK_USUARIO_DIR_Municipio">
@@ -871,7 +957,16 @@
               <MappingFragment StoreEntitySet="ESTADO">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Abreb" ColumnName="Abreb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOCALIDADs">
+            <EntityTypeMapping TypeName="INTEGRAModel.LOCALIDAD">
+              <MappingFragment StoreEntitySet="LOCALIDAD">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

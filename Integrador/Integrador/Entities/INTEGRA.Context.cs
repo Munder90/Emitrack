@@ -28,6 +28,7 @@ namespace Integrador.Entities
         public virtual DbSet<CARRITO> CARRITOes { get; set; }
         public virtual DbSet<CARRITO_D> CARRITO_D { get; set; }
         public virtual DbSet<ESTADO> ESTADOes { get; set; }
+        public virtual DbSet<LOCALIDAD> LOCALIDADs { get; set; }
         public virtual DbSet<MUNICIPIO> MUNICIPIOs { get; set; }
         public virtual DbSet<PAGO_T> PAGO_T { get; set; }
         public virtual DbSet<PRODUCTO> PRODUCTOes { get; set; }

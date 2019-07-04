@@ -12,20 +12,20 @@ namespace Integrador.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class ESTADO
+    public partial class LOCALIDAD
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ESTADO()
+        public LOCALIDAD()
         {
-            this.MUNICIPIOs = new HashSet<MUNICIPIO>();
             this.USUARIO_DIR = new HashSet<USUARIO_DIR>();
         }
     
         public int ID { get; set; }
+        public int CP { get; set; }
         public string Nombre { get; set; }
+        public int Municipio { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MUNICIPIO> MUNICIPIOs { get; set; }
+        public virtual MUNICIPIO MUNICIPIO1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_DIR> USUARIO_DIR { get; set; }
     }

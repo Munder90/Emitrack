@@ -13,8 +13,8 @@ namespace Integrador.Models
         string numero_Ext;
         string numero_Int;
         string colonia;
-        int municipio;
-        int estado;
+        string municipio;
+        string estado;
         int cP;
 
         public int ID { get => iD; set => iD = value; }
@@ -23,8 +23,8 @@ namespace Integrador.Models
         public string Numero_Ext { get => numero_Ext; set => numero_Ext = value; }
         public string Numero_Int { get => numero_Int; set => numero_Int = value; }
         public string Colonia { get => colonia; set => colonia = value; }
-        public int Municipio { get => municipio; set => municipio = value; }
-        public int Estado { get => estado; set => estado = value; }
+        public string Municipio { get => municipio; set => municipio = value; }
+        public string Estado { get => estado; set => estado = value; }
         public int CP { get => cP; set => cP = value; }
     }
 }

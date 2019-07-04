@@ -5,79 +5,84 @@
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
 
-<div>
-    <h4>Usuarios_Dir</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Calle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Calle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Numero_Ext)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Numero_Ext)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Numero_Int)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Numero_Int)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Colonia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Colonia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Municipio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Municipio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CP)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CP)
-        </dd>
-
-    </dl>
-</div>
-<div class="col-md-4">
-    <div class="form-group">
-        @Html.ActionLink("Datos", "Dashboard", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
-        @Html.ActionLink("Editar Direccion", "Direccion", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">
+                    <small>@ViewBag.usuario</small>
+                </h1>
+            </div>
+        </div>
+        @if (Model != null)
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.DisplayNameFor(model => model.Usuario)
+                            @Html.DisplayFor(model => model.Usuario)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.DisplayNameFor(model => model.Calle)
+                            @Html.DisplayFor(model => model.Calle)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.DisplayNameFor(model => model.Numero_Ext)
+                            @Html.DisplayFor(model => model.Numero_Ext)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.DisplayNameFor(model => model.Numero_Int)
+                            @Html.DisplayFor(model => model.Numero_Int)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.DisplayNameFor(model => model.Colonia)
+                            @Html.DisplayFor(model => model.Colonia)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.DisplayNameFor(model => model.Municipio)
+                            @Html.DisplayFor(model => model.Municipio)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.DisplayNameFor(model => model.Estado)
+                            @Html.DisplayFor(model => model.Estado)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.DisplayNameFor(model => model.CP)
+                            @Html.DisplayFor(model => model.CP)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>@ViewBag.Error</label>
+                </div>
+            </div>
+        }
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.ActionLink("Datos", "Dashboard", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                @Html.ActionLink("Nueva Direccion", "DireccionNueva", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+            </div>
+        </div>
     </div>
-</div>
+            </div>

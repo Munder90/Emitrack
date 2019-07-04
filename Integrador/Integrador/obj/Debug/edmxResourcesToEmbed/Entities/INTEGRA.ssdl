@@ -24,14 +24,22 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
-    <Property Name="Abreb" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LOCALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CP" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="Municipio" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MUNICIPIO">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Nombre" Type="varchar" MaxLength="70" />
     <Property Name="Estado" Type="int" />
   </EntityType>
   <EntityType Name="PAGO_T">
@@ -177,6 +185,18 @@
       </Principal>
       <Dependent Role="CARRITO">
         <PropertyRef Name="Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOCALIDAD_Municipio">
+    <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="1" />
+    <End Role="LOCALIDAD" Type="Self.LOCALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MUNICIPIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LOCALIDAD">
+        <PropertyRef Name="Municipio" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -328,6 +348,7 @@
     <EntitySet Name="CARRITO" EntityType="Self.CARRITO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CARRITO_D" EntityType="Self.CARRITO_D" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOCALIDAD" EntityType="Self.LOCALIDAD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MUNICIPIO" EntityType="Self.MUNICIPIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAGO_T" EntityType="Self.PAGO_T" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
@@ -350,6 +371,10 @@
     <AssociationSet Name="FK_CARRITO_Usuario" Association="Self.FK_CARRITO_Usuario">
       <End Role="USUARIO" EntitySet="USUARIO" />
       <End Role="CARRITO" EntitySet="CARRITO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOCALIDAD_Municipio" Association="Self.FK_LOCALIDAD_Municipio">
+      <End Role="MUNICIPIO" EntitySet="MUNICIPIO" />
+      <End Role="LOCALIDAD" EntitySet="LOCALIDAD" />
     </AssociationSet>
     <AssociationSet Name="FK_MUNICIPIO_Estado" Association="Self.FK_MUNICIPIO_Estado">
       <End Role="ESTADO" EntitySet="ESTADO" />

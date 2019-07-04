@@ -28,18 +28,28 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Abreb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="MUNICIPIOs" Relationship="Self.FK_MUNICIPIO_Estado" FromRole="ESTADO" ToRole="MUNICIPIO" />
     <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Estado" FromRole="ESTADO" ToRole="USUARIO_DIR" />
+  </EntityType>
+  <EntityType Name="LOCALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CP" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Municipio" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MUNICIPIO1" Relationship="Self.FK_LOCALIDAD_Municipio" FromRole="LOCALIDAD" ToRole="MUNICIPIO" />
   </EntityType>
   <EntityType Name="MUNICIPIO">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
     <Property Name="Estado" Type="Int32" />
     <NavigationProperty Name="ESTADO1" Relationship="Self.FK_MUNICIPIO_Estado" FromRole="MUNICIPIO" ToRole="ESTADO" />
+    <NavigationProperty Name="LOCALIDADs" Relationship="Self.FK_LOCALIDAD_Municipio" FromRole="MUNICIPIO" ToRole="LOCALIDAD" />
     <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Municipio" FromRole="MUNICIPIO" ToRole="USUARIO_DIR" />
   </EntityType>
   <EntityType Name="PAGO_T">
@@ -234,6 +244,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_LOCALIDAD_Municipio">
+    <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="1" />
+    <End Role="LOCALIDAD" Type="Self.LOCALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MUNICIPIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LOCALIDAD">
+        <PropertyRef Name="Municipio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_USUARIO_DIR_Municipio">
     <End Role="MUNICIPIO" Type="Self.MUNICIPIO" Multiplicity="0..1" />
     <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
@@ -358,6 +380,7 @@
     <EntitySet Name="CARRITOes" EntityType="Self.CARRITO" />
     <EntitySet Name="CARRITO_D" EntityType="Self.CARRITO_D" />
     <EntitySet Name="ESTADOes" EntityType="Self.ESTADO" />
+    <EntitySet Name="LOCALIDADs" EntityType="Self.LOCALIDAD" />
     <EntitySet Name="MUNICIPIOs" EntityType="Self.MUNICIPIO" />
     <EntitySet Name="PAGO_T" EntityType="Self.PAGO_T" />
     <EntitySet Name="PRODUCTOes" EntityType="Self.PRODUCTO" />
@@ -388,6 +411,10 @@
     <AssociationSet Name="FK_USUARIO_DIR_Estado" Association="Self.FK_USUARIO_DIR_Estado">
       <End Role="ESTADO" EntitySet="ESTADOes" />
       <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOCALIDAD_Municipio" Association="Self.FK_LOCALIDAD_Municipio">
+      <End Role="MUNICIPIO" EntitySet="MUNICIPIOs" />
+      <End Role="LOCALIDAD" EntitySet="LOCALIDADs" />
     </AssociationSet>
     <AssociationSet Name="FK_USUARIO_DIR_Municipio" Association="Self.FK_USUARIO_DIR_Municipio">
       <End Role="MUNICIPIO" EntitySet="MUNICIPIOs" />

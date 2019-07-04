@@ -4,26 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="15ba1d01955d48e69d81210a082b30f3" Name="Diagram1">
-        <EntityTypeShape EntityType="INTEGRAModel.CARRITO" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.CARRITO_D" Width="1.5" PointX="9.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.ESTADO" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+      <Diagram DiagramId="49a433b77f8e47c194cda4f36b3b8d33" Name="Diagram1">
+        <EntityTypeShape EntityType="INTEGRAModel.CARRITO" Width="1.5" PointX="9.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.CARRITO_D" Width="1.5" PointX="12" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.ESTADO" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.LOCALIDAD" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="INTEGRAModel.MUNICIPIO" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.PAGO_T" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.PRODUCTO" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.PRODUCTO_T" Width="1.5" PointX="7.5" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.PRODUCTO_TIPO" Width="1.5" PointX="9.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.sysdiagram" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.USUARIO" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.USUARIO_DIR" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.USUARIO_T" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.VENTA" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTEGRAModel.VENTA_D" Width="1.5" PointX="9.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.PAGO_T" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.PRODUCTO" Width="1.5" PointX="9.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.PRODUCTO_T" Width="1.5" PointX="9.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.PRODUCTO_TIPO" Width="1.5" PointX="12" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.USUARIO" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.USUARIO_DIR" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.USUARIO_T" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.VENTA" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTEGRAModel.VENTA_D" Width="1.5" PointX="12" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="INTEGRAModel.FK_CARRITO_D_ID_Carrito" ManuallyRouted="false" />
         <AssociationConnector Association="INTEGRAModel.FK_CARRITO_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="INTEGRAModel.FK_CARRITO_D_Producto" ManuallyRouted="false" />
         <AssociationConnector Association="INTEGRAModel.FK_MUNICIPIO_Estado" ManuallyRouted="false" />
         <AssociationConnector Association="INTEGRAModel.FK_USUARIO_DIR_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="INTEGRAModel.FK_LOCALIDAD_Municipio" ManuallyRouted="false" />
+        <AssociationConnector Association="INTEGRAModel.FK_USUARIO_DIR_Colonia" ManuallyRouted="false" />
         <AssociationConnector Association="INTEGRAModel.FK_USUARIO_DIR_Municipio" ManuallyRouted="false" />
         <AssociationConnector Association="INTEGRAModel.FK_VENTA_Metod_Pago" ManuallyRouted="false" />
         <AssociationConnector Association="INTEGRAModel.FK_PRODUCTO_TIPO_Producto" ManuallyRouted="false" />

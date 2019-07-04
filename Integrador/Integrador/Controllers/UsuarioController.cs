@@ -217,13 +217,32 @@ namespace Integrador.Controllers
 
                 ViewBag.Usuario = Session["usuario"].ToString();
                 ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                return View(ud);
+                if (ud.Count() > 0)
+                {
+                    return View(ud);
+                }
+                else
+                {
+                    ViewBag.Error = "No tienes Direcciones Registradas";
+                    return View();
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult DireccionNueva(string id)
+        {
+            if (id != null)
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                return View();
             }
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public ActionResult Direccion(string id, FormCollection collection)
+        public ActionResult DireccionNueva(string id, Usuarios_Dir Model)
         {
             try
             {
@@ -336,6 +355,34 @@ namespace Integrador.Controllers
             {
                 return false;
             }
+        }
+
+        public JsonResult Colonia(string Prefix, int cp)
+        {
+            if (Prefix == null)
+                Prefix = "";
+
+            var c = (from x in db.LOCALIDADs
+                     where (x.Nombre.Contains(Prefix) && x.CP == cp)
+                     select new { ID = x.ID, Colonia = x.Nombre }).ToList();
+
+            JsonResult cc = Json(c, JsonRequestBehavior.AllowGet);
+
+            return cc;
+        }
+
+        public JsonResult CodigoP(string Prefix)
+        {
+            if (Prefix == null)
+                Prefix = "";
+
+            var c = (from x in db.LOCALIDADs
+                     where x.CP.ToString().Contains(Prefix)
+                     select new { CP = x.CP }).ToList();
+
+            JsonResult cc = Json(c, JsonRequestBehavior.AllowGet);
+
+            return cc;
         }
     }
 }

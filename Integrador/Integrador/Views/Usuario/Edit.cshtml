@@ -69,9 +69,9 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         @Html.ActionLink("Datos", "Dashboard", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                        @Html.ActionLink("Direcciones de Envío", "Dir", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                        @Html.ActionLink("Cambiar Pregunta", "Pregunta", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                        @Html.ActionLink("Cambiar Contraseña", "Pass", "Usuario", htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                        @Html.ActionLink("Direcciones de Envío", "Dir", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                        @Html.ActionLink("Cambiar Pregunta", "Pregunta", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                        @Html.ActionLink("Cambiar Contraseña", "Pass", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
                     </div>
                 </div>
             </div>

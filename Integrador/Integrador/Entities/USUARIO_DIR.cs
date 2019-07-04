@@ -25,13 +25,14 @@ namespace Integrador.Entities
         public string Calle { get; set; }
         public string Numero_Ext { get; set; }
         public string Numero_Int { get; set; }
-        public string Colonia { get; set; }
+        public Nullable<int> Colonia { get; set; }
         public Nullable<int> Municipio { get; set; }
         public Nullable<int> Estado { get; set; }
         public Nullable<int> CP { get; set; }
         public Nullable<bool> Activo { get; set; }
     
         public virtual ESTADO ESTADO1 { get; set; }
+        public virtual LOCALIDAD LOCALIDAD { get; set; }
         public virtual MUNICIPIO MUNICIPIO1 { get; set; }
         public virtual USUARIO USUARIO1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
