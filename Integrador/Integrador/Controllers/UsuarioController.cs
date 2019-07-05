@@ -357,13 +357,15 @@ namespace Integrador.Controllers
             }
         }
 
-        public JsonResult Colonia(string Prefix, int cp)
+        public JsonResult Colonia(string Prefix/*, int cp*/)
         {
             if (Prefix == null)
                 Prefix = "";
 
+            //List<LOCALIDAD> lOCALIDADs = db.LOCALIDADs.Where(x => x.CP.Equals(cp)).ToList();
+
             var c = (from x in db.LOCALIDADs
-                     where (x.Nombre.Contains(Prefix) && x.CP == cp)
+                     where (x.Nombre.Contains(Prefix) /*&& x.CP == cp*/)
                      select new { ID = x.ID, Colonia = x.Nombre }).ToList();
 
             JsonResult cc = Json(c, JsonRequestBehavior.AllowGet);

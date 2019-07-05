@@ -40,6 +40,7 @@
     <Property Name="Nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Municipio" Type="Int32" Nullable="false" />
     <NavigationProperty Name="MUNICIPIO1" Relationship="Self.FK_LOCALIDAD_Municipio" FromRole="LOCALIDAD" ToRole="MUNICIPIO" />
+    <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Colonia" FromRole="LOCALIDAD" ToRole="USUARIO_DIR" />
   </EntityType>
   <EntityType Name="MUNICIPIO">
     <Key>
@@ -137,12 +138,13 @@
     <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Numero_Ext" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Numero_Int" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Colonia" Type="Int32" />
     <Property Name="Municipio" Type="Int32" />
     <Property Name="Estado" Type="Int32" />
     <Property Name="CP" Type="Int32" />
     <Property Name="Activo" Type="Boolean" />
     <NavigationProperty Name="ESTADO1" Relationship="Self.FK_USUARIO_DIR_Estado" FromRole="USUARIO_DIR" ToRole="ESTADO" />
+    <NavigationProperty Name="LOCALIDAD" Relationship="Self.FK_USUARIO_DIR_Colonia" FromRole="USUARIO_DIR" ToRole="LOCALIDAD" />
     <NavigationProperty Name="MUNICIPIO1" Relationship="Self.FK_USUARIO_DIR_Municipio" FromRole="USUARIO_DIR" ToRole="MUNICIPIO" />
     <NavigationProperty Name="USUARIO1" Relationship="Self.FK_USUARIO_DIR_Usuario" FromRole="USUARIO_DIR" ToRole="USUARIO" />
     <NavigationProperty Name="VENTAs" Relationship="Self.FK_VENTA_Direccion" FromRole="USUARIO_DIR" ToRole="VENTA" />
@@ -253,6 +255,18 @@
       </Principal>
       <Dependent Role="LOCALIDAD">
         <PropertyRef Name="Municipio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIO_DIR_Colonia">
+    <End Role="LOCALIDAD" Type="Self.LOCALIDAD" Multiplicity="0..1" />
+    <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOCALIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USUARIO_DIR">
+        <PropertyRef Name="Colonia" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -415,6 +429,10 @@
     <AssociationSet Name="FK_LOCALIDAD_Municipio" Association="Self.FK_LOCALIDAD_Municipio">
       <End Role="MUNICIPIO" EntitySet="MUNICIPIOs" />
       <End Role="LOCALIDAD" EntitySet="LOCALIDADs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIO_DIR_Colonia" Association="Self.FK_USUARIO_DIR_Colonia">
+      <End Role="LOCALIDAD" EntitySet="LOCALIDADs" />
+      <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
     </AssociationSet>
     <AssociationSet Name="FK_USUARIO_DIR_Municipio" Association="Self.FK_USUARIO_DIR_Municipio">
       <End Role="MUNICIPIO" EntitySet="MUNICIPIOs" />

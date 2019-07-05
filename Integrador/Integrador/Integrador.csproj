@@ -2308,6 +2308,8 @@
     <Content Include="Views\Usuario\Direccion.cshtml" />
     <Content Include="Views\Usuario\DireccionNueva.cshtml" />
     <Content Include="Views\Report\Productos.cshtml" />
+    <Content Include="Views\Report\Ventas.cshtml" />
+    <Content Include="Views\Report\Clientes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

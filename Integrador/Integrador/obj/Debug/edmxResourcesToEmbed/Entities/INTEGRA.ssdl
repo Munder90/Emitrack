@@ -116,7 +116,7 @@
     <Property Name="Calle" Type="varchar" MaxLength="50" />
     <Property Name="Numero_Ext" Type="varchar" MaxLength="50" />
     <Property Name="Numero_Int" Type="varchar" MaxLength="50" />
-    <Property Name="Colonia" Type="varchar" MaxLength="50" />
+    <Property Name="Colonia" Type="int" />
     <Property Name="Municipio" Type="int" />
     <Property Name="Estado" Type="int" />
     <Property Name="CP" Type="int" />
@@ -233,6 +233,18 @@
       </Principal>
       <Dependent Role="PRODUCTO_TIPO">
         <PropertyRef Name="Tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIO_DIR_Colonia">
+    <End Role="LOCALIDAD" Type="Self.LOCALIDAD" Multiplicity="0..1" />
+    <End Role="USUARIO_DIR" Type="Self.USUARIO_DIR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LOCALIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USUARIO_DIR">
+        <PropertyRef Name="Colonia" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -387,6 +399,10 @@
     <AssociationSet Name="FK_PRODUCTO_TIPO_Tipo" Association="Self.FK_PRODUCTO_TIPO_Tipo">
       <End Role="PRODUCTO_T" EntitySet="PRODUCTO_T" />
       <End Role="PRODUCTO_TIPO" EntitySet="PRODUCTO_TIPO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIO_DIR_Colonia" Association="Self.FK_USUARIO_DIR_Colonia">
+      <End Role="LOCALIDAD" EntitySet="LOCALIDAD" />
+      <End Role="USUARIO_DIR" EntitySet="USUARIO_DIR" />
     </AssociationSet>
     <AssociationSet Name="FK_USUARIO_DIR_Estado" Association="Self.FK_USUARIO_DIR_Estado">
       <End Role="ESTADO" EntitySet="ESTADO" />

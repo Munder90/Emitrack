@@ -18,6 +18,8 @@ namespace Integrador.Controllers
                 ViewBag.Usuario = Session["usuario"].ToString();
                 ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 //var 
+
+
                 return View();
             }
             catch
@@ -42,12 +44,47 @@ namespace Integrador.Controllers
             }
         }
 
+        public ActionResult Clientes()
+        {
+            try
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                //var 
+
+
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Clientes(FormCollection collection)
+        {
+            try
+            {
+
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         public ActionResult Ventas()
         {
             try
             {
                 ViewBag.Usuario = Session["usuario"].ToString();
                 ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+
+
                 return View();
             }
             catch
