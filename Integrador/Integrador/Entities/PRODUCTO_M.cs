@@ -12,15 +12,13 @@ namespace Integrador.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class CARRITO_D
+    public partial class PRODUCTO_M
     {
         public int ID { get; set; }
-        public Nullable<int> ID_Carrito { get; set; }
         public Nullable<int> Producto { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-        public Nullable<decimal> Total { get; set; }
+        public string Nombre { get; set; }
+        public string Direccion { get; set; }
     
-        public virtual CARRITO CARRITO { get; set; }
         public virtual PRODUCTO PRODUCTO1 { get; set; }
     }
 }

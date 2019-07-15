@@ -15,6 +15,8 @@ namespace Integrador.Models
         decimal precio_A;
         decimal precio_V;
         bool activo;
+        string imagen;
+        string codigo;
 
         public int ID { get => iD; set => iD = value; }
         public string Nombre { get => nombre; set => nombre = value; }
@@ -24,5 +26,7 @@ namespace Integrador.Models
         public decimal Precio_A { get => precio_A; set => precio_A = value; }
         public decimal Precio_V { get => precio_V; set => precio_V = value; }
         public bool Activo { get => activo; set => activo = value; }
+        public string Imagen { get => imagen; set => imagen = value; }
+        public string Codigo { get => codigo; set => codigo = value; }
     }
 }

@@ -67,6 +67,10 @@
                         {
                             @Html.ActionLink("Direcciones de Envío", "Direccion", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
                         }
+                        @if (ViewBag.Tipo == 1)
+                        {
+                            @Html.ActionLink("Tipos de Pago", "Index", "Pagos", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                        }
                         @Html.ActionLink("Cambiar Pregunta", "Pregunta", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
                         @Html.ActionLink("Cambiar Contraseña", "Pass", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
                     </div>

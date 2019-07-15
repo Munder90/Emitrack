@@ -25,6 +25,8 @@ namespace Integrador.Entities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BANER> BANERs { get; set; }
+        public virtual DbSet<BANER_D> BANER_D { get; set; }
         public virtual DbSet<CARRITO> CARRITOes { get; set; }
         public virtual DbSet<CARRITO_D> CARRITO_D { get; set; }
         public virtual DbSet<ESTADO> ESTADOes { get; set; }
@@ -32,6 +34,7 @@ namespace Integrador.Entities
         public virtual DbSet<MUNICIPIO> MUNICIPIOs { get; set; }
         public virtual DbSet<PAGO_T> PAGO_T { get; set; }
         public virtual DbSet<PRODUCTO> PRODUCTOes { get; set; }
+        public virtual DbSet<PRODUCTO_M> PRODUCTO_M { get; set; }
         public virtual DbSet<PRODUCTO_T> PRODUCTO_T { get; set; }
         public virtual DbSet<PRODUCTO_TIPO> PRODUCTO_TIPO { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }

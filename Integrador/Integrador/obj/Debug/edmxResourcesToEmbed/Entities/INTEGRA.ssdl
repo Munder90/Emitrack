@@ -1,5 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="INTEGRAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BANER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Imagen" Type="varchar" MaxLength="50" />
+    <Property Name="Fecha" Type="date" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="BANER_D">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Baner" Type="int" />
+    <Property Name="Producto" Type="int" />
+    <Property Name="Precio" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Cantidad" Type="int" />
+  </EntityType>
   <EntityType Name="CARRITO">
     <Key>
       <PropertyRef Name="ID" />
@@ -16,7 +36,7 @@
     <Property Name="ID_Carrito" Type="int" />
     <Property Name="Producto" Type="int" />
     <Property Name="Cantidad" Type="int" />
-    <Property Name="Total" Type="varchar" MaxLength="50" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="ESTADO">
     <Key>
@@ -63,6 +83,17 @@
     <Property Name="Precio_A" Type="decimal" Precision="18" Scale="0" />
     <Property Name="Precio_V" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Activo" Type="bit" />
+    <Property Name="Imagen" Type="varchar" MaxLength="50" />
+    <Property Name="Codigo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PRODUCTO_M">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Direccion" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="PRODUCTO_T">
     <Key>
@@ -152,6 +183,30 @@
     <Property Name="Cantidad" Type="int" />
     <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
+  <Association Name="FK_BANER_D_ID_Baner">
+    <End Role="BANER" Type="Self.BANER" Multiplicity="0..1" />
+    <End Role="BANER_D" Type="Self.BANER_D" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BANER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BANER_D">
+        <PropertyRef Name="ID_Baner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BANER_D_Producto">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+    <End Role="BANER_D" Type="Self.BANER_D" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BANER_D">
+        <PropertyRef Name="Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CARRITO_D_ID_Carrito">
     <End Role="CARRITO" Type="Self.CARRITO" Multiplicity="0..1" />
     <End Role="CARRITO_D" Type="Self.CARRITO_D" Multiplicity="*" />
@@ -209,6 +264,18 @@
       </Principal>
       <Dependent Role="MUNICIPIO">
         <PropertyRef Name="Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTO_M_Producto">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+    <End Role="PRODUCTO_M" Type="Self.PRODUCTO_M" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRODUCTO_M">
+        <PropertyRef Name="Producto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -357,6 +424,8 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="INTEGRAModelStoreContainer">
+    <EntitySet Name="BANER" EntityType="Self.BANER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BANER_D" EntityType="Self.BANER_D" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CARRITO" EntityType="Self.CARRITO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CARRITO_D" EntityType="Self.CARRITO_D" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="dbo" store:Type="Tables" />
@@ -364,6 +433,7 @@
     <EntitySet Name="MUNICIPIO" EntityType="Self.MUNICIPIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PAGO_T" EntityType="Self.PAGO_T" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUCTO_M" EntityType="Self.PRODUCTO_M" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PRODUCTO_T" EntityType="Self.PRODUCTO_T" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PRODUCTO_TIPO" EntityType="Self.PRODUCTO_TIPO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -372,6 +442,14 @@
     <EntitySet Name="USUARIO_T" EntityType="Self.USUARIO_T" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VENTA_D" EntityType="Self.VENTA_D" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BANER_D_ID_Baner" Association="Self.FK_BANER_D_ID_Baner">
+      <End Role="BANER" EntitySet="BANER" />
+      <End Role="BANER_D" EntitySet="BANER_D" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BANER_D_Producto" Association="Self.FK_BANER_D_Producto">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="BANER_D" EntitySet="BANER_D" />
+    </AssociationSet>
     <AssociationSet Name="FK_CARRITO_D_ID_Carrito" Association="Self.FK_CARRITO_D_ID_Carrito">
       <End Role="CARRITO" EntitySet="CARRITO" />
       <End Role="CARRITO_D" EntitySet="CARRITO_D" />
@@ -391,6 +469,10 @@
     <AssociationSet Name="FK_MUNICIPIO_Estado" Association="Self.FK_MUNICIPIO_Estado">
       <End Role="ESTADO" EntitySet="ESTADO" />
       <End Role="MUNICIPIO" EntitySet="MUNICIPIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTO_M_Producto" Association="Self.FK_PRODUCTO_M_Producto">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="PRODUCTO_M" EntitySet="PRODUCTO_M" />
     </AssociationSet>
     <AssociationSet Name="FK_PRODUCTO_TIPO_Producto" Association="Self.FK_PRODUCTO_TIPO_Producto">
       <End Role="PRODUCTO" EntitySet="PRODUCTO" />

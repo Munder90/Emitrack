@@ -147,7 +147,64 @@ namespace Integrador.Controllers
 
         // POST: Usuario/Edit/5
         [HttpPost]
-        public ActionResult Edit(string id, FormCollection collection)
+        public ActionResult Edit(string id, Usuario us)
+        {
+            try
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult EditPass(string id)
+        {
+            if (id != null)
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult EditPass(string id, FormCollection collection)
+        {
+            try
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult EditQues(string id)
+        {
+            if (id != null)
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        // POST: Usuario/Edit/5
+        [HttpPost]
+        public ActionResult EditQues(string id, FormCollection collection)
         {
             try
             {
@@ -357,7 +414,7 @@ namespace Integrador.Controllers
             }
         }
 
-        public JsonResult Colonia(string Prefix/*, int cp*/)
+        public JsonResult Colonia(string Prefix, int cp)
         {
             if (Prefix == null)
                 Prefix = "";
@@ -365,7 +422,7 @@ namespace Integrador.Controllers
             //List<LOCALIDAD> lOCALIDADs = db.LOCALIDADs.Where(x => x.CP.Equals(cp)).ToList();
 
             var c = (from x in db.LOCALIDADs
-                     where (x.Nombre.Contains(Prefix) /*&& x.CP == cp*/)
+                     where (x.Nombre.Contains(Prefix) && x.CP == cp)
                      select new { ID = x.ID, Colonia = x.Nombre }).ToList();
 
             JsonResult cc = Json(c, JsonRequestBehavior.AllowGet);
@@ -381,6 +438,19 @@ namespace Integrador.Controllers
             var c = (from x in db.LOCALIDADs
                      where x.CP.ToString().Contains(Prefix)
                      select new { CP = x.CP }).ToList();
+
+            JsonResult cc = Json(c, JsonRequestBehavior.AllowGet);
+
+            return cc;
+        }
+
+        public JsonResult EdoMun(int cp)
+        {
+            var c = (from x in db.LOCALIDADs
+                     join y in db.MUNICIPIOs on x.Municipio equals y.ID
+                     join z in db.ESTADOes on y.Estado equals z.ID
+                     where (x.CP == cp)
+                     select new { estado = z.Nombre, municipio = y.Nombre }).FirstOrDefault();
 
             JsonResult cc = Json(c, JsonRequestBehavior.AllowGet);
 

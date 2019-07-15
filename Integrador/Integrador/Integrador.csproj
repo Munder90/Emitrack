@@ -2203,9 +2203,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CuentasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Entities\BANER.cs">
+      <DependentUpon>INTEGRA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\BANER_D.cs">
+      <DependentUpon>INTEGRA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\CARRITO.cs">
       <DependentUpon>INTEGRA.tt</DependentUpon>
     </Compile>
@@ -2240,6 +2247,9 @@
       <DependentUpon>INTEGRA.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\PRODUCTO.cs">
+      <DependentUpon>INTEGRA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRODUCTO_M.cs">
       <DependentUpon>INTEGRA.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\PRODUCTO_T.cs">
@@ -2310,6 +2320,13 @@
     <Content Include="Views\Report\Productos.cshtml" />
     <Content Include="Views\Report\Ventas.cshtml" />
     <Content Include="Views\Report\Clientes.cshtml" />
+    <Content Include="Views\Home\Contacto.cshtml" />
+    <Content Include="Views\Home\Emitrack.cshtml" />
+    <Content Include="Views\Home\Buscar.cshtml" />
+    <Content Include="Views\Pagos\Index.cshtml" />
+    <Content Include="Views\Pagos\Create.cshtml" />
+    <Content Include="Views\Pagos\Details.cshtml" />
+    <Content Include="Views\Pagos\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,6 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="INTEGRAModelStoreContainer" CdmEntityContainer="INTEGRAEntities">
+    <EntitySetMapping Name="BANERs">
+      <EntityTypeMapping TypeName="INTEGRAModel.BANER">
+        <MappingFragment StoreEntitySet="BANER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BANER_D">
+      <EntityTypeMapping TypeName="INTEGRAModel.BANER_D">
+        <MappingFragment StoreEntitySet="BANER_D">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_Baner" ColumnName="ID_Baner" />
+          <ScalarProperty Name="Producto" ColumnName="Producto" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CARRITOes">
       <EntityTypeMapping TypeName="INTEGRAModel.CARRITO">
         <MappingFragment StoreEntitySet="CARRITO">
@@ -69,6 +91,18 @@
           <ScalarProperty Name="Precio_A" ColumnName="Precio_A" />
           <ScalarProperty Name="Precio_V" ColumnName="Precio_V" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUCTO_M">
+      <EntityTypeMapping TypeName="INTEGRAModel.PRODUCTO_M">
+        <MappingFragment StoreEntitySet="PRODUCTO_M">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Producto" ColumnName="Producto" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

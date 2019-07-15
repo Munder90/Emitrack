@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Buscar";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        <small>@ViewBag.usuario</small>
+                    </h1>
+                </div>
+            </div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4">
+                    @if (ViewBag.Error == "")
+                    {
+                    <table class="table mdl-data-table striped" id="table" style="width:100%;">
+                        @*<thead>
+                            <tr>
+                                <th id="thead_kunnr">Cliente</th>
+                                <th id="thead_bunnyt">Company Code</th>
+                                <th id="thead_puesto_id">Nivel</th>
+                                <th id="thead_id">Usuario ID</th>
+                                <th id="thead_nombre">Nombre</th>
+                                <th id="thead_apellido_p">Apellido Paterno</th>
+                                <th id="thead_apellido_m">Apellido Materno</th>
+                                <th id="thead_email">Correo</th>
+                                <th id="thead_spras_id">Idioma</th>
+                                <th id="thead_pass">Password</th>
+                                <th id="thead_mess">Mensaje</th>
+                            </tr>
+                        </thead>*@
+                        <tbody>
+                            @foreach(var item in ViewBag.Productos)
+                            { 
+                            <tr>
+                                <td onclick="document.location='@Url.Action("Details", "Producto", new { id = item.ID })'" style="cursor:pointer">
+                                @item.Imagen</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.Precio_V</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    }
+                    else
+                    {
+                        <h1>@ViewBag.Error</h1>
+                    }
+                </div>
+
+                <div class="col-md-4">
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

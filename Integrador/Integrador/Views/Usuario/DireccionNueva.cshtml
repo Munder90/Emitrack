@@ -32,14 +32,14 @@
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Estado, "Estado", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control", @placeholder = "Estado" } })
+                            @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control", @placeholder = "Estado", @id="Estado" } })
                             @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Municipio, "Municipio", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Municipio, new { htmlAttributes = new { @class = "form-control", @placeholder = "Municipio" } })
+                            @Html.EditorFor(model => model.Municipio, new { htmlAttributes = new { @class = "form-control", @placeholder = "Municipio", @id="Municipio" } })
                             @Html.ValidationMessageFor(model => model.Municipio, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -88,7 +88,7 @@
 }
 
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-3.0.0.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/Scripts/autocomplete1.10.2.js"></script>
@@ -98,20 +98,35 @@
 <script>
     var auto = $.noConflict();
 
-    var codigo = '#CP'.value;
+    $('#CP').focusout(function () {
+        var codigo = this.value;
+        
+        $.ajax({
+            type: "POST",
+            url: '../EdoMun',
+            dataType: "json",
+            data: { "cp": codigo },
+            success: function (data) {
+                $('#Estado').val(data.estado);
+                $('#Municipio').val(data.municipio);
+            }
+        });
+    });
 
     $('body').on('keydown.autocomplete', '#Colonia', function () {
+
+        var codigo = $('#CP').val();
 
         auto(this).autocomplete({
             source: function (request, response) {
                 auto.ajax({
                     type: "POST",
-                    url: 'Colonia',
-                    dataType: "json", codigo,
-                    data: { "Prefix": request.term },
+                    url: '../Colonia',
+                    dataType: "json",
+                    data: { "Prefix": request.term, "cp": codigo },
                     success: function (data) {
                         response(auto.map(data, function (item) {
-                            return { label: item.Colonia, value: item.ID };
+                            return { label: item.Colonia, value: item.Colonia };
                         }))
                     }
                 })
@@ -132,36 +147,5 @@
             }
         });
     });
-    //$('body').on('keydown.autocomplete', '#CP', function () {
-
-    //    auto(this).autocomplete({
-    //        source: function (request, response) {
-    //            auto.ajax({
-    //                type: "POST",
-    //                url: root + 'Usuario/CodigoP',
-    //                dataType: "json",
-    //                data: { "Prefix": request.term },
-    //                success: function (data) {
-    //                    response(auto.map(data, function (item) {
-    //                        return { label: item.CP, value: item.CP };
-    //                    }))
-    //                }
-    //            })
-    //        },
-
-    //        messages: {
-    //            noResults: '',
-    //            results: function (resultsCount) { }
-    //        },
-
-    //        change: function (e, ui) {
-    //            if (!(ui.item)) {
-    //                e.target.value = "";
-    //            }
-    //        },
-
-    //        select: function (event, ui) {
-    //        }
-    //    });
-    //});
+    
 </script>

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-//using Integrador.Entities;
+using Integrador.Entities;
 using Integrador.Models;
 
 namespace Integrador.Controllers
 {
     public class HomeController : Controller
     {
+        INTEGRAEntities db = new INTEGRAEntities();
         // GET: Home
         public ActionResult Index()
         {
@@ -22,76 +23,63 @@ namespace Integrador.Controllers
             return View();
         }
 
-        // GET: Home/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Home/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Home/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Contacto()
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Home/Edit/5
-        public ActionResult Edit(int id)
-        {
+            catch (Exception) { }
             return View();
         }
 
-        // POST: Home/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Emitrack()
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Home/Delete/5
-        public ActionResult Delete(int id)
-        {
+            catch (Exception) { }
             return View();
         }
 
-        // POST: Home/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Buscar(string palabra)
         {
             try
             {
-                // TODO: Add delete logic here
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+            }
+            catch (Exception) { }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            IEnumerable<PRODUCTO> productos;
+
+            productos = db.PRODUCTOes;
+
+            if (!String.IsNullOrEmpty(palabra))
             {
-                return View();
+                productos = productos.Where(x => (x.Nombre.ToUpper().Contains(palabra.ToUpper()) || x.Descripcion.ToUpper().Contains(palabra.ToUpper())) && x.Activo == true).ToList();
             }
+            ViewBag.Error = "";
+            ViewBag.Productos = "";
+
+            if (productos.Count() > 0)
+            {
+                ViewBag.Productos = productos;
+            }
+            else
+            {
+                ViewBag.Error = "No hay coincidencias";
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public string Buscar(string palabra, bool notUsed)
+        {
+            return "From [HttpPost]Index: filter on " + palabra;
         }
     }
 }

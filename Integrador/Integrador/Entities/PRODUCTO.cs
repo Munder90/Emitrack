@@ -17,7 +17,9 @@ namespace Integrador.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUCTO()
         {
+            this.BANER_D = new HashSet<BANER_D>();
             this.CARRITO_D = new HashSet<CARRITO_D>();
+            this.PRODUCTO_M = new HashSet<PRODUCTO_M>();
             this.PRODUCTO_TIPO = new HashSet<PRODUCTO_TIPO>();
             this.VENTA_D = new HashSet<VENTA_D>();
         }
@@ -30,9 +32,15 @@ namespace Integrador.Entities
         public Nullable<decimal> Precio_A { get; set; }
         public decimal Precio_V { get; set; }
         public Nullable<bool> Activo { get; set; }
+        public string Imagen { get; set; }
+        public string Codigo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BANER_D> BANER_D { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CARRITO_D> CARRITO_D { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRODUCTO_M> PRODUCTO_M { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTO_TIPO> PRODUCTO_TIPO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
