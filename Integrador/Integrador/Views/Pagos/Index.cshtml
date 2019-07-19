@@ -47,9 +47,15 @@
                                 <th></th>
                                 <td>
                                     @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |*@
-                                    @Html.ActionLink("Detalle", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
-
+                                    @*@Html.ActionLink("Detalle", "Details", new { id = item.ID })*@
+                                    <a href="@Url.Action("Details", "Pagos", new { id = item.ID })">
+                                        <i class="fa fa-fw fa-search"></i>
+                                    </a>
+                                    &nbsp;
+                                    @*@Html.ActionLink("Eliminar", "Delete", new { id = item.ID })*@
+                                    <a href="@Url.Action("DeleteConfirmed", "Pagos", new { id = item.ID })" id="Confirma">
+                                        <i class="fa fa-fw fa-trash-o"></i>
+                                    </a>
                                 </td>
                             </tr>
                         }
@@ -77,11 +83,14 @@
     </div>
 }
 
-<script type="text/javascript" src="~/Scripts/fnCommon.js"></script>
+@*<script type="text/javascript" src="~/Scripts/fnCommon.js"></script>*@
 <script>
+    function pop(id) {
+        confirm("Eliminar");
+    };
 
-    function eliminarUsuario(idLink) {
-        $('#' + idLink).get(0).click().click();
-    }
-
+    $('#Confirma').click(function () {
+        var id = this.id.valueOf()
+        pop(id);
+    });
 </script>

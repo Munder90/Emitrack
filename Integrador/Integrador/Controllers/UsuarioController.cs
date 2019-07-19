@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Integrador.Models;
 using Integrador.Entities;
 using System.Text.RegularExpressions;
+using System.Data.Entity;
 
 namespace Integrador.Controllers
 {
@@ -135,8 +136,7 @@ namespace Integrador.Controllers
                     Nombre = u.Nombre,
                     Apellido_P = u.Apellido_P,
                     Apellido_M = u.Apellido_M,
-                    Fecha_N = u.Fecha_N.Date,
-                    Pregunta = u.Pregunta
+                    Fecha_N = u.Fecha_N.Date
                 };
                 ViewBag.Usuario = Session["usuario"].ToString();
                 ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
@@ -151,15 +151,22 @@ namespace Integrador.Controllers
         {
             try
             {
+                USUARIO uSUARIO = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                uSUARIO.Nombre = us.Nombre;
+                uSUARIO.Apellido_P = us.Apellido_P;
+                uSUARIO.Apellido_M = us.Apellido_M;
+                uSUARIO.Fecha_N = us.Fecha_N;
+
+                db.Entry(uSUARIO).State = EntityState.Modified;
+                db.SaveChanges();
+
                 ViewBag.Usuario = Session["usuario"].ToString();
                 ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", id);
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -167,27 +174,48 @@ namespace Integrador.Controllers
         {
             if (id != null)
             {
+                USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                Pass us = new Pass
+                {
+                    Id = u.ID,
+                };
                 ViewBag.Usuario = Session["usuario"].ToString();
                 ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                return View();
+                return View(us);
             }
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public ActionResult EditPass(string id, FormCollection collection)
+        public ActionResult EditPass(string id, Pass us)
         {
             try
             {
                 ViewBag.Usuario = Session["usuario"].ToString();
                 ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                USUARIO uSUARIO = db.USUARIOs.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
+                Cryptography c = new Cryptography();
+                string pass_a = c.Decrypt(uSUARIO.Password);
+                if ((us.Apass.Equals(pass_a)))
+                {
+                    if (us.Npass1.Equals(us.Npass2))
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            uSUARIO.Password = c.Encrypt(us.Npass1);
+                            db.Entry(uSUARIO).State = EntityState.Modified;
+                            db.SaveChanges();
+                            return RedirectToAction("Details", id);
+                        }
+                    }
+                }
+                ViewBag.message = "Los datos no coinciden";
+                return View(us);
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -234,6 +262,24 @@ namespace Integrador.Controllers
             {
                 // TODO: Add delete logic here
 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult DeleteConfirmed(string id)
+        {
+            try
+            {
+                ViewBag.Usuario = Session["usuario"].ToString();
+                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                USUARIO uSUARIO = db.USUARIOs.Find(id);
+                uSUARIO.Activo = false;
+                db.Entry(uSUARIO).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

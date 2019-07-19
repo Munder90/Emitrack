@@ -11,7 +11,7 @@ namespace Integrador.Controllers
 {
     public class PagosController : Controller
     {
-        INTEGRAEntities db = new INTEGRAEntities();
+        readonly INTEGRAEntities db = new INTEGRAEntities();
         // GET: Pagos
         public ActionResult Index()
         {
@@ -193,6 +193,30 @@ namespace Integrador.Controllers
                 if (Tipo == 1)
                 {
                     PAGO_T pAGO_T = db.PAGO_T.Where(x => x.ID == pagos.ID).FirstOrDefault();
+                    pAGO_T.Activo = false;
+
+                    db.Entry(pAGO_T).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                ViewBag.Usuario = Usuario;
+                ViewBag.Tipo = Tipo;
+                if (Tipo == 1)
+                {
+                    PAGO_T pAGO_T = db.PAGO_T.Where(x => x.ID == id).FirstOrDefault();
                     pAGO_T.Activo = false;
 
                     db.Entry(pAGO_T).State = EntityState.Modified;

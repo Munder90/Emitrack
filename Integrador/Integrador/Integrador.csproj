@@ -2286,6 +2286,7 @@
     <Compile Include="Models\Estados.cs" />
     <Compile Include="Models\Municipios.cs" />
     <Compile Include="Models\Pagos_T.cs" />
+    <Compile Include="Models\Pass.cs" />
     <Compile Include="Models\Productos.cs" />
     <Compile Include="Models\Productos_T.cs" />
     <Compile Include="Models\Productos_Tipos.cs" />
