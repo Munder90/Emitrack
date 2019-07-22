@@ -173,14 +173,15 @@
                                     <a href="#">Lista de Productos</a>
                                 </li>
                             }
+                            @if (ViewBag.Categoria != null)
+                            {
+                                foreach (Integrador.Entities.PRODUCTO_T T in ViewBag.Categoria)
+                                {
+                                    <li><a href="#">@T.Descripcion</a></li>
+                                }
+                            }
                             <li>
                                 <a href="#">Categoria 1</a>
-                            </li>
-                            <li>
-                                <a href="#">Categoria 2</a>
-                            </li>
-                            <li>
-                                <a href="#">Categoria 2</a>
                             </li>
                             @*<li>
                                     <a href="#">Second Level Link<span class="fa arrow"></span></a>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -48,7 +49,7 @@ namespace Integrador.Controllers
                 }
                 catch (Exception)
                 {
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
                 }
 
                 PRODUCTO productos = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
@@ -189,22 +190,51 @@ namespace Integrador.Controllers
         // GET: Producto/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                ViewBag.Usuario = Usuario;
+                ViewBag.Tipo = Tipo;
+                if (Tipo == 1)
+                {
+                    PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
+
+                    return View(pRODUCTO);
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // POST: Producto/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Productos productos)
         {
             try
             {
-                // TODO: Add delete logic here
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                ViewBag.Usuario = Usuario;
+                ViewBag.Tipo = Tipo;
+                if (Tipo == 1)
+                {
+                    PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == productos.ID).FirstOrDefault();
+                    pRODUCTO.Activo = false;
+
+                    db.Entry(pRODUCTO).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
     }

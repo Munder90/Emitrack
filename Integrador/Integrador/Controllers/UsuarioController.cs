@@ -7,6 +7,7 @@ using Integrador.Models;
 using Integrador.Entities;
 using System.Text.RegularExpressions;
 using System.Data.Entity;
+using Integrador.Common;
 
 namespace Integrador.Controllers
 {
@@ -37,8 +38,9 @@ namespace Integrador.Controllers
                     Fecha_N = u.Fecha_N.Date,
                     Pregunta = u.Pregunta
                 };
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                //ViewBag.Usuario = Session["usuario"].ToString();
+                //ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 return View(us);
             }
             return RedirectToAction("Index", "Home");
@@ -138,8 +140,9 @@ namespace Integrador.Controllers
                     Apellido_M = u.Apellido_M,
                     Fecha_N = u.Fecha_N.Date
                 };
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                //ViewBag.Usuario = Session["usuario"].ToString();
+                //ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 return View(us);
             }
             return RedirectToAction("Index", "Home");
@@ -179,8 +182,9 @@ namespace Integrador.Controllers
                 {
                     Id = u.ID,
                 };
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                //ViewBag.Usuario = Session["usuario"].ToString();
+                //ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 return View(us);
             }
             return RedirectToAction("Index", "Home");
@@ -304,8 +308,9 @@ namespace Integrador.Controllers
                     Fecha_N = u.Fecha_N.Date,
                     Pregunta = u.Pregunta
                 };
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                //ViewBag.Usuario = Session["usuario"].ToString();
+                //ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 return View(us);
             }
             return RedirectToAction("Index", "Home");
