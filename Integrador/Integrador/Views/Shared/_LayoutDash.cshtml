@@ -170,7 +170,10 @@
                             @if (ViewBag.Usuario != null && ViewBag.Tipo == 1)
                             {
                                 <li>
-                                    <a href="#">Lista de Productos</a>
+                                    <a href="@Url.Action("Index", "Producto")">Lista de Productos</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Create", "Producto")">Nuevo Producto</a>
                                 </li>
                             }
                             @if (ViewBag.Categoria != null)
@@ -184,21 +187,21 @@
                                 <a href="#">Categoria 1</a>
                             </li>
                             @*<li>
-                                    <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">Third Level Link</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Link</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Link</a>
-                                        </li>
+            <a href="#">Second Level Link<span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li>
+                    <a href="#">Third Level Link</a>
+                </li>
+                <li>
+                    <a href="#">Third Level Link</a>
+                </li>
+                <li>
+                    <a href="#">Third Level Link</a>
+                </li>
 
-                                    </ul>
+            </ul>
 
-                                </li>*@
+        </li>*@
                         </ul>
                     </li>
                     <li>

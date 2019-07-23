@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Integrador.Common;
 using Integrador.Entities;
 using Integrador.Models;
 
@@ -17,10 +18,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     List<PRODUCTO> pRODUCTO = db.PRODUCTOes.Where(x => x.Activo == true).ToList();
@@ -42,10 +42,9 @@ namespace Integrador.Controllers
             {
                 try
                 {
+                    FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                     string Usuario = Session["usuario"].ToString();
                     int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                    ViewBag.Usuario = Usuario;
-                    ViewBag.Tipo = Tipo;
                 }
                 catch (Exception)
                 {
@@ -67,10 +66,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     return View();
@@ -90,10 +88,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     PRODUCTO pRODUCTO = new PRODUCTO
@@ -128,10 +125,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
@@ -153,10 +149,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
 
@@ -192,10 +187,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
@@ -217,13 +211,36 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == productos.ID).FirstOrDefault();
+                    pRODUCTO.Activo = false;
+
+                    db.Entry(pRODUCTO).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                if (Tipo == 1)
+                {
+                    PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
                     pRODUCTO.Activo = false;
 
                     db.Entry(pRODUCTO).State = EntityState.Modified;

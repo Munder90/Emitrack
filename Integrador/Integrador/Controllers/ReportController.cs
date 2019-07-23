@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Integrador.Models;
 using Integrador.Entities;
+using Integrador.Common;
 
 namespace Integrador.Controllers
 {
@@ -15,8 +16,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 //var 
 
 
@@ -48,8 +48,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 //var 
 
 
@@ -81,8 +80,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
 
 
                 return View();

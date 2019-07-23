@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Integrador.Common;
 using Integrador.Entities;
 using Integrador.Models;
 
@@ -16,8 +17,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
             }
             catch (Exception) { }
             return View();
@@ -27,8 +27,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
             }
             catch (Exception) { }
             return View();
@@ -38,8 +37,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
             }
             catch (Exception) { }
             return View();
@@ -49,8 +47,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
             }
             catch (Exception) { }
 
@@ -79,6 +76,7 @@ namespace Integrador.Controllers
         [HttpPost]
         public string Buscar(string palabra, bool notUsed)
         {
+            FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
             return "From [HttpPost]Index: filter on " + palabra;
         }
     }

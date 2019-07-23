@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Integrador.Models;
 using Integrador.Entities;
 using System.Data.Entity;
+using Integrador.Common;
 
 namespace Integrador.Controllers
 {
@@ -17,10 +18,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     List<PAGO_T> pt = db.PAGO_T.Where(x => x.Activo == true).ToList();
@@ -51,10 +51,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     PAGO_T pt = db.PAGO_T.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
@@ -80,10 +79,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     return View();
@@ -103,10 +101,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     PAGO_T pAGO_T = new PAGO_T
@@ -157,10 +154,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     PAGO_T pt = db.PAGO_T.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
@@ -186,10 +182,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     PAGO_T pAGO_T = db.PAGO_T.Where(x => x.ID == pagos.ID).FirstOrDefault();
@@ -210,10 +205,9 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                ViewBag.Usuario = Usuario;
-                ViewBag.Tipo = Tipo;
                 if (Tipo == 1)
                 {
                     PAGO_T pAGO_T = db.PAGO_T.Where(x => x.ID == id).FirstOrDefault();

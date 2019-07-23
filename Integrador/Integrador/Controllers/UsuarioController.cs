@@ -195,8 +195,9 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                //ViewBag.Usuario = Session["usuario"].ToString();
+                //ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
 
                 USUARIO uSUARIO = db.USUARIOs.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
                 Cryptography c = new Cryptography();
@@ -240,8 +241,9 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                //ViewBag.Usuario = Session["usuario"].ToString();
+                //ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");
@@ -264,6 +266,7 @@ namespace Integrador.Controllers
         {
             try
             {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
@@ -278,8 +281,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 USUARIO uSUARIO = db.USUARIOs.Find(id);
                 uSUARIO.Activo = false;
                 db.Entry(uSUARIO).State = EntityState.Modified;
@@ -342,8 +344,7 @@ namespace Integrador.Controllers
         {
             if (id != null)
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 return View();
             }
             return RedirectToAction("Index", "Home");
@@ -354,8 +355,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");
@@ -373,8 +373,7 @@ namespace Integrador.Controllers
                 USUARIO_DIR d = db.USUARIO_DIR.Where(x => x.Usuario == id).FirstOrDefault();
                 Usuarios_Dir ud = new Usuarios_Dir();
 
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 return View(ud);
             }
             return RedirectToAction("Index", "Home");
@@ -385,8 +384,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");
@@ -411,8 +409,7 @@ namespace Integrador.Controllers
                     Apellido_M = u.Apellido_M,
                     Fecha_N = u.Fecha_N.Date,
                 };
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 return View(us);
             }
             return RedirectToAction("Index", "Home");
@@ -423,8 +420,7 @@ namespace Integrador.Controllers
         {
             try
             {
-                ViewBag.Usuario = Session["usuario"].ToString();
-                ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");

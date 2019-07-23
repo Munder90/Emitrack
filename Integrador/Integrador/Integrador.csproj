@@ -2366,6 +2366,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\Producto\Details.cshtml" />
+    <Content Include="Views\Producto\Create.cshtml" />
+    <Content Include="Views\Producto\Edit.cshtml" />
+    <Content Include="Views\Producto\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2376,7 +2381,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Estilos\assets\img\" />
-    <Folder Include="Views\Producto\" />
     <Folder Include="Views\Venta\" />
   </ItemGroup>
   <ItemGroup>
