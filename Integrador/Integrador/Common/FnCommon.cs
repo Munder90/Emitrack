@@ -16,7 +16,7 @@ namespace Integrador.Common
         public static void ObtenerConfPage(INTEGRAEntities db, /*int pagina_id,*/ string user_id, ControllerBase controller, int? pagina_id_textos = null)
         {
             var user = ObtenerUsuario(db, user_id);
-            try { controller.ViewBag.Categoria = db.PRODUCTO_T.Where(x => x.Activo.Equals(true)).ToList(); } catch (Exception) { }
+            try { controller.ViewBag.Categoria = db.PRODUCTO_T.Where(x => x.Activo == true).ToList(); } catch (Exception) { }
             if (user != null)
             {
                 controller.ViewBag.Usuario = user.ID;

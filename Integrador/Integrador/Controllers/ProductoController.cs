@@ -52,8 +52,21 @@ namespace Integrador.Controllers
                 }
 
                 PRODUCTO productos = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
+                Productos p = new Productos
+                {
+                    ID = productos.ID,
+                    Nombre = productos.Nombre,
+                    Cantidad = productos.Cantidad,
+                    Fecha_Mo = productos.Fecha_Mo.Value,
+                    Descripcion = productos.Descripcion,
+                    Precio_A = productos.Precio_A.Value,
+                    Precio_V = productos.Precio_V,
+                    Activo = productos.Activo.Value,
+                    Imagen = productos.Imagen,
+                    Codigo = productos.Codigo
+                };
 
-                return View(productos);
+                return View(p);
             }
             catch (Exception)
             {
@@ -93,6 +106,7 @@ namespace Integrador.Controllers
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 if (Tipo == 1)
                 {
+
                     PRODUCTO pRODUCTO = new PRODUCTO
                     {
                         Codigo = pro.Codigo,
@@ -103,7 +117,7 @@ namespace Integrador.Controllers
                         Cantidad = pro.Cantidad,
                         Fecha_Mo = DateTime.Today,
                         Imagen = pro.Imagen,
-                        Activo = true
+                        Activo = true,
                     };
 
                     db.PRODUCTOes.Add(pRODUCTO);
@@ -131,8 +145,21 @@ namespace Integrador.Controllers
                 if (Tipo == 1)
                 {
                     PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
+                    Productos p = new Productos
+                    {
+                        ID = pRODUCTO.ID,
+                        Nombre = pRODUCTO.Nombre,
+                        Cantidad = pRODUCTO.Cantidad,
+                        Fecha_Mo = pRODUCTO.Fecha_Mo.Value,
+                        Descripcion = pRODUCTO.Descripcion,
+                        Precio_A = pRODUCTO.Precio_A.Value,
+                        Precio_V = pRODUCTO.Precio_V,
+                        Activo = pRODUCTO.Activo.Value,
+                        Imagen = pRODUCTO.Imagen,
+                        Codigo = pRODUCTO.Codigo
+                    };
 
-                    return View(pRODUCTO);
+                    return View(p);
                 }
 
                 return RedirectToAction("Index", "Home");
@@ -193,8 +220,21 @@ namespace Integrador.Controllers
                 if (Tipo == 1)
                 {
                     PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
+                    Productos p = new Productos
+                    {
+                        ID = pRODUCTO.ID,
+                        Nombre = pRODUCTO.Nombre,
+                        Cantidad = pRODUCTO.Cantidad,
+                        Fecha_Mo = pRODUCTO.Fecha_Mo.Value,
+                        Descripcion = pRODUCTO.Descripcion,
+                        Precio_A = pRODUCTO.Precio_A.Value,
+                        Precio_V = pRODUCTO.Precio_V,
+                        Activo = pRODUCTO.Activo.Value,
+                        Imagen = pRODUCTO.Imagen,
+                        Codigo = pRODUCTO.Codigo
+                    };
 
-                    return View(pRODUCTO);
+                    return View(p);
                 }
 
                 return RedirectToAction("Index", "Home");
@@ -248,6 +288,44 @@ namespace Integrador.Controllers
                 }
 
                 return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public ActionResult Detalle(int id)
+        {
+            try
+            {
+                try
+                {
+                    FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                    string Usuario = Session["usuario"].ToString();
+                    int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                }
+                catch (Exception)
+                {
+                    //return RedirectToAction("Index", "Home");
+                }
+
+                PRODUCTO productos = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
+                Productos p = new Productos
+                {
+                    ID = productos.ID,
+                    Nombre = productos.Nombre,
+                    Cantidad = productos.Cantidad,
+                    Fecha_Mo = productos.Fecha_Mo.Value,
+                    Descripcion = productos.Descripcion,
+                    Precio_A = productos.Precio_A.Value,
+                    Precio_V = productos.Precio_V,
+                    Activo = productos.Activo.Value,
+                    Imagen = productos.Imagen,
+                    Codigo = productos.Codigo
+                };
+
+                return View(p);
             }
             catch (Exception)
             {

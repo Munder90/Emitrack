@@ -22,10 +22,13 @@
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="row">
-                <div class="col-md-4">
-                    @*<p>
-                        @Html.ActionLink("Create New", "Create")
-                    </p>*@
+                <div class="col-md-12">
+                    <p align="right" class="col-md-">
+                        @Html.ActionLink("Nuevo Producto", "Create", "Producto", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Cargar", "Carga", "Producto", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary" })
+                    </p>
+                </div>
+                <div class="col-md-12">
 
                     <table class="table table mdl-data-table table-striped">
                         <tr>
@@ -47,16 +50,18 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Precio_V)
                             </th>
-                            <th>
+                            @*<th>
                                 @Html.DisplayNameFor(model => model.Activo)
-                            </th>
+                            </th>*@
                             <th>
                                 @Html.DisplayNameFor(model => model.Imagen)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Codigo)
                             </th>
-                            <th></th>
+                            <th>
+                                
+                            </th>
                         </tr>
 
                         @foreach (var item in Model)
@@ -80,19 +85,28 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Precio_V)
                                 </td>
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => item.Activo)
-                                </td>
+                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Imagen)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Codigo)
                                 </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                <td style="width: 80px;">
+                                    @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                                     @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                                    <a href="@Url.Action("Edit", "Producto", new { id = item.ID })" id="Editar">
+                                        <i class="fa fa-fw fa-edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("Detalle", "Producto", new { id = item.ID })" id="Detalle">
+                                        <i class="fa fa-fw fa-search"></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Producto", new { id = item.ID })" id="Confirma" onclick="pop(@item.ID)">
+                                        <i class="fa fa-fw fa-trash-o"></i>
+                                    </a>
                                 </td>
                             </tr>
                         }

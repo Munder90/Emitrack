@@ -92,7 +92,13 @@
                             </li>*@
                         <li class="divider"></li>
                         <li>
-                            <a href="@Url.Action("LogOut", "Cuentas")"><i class="fa fa-sign-out fa-fw"></i> Cerrar</a>
+                            @*@using Microsoft.AspNet.Identity*@
+                            @*@using (Html.BeginForm("LogOut", "Cuentas", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()*@
+                                @*<a href="javascript:document.getElementById('logoutForm').submit()" id="lbl_loggoff"><i class="fa fa-sign-out fa-fw"></i>Salir</a>*@
+                                <a href="@Url.Action("LogOut", "Cuentas")"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+                            @*}*@
                         </li>
                     </ul>
                 </li>
@@ -170,23 +176,36 @@
                             @if (ViewBag.Usuario != null && ViewBag.Tipo == 1)
                             {
                                 <li>
-                                    <a href="@Url.Action("Index", "Producto")">Lista de Productos</a>
+                                    <a href="@Url.Action("Index", "Etiquetas")">Lista de Categorias</a>
                                 </li>
                                 <li>
+                                    <a href="@Url.Action("Index", "Producto")">Lista de Productos</a>
+                                </li>
+                                @*<li>
                                     <a href="@Url.Action("Create", "Producto")">Nuevo Producto</a>
+                                </li>*@
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">Categorias<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        @foreach (Integrador.Entities.PRODUCTO_T T in ViewBag.Categoria)
+                                        {
+                                        <li><a href="#">@T.Descripcion</a></li>
+                                        }
+                                    </ul>
                                 </li>
                             }
-                            @if (ViewBag.Categoria != null)
+                            @if (ViewBag.Categoria != null && ViewBag.Tipo != 1)
                             {
                                 foreach (Integrador.Entities.PRODUCTO_T T in ViewBag.Categoria)
                                 {
                                     <li><a href="#">@T.Descripcion</a></li>
                                 }
                             }
-                            <li>
-                                <a href="#">Categoria 1</a>
-                            </li>
                             @*<li>
+            <a href="#">Categoria 1</a>
+        </li>
+        <li>
             <a href="#">Second Level Link<span class="fa arrow"></span></a>
             <ul class="nav nav-third-level">
                 <li>
@@ -198,9 +217,7 @@
                 <li>
                     <a href="#">Third Level Link</a>
                 </li>
-
             </ul>
-
         </li>*@
                         </ul>
                     </li>

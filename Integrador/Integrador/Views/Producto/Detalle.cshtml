@@ -1,0 +1,42 @@
+﻿@model Integrador.Models.Productos
+
+@{
+    ViewBag.Title = "Detalle";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-2">
+
+            </div>
+
+            <div class="col-lg-9">
+
+                <div class="card mt-4">
+                    <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">@Html.DisplayFor(model => model.Nombre, new { htmlAttributes = new { @class = "control-label" } })</h3>
+                        <h4>$@Html.DisplayFor(model => model.Precio_V, new { htmlAttributes = new { @class = "control-label" } })</h4>
+                        <p class="card-text">@Html.DisplayFor(model => model.Descripcion, new { htmlAttributes = new { @class = "control-label" } })</p>
+                        @*<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                        4.0 stars*@
+                    </div>
+                </div>
+
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header">
+                        Manuales
+                    </div>
+                    <div class="card-body">
+                        
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

@@ -138,8 +138,12 @@ namespace Integrador.Controllers
                 return View(model);
             }
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOut()
         {
+            FormsAuthentication.SignOut();
             Session["usuario"] = null;
             Session["tipo"] = null;
             return RedirectToAction("Index", "Home");

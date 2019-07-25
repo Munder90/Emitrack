@@ -17,6 +17,7 @@ namespace Integrador.Models
         bool activo;
         string imagen;
         string codigo;
+        string etiquetas;
 
         public int ID { get => iD; set => iD = value; }
         public string Nombre { get => nombre; set => nombre = value; }
@@ -28,5 +29,6 @@ namespace Integrador.Models
         public bool Activo { get => activo; set => activo = value; }
         public string Imagen { get => imagen; set => imagen = value; }
         public string Codigo { get => codigo; set => codigo = value; }
+        public string Etiquetas { get => etiquetas; set => etiquetas = value; }
     }
 }
