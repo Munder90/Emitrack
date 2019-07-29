@@ -152,28 +152,29 @@ namespace Integrador.Controllers
         // GET: Pagos/Delete/5
         public ActionResult Delete(int id)
         {
-            try
-            {
-                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
-                string Usuario = Session["usuario"].ToString();
-                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                if (Tipo == 1)
-                {
-                    PAGO_T pt = db.PAGO_T.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
-                    Pagos_T pagos = new Pagos_T
-                    {
-                        Nombre = pt.Nombre,
-                        Descripcion = pt.Descripcion
-                    };
-                    return View(pagos);
-                }
+            //try
+            //{
+            //    FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+            //    string Usuario = Session["usuario"].ToString();
+            //    int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+            //    if (Tipo == 1)
+            //    {
+            //        PAGO_T pt = db.PAGO_T.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
+            //        Pagos_T pagos = new Pagos_T
+            //        {
+            //            Nombre = pt.Nombre,
+            //            Descripcion = pt.Descripcion
+            //        };
+            //        return View(pagos);
+            //    }
 
-                return RedirectToAction("Index");
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //    return RedirectToAction("Index");
+            //}
+            //catch (Exception)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            return RedirectToAction("Index");
         }
 
         // POST: Pagos/Delete/5
@@ -215,11 +216,12 @@ namespace Integrador.Controllers
 
                     db.Entry(pAGO_T).State = EntityState.Modified;
                     db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Pagos");
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return RedirectToAction("Index", "Home");
             }

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
@@ -83,7 +83,8 @@
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Imagen" } })
+                            @*@Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", type = "file", @placeholder = "Imagen", @name = "upload" } })*@
+                            <input type="file" id="Avatar" name="upload" accept="image/png" />
                             @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
                         </div>
                     </div>

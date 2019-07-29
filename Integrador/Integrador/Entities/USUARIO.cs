@@ -34,6 +34,7 @@ namespace Integrador.Entities
         public string Imagen { get; set; }
         public string Password { get; set; }
         public bool Activo { get; set; }
+        public Nullable<int> N_Compras { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CARRITO> CARRITOes { get; set; }

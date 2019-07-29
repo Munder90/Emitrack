@@ -2412,6 +2412,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Estilos\assets\img\" />
+    <Folder Include="images\Productos\" />
     <Folder Include="Views\Venta\" />
   </ItemGroup>
   <ItemGroup>

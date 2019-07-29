@@ -18,6 +18,25 @@ namespace Integrador.Controllers
             try
             {
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                try
+                {
+                    List<PRODUCTO> pRODUCTO = db.PRODUCTOes.Where(x => x.Activo == true).OrderByDescending(x => x.N_Ventas).ToList();
+                    List<PRODUCTO> p = new List<PRODUCTO>();
+                    int rows = 0;
+                    if (pRODUCTO.Count > 9)
+                    { rows = 9; }
+                    else
+                    { rows = pRODUCTO.Count; }
+                    for (int i = 0; i < rows; i++)
+                    {
+                        p.Add(pRODUCTO[i]);
+                    }
+                    ViewBag.Productos = p;
+                }
+                catch(Exception)
+                {
+
+                }
             }
             catch (Exception) { }
             return View();

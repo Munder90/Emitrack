@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Integrador.Entities.PRODUCTO>
+﻿@model IEnumerable<Integrador.Models.Productos>
 
 @{
     ViewBag.Title = "Index";
@@ -51,16 +51,16 @@
                                 @Html.DisplayNameFor(model => model.Precio_V)
                             </th>
                             @*<th>
-                                @Html.DisplayNameFor(model => model.Activo)
-                            </th>*@
-                            <th>
-                                @Html.DisplayNameFor(model => model.Imagen)
-                            </th>
+                                    @Html.DisplayNameFor(model => model.Activo)
+                                </th>*@
+                            @*<th>
+                                    @Html.DisplayNameFor(model => model.Imagen)
+                                </th>*@
                             <th>
                                 @Html.DisplayNameFor(model => model.Codigo)
                             </th>
                             <th>
-                                
+
                             </th>
                         </tr>
 
@@ -86,25 +86,25 @@
                                     @Html.DisplayFor(modelItem => item.Precio_V)
                                 </td>
                                 @*<td>
-                                    @Html.DisplayFor(modelItem => item.Activo)
-                                </td>*@
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Imagen)
-                                </td>
+                                        @Html.DisplayFor(modelItem => item.Activo)
+                                    </td>*@
+                                @*<td>
+                                        @Html.DisplayFor(modelItem => item.Imagen)
+                                    </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Codigo)
                                 </td>
                                 <td style="width: 80px;">
                                     @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
                                     <a href="@Url.Action("Edit", "Producto", new { id = item.ID })" id="Editar">
                                         <i class="fa fa-fw fa-edit"></i>
                                     </a>
                                     <a href="@Url.Action("Detalle", "Producto", new { id = item.ID })" id="Detalle">
                                         <i class="fa fa-fw fa-search"></i>
                                     </a>
-                                    <a href="@Url.Action("Delete", "Producto", new { id = item.ID })" id="Confirma" onclick="pop(@item.ID)">
+                                    <a href="" @*href="@Url.Action("Delete", "Producto", new { id = item.ID })"*@ id="Confirma" onclick="pop(@item.ID)">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
                                 </td>
@@ -115,26 +115,26 @@
                 </div>
 
                 @*<div class="col-md-4">
-                    <div class="form-group">
-                        @Html.ActionLink("Editar Datos", "Edit", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                        @if (ViewBag.Tipo == 2)
-                        {
-                            @Html.ActionLink("Direcciones de Envío", "Direccion", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                        }
-                        @if (ViewBag.Tipo == 1)
-                        {
-                            @Html.ActionLink("Nuevo", "Create", "Pagos", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                        }
-                        @Html.ActionLink("Cambiar Pregunta", "Pregunta", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                        @Html.ActionLink("Cambiar Contraseña", "Pass", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                    </div>
-                </div>*@
+                        <div class="form-group">
+                            @Html.ActionLink("Editar Datos", "Edit", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                            @if (ViewBag.Tipo == 2)
+                            {
+                                @Html.ActionLink("Direcciones de Envío", "Direccion", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                            }
+                            @if (ViewBag.Tipo == 1)
+                            {
+                                @Html.ActionLink("Nuevo", "Create", "Pagos", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                            }
+                            @Html.ActionLink("Cambiar Pregunta", "Pregunta", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                            @Html.ActionLink("Cambiar Contraseña", "Pass", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                        </div>
+                    </div>*@
             </div>
         </div>
     </div>
 }
 
-<script src="~/Scripts/jquery-3.0.0.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>

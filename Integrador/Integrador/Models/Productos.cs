@@ -10,7 +10,7 @@ namespace Integrador.Models
         int iD;
         string nombre;
         int cantidad;
-        System.DateTime fecha_Mo;
+        string fecha_Mo;
         string descripcion;
         decimal precio_A;
         decimal precio_V;
@@ -18,11 +18,12 @@ namespace Integrador.Models
         string imagen;
         string codigo;
         string etiquetas;
+        FileType img;
 
         public int ID { get => iD; set => iD = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public int Cantidad { get => cantidad; set => cantidad = value; }
-        public DateTime Fecha_Mo { get => fecha_Mo; set => fecha_Mo = value; }
+        public string Fecha_Mo { get => fecha_Mo; set => fecha_Mo = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public decimal Precio_A { get => precio_A; set => precio_A = value; }
         public decimal Precio_V { get => precio_V; set => precio_V = value; }
@@ -30,5 +31,10 @@ namespace Integrador.Models
         public string Imagen { get => imagen; set => imagen = value; }
         public string Codigo { get => codigo; set => codigo = value; }
         public string Etiquetas { get => etiquetas; set => etiquetas = value; }
+        public FileType Img { get => img; set => img = value; }
+    }
+    public enum FileType
+    {
+        Avatar = 1, Photo
     }
 }

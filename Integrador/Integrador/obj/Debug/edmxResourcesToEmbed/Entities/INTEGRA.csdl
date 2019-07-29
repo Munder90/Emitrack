@@ -94,7 +94,7 @@
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Cantidad" Type="Int32" Nullable="false" />
     <Property Name="Fecha_Mo" Type="DateTime" Precision="0" />
-    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Precio_A" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="Precio_V" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Activo" Type="Boolean" />
@@ -105,6 +105,7 @@
     <NavigationProperty Name="PRODUCTO_M" Relationship="Self.FK_PRODUCTO_M_Producto" FromRole="PRODUCTO" ToRole="PRODUCTO_M" />
     <NavigationProperty Name="PRODUCTO_TIPO" Relationship="Self.FK_PRODUCTO_TIPO_Producto" FromRole="PRODUCTO" ToRole="PRODUCTO_TIPO" />
     <NavigationProperty Name="VENTA_D" Relationship="Self.FK_VENTA_D_Producto" FromRole="PRODUCTO" ToRole="VENTA_D" />
+    <Property Name="N_Ventas" Type="Int32" />
   </EntityType>
   <EntityType Name="PRODUCTO_M">
     <Key>
@@ -165,6 +166,7 @@
     <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Usuario" FromRole="USUARIO" ToRole="USUARIO_DIR" />
     <NavigationProperty Name="USUARIO_T" Relationship="Self.FK_USUARIO_T_Usuario" FromRole="USUARIO" ToRole="USUARIO_T" />
     <NavigationProperty Name="VENTAs" Relationship="Self.FK_VENTA_Usuario" FromRole="USUARIO" ToRole="VENTA" />
+    <Property Name="N_Compras" Type="Int32" />
   </EntityType>
   <EntityType Name="USUARIO_DIR">
     <Key>

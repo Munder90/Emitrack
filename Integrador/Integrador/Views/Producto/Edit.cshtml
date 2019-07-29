@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -22,6 +22,19 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="row">
                 <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <img class="card-img-top" src="@Model.Imagen" alt="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @*@Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", type = "file", @placeholder = "Imagen", @name = "upload" } })*@
+                            <input type="file" id="Avatar" name="upload" accept="image/png" value="@Model.Imagen" />
+                            @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -75,13 +88,6 @@
                     </div>*@
                     <div class="form-group">
                         <div class="form-label-group">
-                            @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Imagen" } })
-                            @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-label-group">
                             @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
                             @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Codigo" } })
                             @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
@@ -110,6 +116,6 @@
     </div>
 }
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

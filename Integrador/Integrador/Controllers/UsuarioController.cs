@@ -28,6 +28,7 @@ namespace Integrador.Controllers
             if (id != null)
             {
                 USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                string fecha = u.Fecha_N.Date.ToString("dd/MM/yyyy");
                 Usuario us = new Usuario
                 {
                     ID1 = u.ID,
@@ -35,7 +36,7 @@ namespace Integrador.Controllers
                     Nombre = u.Nombre,
                     Apellido_P = u.Apellido_P,
                     Apellido_M = u.Apellido_M,
-                    Fecha_N = u.Fecha_N.Date,
+                    Fecha_N = fecha,
                     Pregunta = u.Pregunta
                 };
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
@@ -86,7 +87,7 @@ namespace Integrador.Controllers
                                         Nombre = usuario.Nombre,
                                         Apellido_P = usuario.Apellido_P,
                                         Apellido_M = usuario.Apellido_M,
-                                        Fecha_N = usuario.Fecha_N,
+                                        Fecha_N = DateTime.Parse(usuario.Fecha_N),
                                         Email = usuario.Email,
                                         Password = usuario.Password,
                                         T_Usuario = tipo,
@@ -131,6 +132,7 @@ namespace Integrador.Controllers
             if (id != null)
             {
                 USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                string fecha = u.Fecha_N.Date.ToString("dd/MM/yyyy");
                 Usuario us = new Usuario
                 {
                     ID1 = u.ID,
@@ -138,7 +140,7 @@ namespace Integrador.Controllers
                     Nombre = u.Nombre,
                     Apellido_P = u.Apellido_P,
                     Apellido_M = u.Apellido_M,
-                    Fecha_N = u.Fecha_N.Date
+                    Fecha_N = fecha
                 };
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 //ViewBag.Usuario = Session["usuario"].ToString();
@@ -158,7 +160,7 @@ namespace Integrador.Controllers
                 uSUARIO.Nombre = us.Nombre;
                 uSUARIO.Apellido_P = us.Apellido_P;
                 uSUARIO.Apellido_M = us.Apellido_M;
-                uSUARIO.Fecha_N = us.Fecha_N;
+                uSUARIO.Fecha_N = DateTime.Parse(us.Fecha_N);
 
                 db.Entry(uSUARIO).State = EntityState.Modified;
                 db.SaveChanges();
@@ -300,6 +302,7 @@ namespace Integrador.Controllers
             if (id != null)
             {
                 USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                string fecha = u.Fecha_N.Date.ToString("dd/MM/yyyy");
                 Usuario us = new Usuario
                 {
                     ID1 = u.ID,
@@ -307,7 +310,7 @@ namespace Integrador.Controllers
                     Nombre = u.Nombre,
                     Apellido_P = u.Apellido_P,
                     Apellido_M = u.Apellido_M,
-                    Fecha_N = u.Fecha_N.Date,
+                    Fecha_N = fecha,
                     Pregunta = u.Pregunta
                 };
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
@@ -400,6 +403,7 @@ namespace Integrador.Controllers
             if (id != null)
             {
                 USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                string fecha = u.Fecha_N.Date.ToString("dd/MM/yyyy");
                 Usuario us = new Usuario
                 {
                     ID1 = u.ID,
@@ -407,7 +411,7 @@ namespace Integrador.Controllers
                     Nombre = u.Nombre,
                     Apellido_P = u.Apellido_P,
                     Apellido_M = u.Apellido_M,
-                    Fecha_N = u.Fecha_N.Date,
+                    Fecha_N = fecha,
                 };
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 return View(us);

@@ -79,12 +79,13 @@
     <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Cantidad" Type="int" Nullable="false" />
     <Property Name="Fecha_Mo" Type="date" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+    <Property Name="Descripcion" Type="varchar(max)" />
     <Property Name="Precio_A" Type="decimal" Precision="18" Scale="0" />
     <Property Name="Precio_V" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Activo" Type="bit" />
     <Property Name="Imagen" Type="varchar" MaxLength="50" />
     <Property Name="Codigo" Type="varchar" MaxLength="50" />
+    <Property Name="N_Ventas" Type="int" />
   </EntityType>
   <EntityType Name="PRODUCTO_M">
     <Key>
@@ -137,6 +138,7 @@
     <Property Name="Imagen" Type="varchar" MaxLength="50" />
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="N_Compras" Type="int" />
   </EntityType>
   <EntityType Name="USUARIO_DIR">
     <Key>

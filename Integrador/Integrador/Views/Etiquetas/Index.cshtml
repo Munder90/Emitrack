@@ -44,12 +44,12 @@
                                     @Html.DisplayFor(modelItem => item.Descripcion)
                                 </td>
                                 <td>
-                                @*    @Html.DisplayFor(modelItem => item.Activo)*@
+                                    @*    @Html.DisplayFor(modelItem => item.Activo)*@
                                 </td>
                                 <td>
                                     @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
                                     <a href="@Url.Action("Delete", "Etiquetas", new { id = item.ID })" id="Confirma" onclick="pop(@item.ID)">
                                         <i class="fa fa-fw fa-trash-o"></i>
                                     </a>
@@ -61,9 +61,9 @@
                 </div>
 
                 <div class="col-md-4">
-                        <div class="form-group">
-                            @Html.ActionLink("Nuevo", "Create", "Etiquetas", htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                            @*@if (ViewBag.Tipo == 2)
+                    <div class="form-group">
+                        @Html.ActionLink("Nuevo", "Create", "Etiquetas", htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                        @*@if (ViewBag.Tipo == 2)
                             {
                                 @Html.ActionLink("Direcciones de Envío", "Direccion", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
                             }
@@ -73,14 +73,14 @@
                             }
                             @Html.ActionLink("Cambiar Pregunta", "Pregunta", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
                             @Html.ActionLink("Cambiar Contraseña", "Pass", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })*@
-                        </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
-<script src="~/Scripts/jquery-3.0.0.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>

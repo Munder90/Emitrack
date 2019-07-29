@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Fecha_N, "Fecha de Nacimiento", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Fecha_N, new { htmlAttributes = new { @class = "form-control", @type = "date", @placeholder = "Fecha de Nacimiento", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Fecha_N, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha de Nacimiento", disabled = "disabled" } })
                             @*@Html.LabelFor(model => model.Fecha_N, "Fecha de Nacimiento", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
@@ -67,10 +67,10 @@
                         {
                             @Html.ActionLink("Direcciones de Envío", "Direccion", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
                         }
-                        @if (ViewBag.Tipo == 1)
+                        @*@if (ViewBag.Tipo == 1)
                         {
                             @Html.ActionLink("Tipos de Pago", "Index", "Pagos", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
-                        }
+                        }*@
                         @Html.ActionLink("Cambiar Pregunta", "Pregunta", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
                         @Html.ActionLink("Cambiar Contraseña", "Pass", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
                     </div>

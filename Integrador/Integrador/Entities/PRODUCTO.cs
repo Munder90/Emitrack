@@ -34,6 +34,7 @@ namespace Integrador.Entities
         public Nullable<bool> Activo { get; set; }
         public string Imagen { get; set; }
         public string Codigo { get; set; }
+        public Nullable<int> N_Ventas { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BANER_D> BANER_D { get; set; }

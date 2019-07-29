@@ -140,13 +140,13 @@
                             <a @*class="active-menu"*@ href="@Url.Action("Dashboard", "Usuario", new { id = ViewBag.usuario })"><i class="fa fa-dashboard"></i> Usuario</a>
                         </li>
                         @*<li>
-                                <a href="#"><i class="fa fa-edit"></i> Editar Datos</a>
-                            </li>*@
+                <a href="#"><i class="fa fa-edit"></i> Editar Datos</a>
+            </li>*@
                         if (ViewBag.Tipo == 1)
                         {
-                            <li>
+                            @*<li>
                                 <a href="#"><i class="fa fa-bar-chart-o"></i> Charts</a>
-                            </li>
+                            </li>*@
                             <li>
                                 <a href="#"><i class="fa fa-qrcode"></i> Reportes<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -170,55 +170,34 @@
                         }
                     }
 
+                    @if (ViewBag.Usuario != null && ViewBag.Tipo == 1)
+                    {
+                        <li>
+                            <a href="#"><i class="fa fa-book"></i> Catalogos<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("Index", "Producto")">Productos</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Etiquetas")">Categorias</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Pagos")">Tipos de Pago</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+
                     <li>
                         <a href="#"><i class="fa fa-list"></i> Productos<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            @if (ViewBag.Usuario != null && ViewBag.Tipo == 1)
-                            {
-                                <li>
-                                    <a href="@Url.Action("Index", "Etiquetas")">Lista de Categorias</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index", "Producto")">Lista de Productos</a>
-                                </li>
-                                @*<li>
-                                    <a href="@Url.Action("Create", "Producto")">Nuevo Producto</a>
-                                </li>*@
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">Categorias<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        @foreach (Integrador.Entities.PRODUCTO_T T in ViewBag.Categoria)
-                                        {
-                                        <li><a href="#">@T.Descripcion</a></li>
-                                        }
-                                    </ul>
-                                </li>
-                            }
-                            @if (ViewBag.Categoria != null && ViewBag.Tipo != 1)
+                            @if (ViewBag.Categoria != null)
                             {
                                 foreach (Integrador.Entities.PRODUCTO_T T in ViewBag.Categoria)
                                 {
                                     <li><a href="#">@T.Descripcion</a></li>
                                 }
                             }
-                            @*<li>
-            <a href="#">Categoria 1</a>
-        </li>
-        <li>
-            <a href="#">Second Level Link<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
-                <li>
-                    <a href="#">Third Level Link</a>
-                </li>
-                <li>
-                    <a href="#">Third Level Link</a>
-                </li>
-                <li>
-                    <a href="#">Third Level Link</a>
-                </li>
-            </ul>
-        </li>*@
                         </ul>
                     </li>
                     <li>

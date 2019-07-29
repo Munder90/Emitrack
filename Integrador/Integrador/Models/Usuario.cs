@@ -11,7 +11,7 @@ namespace Integrador.Models
         string nombre;
         string apellido_P;
         string apellido_M;
-        System.DateTime fecha_N;
+        string fecha_N;
         int t_Usuario;
         string t_Usuario_l;
         string email;
@@ -25,7 +25,7 @@ namespace Integrador.Models
         public string Nombre { get => nombre; set => nombre = value; }
         public string Apellido_P { get => apellido_P; set => apellido_P = value; }
         public string Apellido_M { get => apellido_M; set => apellido_M = value; }
-        public DateTime Fecha_N { get => fecha_N; set => fecha_N = value; }
+        public string Fecha_N { get => fecha_N; set => fecha_N = value; }
         public int T_Usuario { get => t_Usuario; set => t_Usuario = value; }
         public string T_Usuario_l { get => t_Usuario_l; set => t_Usuario_l = value; }
         public string Email { get => email; set => email = value; }

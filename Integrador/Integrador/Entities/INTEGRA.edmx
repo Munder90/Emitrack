@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="INTEGRAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="INTEGRAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BANER">
           <Key>
             <PropertyRef Name="ID" />
@@ -84,12 +84,13 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Fecha_Mo" Type="date" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar(max)" />
           <Property Name="Precio_A" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Precio_V" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Activo" Type="bit" />
           <Property Name="Imagen" Type="varchar" MaxLength="50" />
           <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="N_Ventas" Type="int" />
         </EntityType>
         <EntityType Name="PRODUCTO_M">
           <Key>
@@ -142,6 +143,7 @@
           <Property Name="Imagen" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="N_Compras" Type="int" />
         </EntityType>
         <EntityType Name="USUARIO_DIR">
           <Key>
@@ -528,8 +530,7 @@
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="INTEGRAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -627,7 +628,7 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Fecha_Mo" Type="DateTime" Precision="0" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Precio_A" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Precio_V" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Activo" Type="Boolean" />
@@ -638,6 +639,7 @@
           <NavigationProperty Name="PRODUCTO_M" Relationship="Self.FK_PRODUCTO_M_Producto" FromRole="PRODUCTO" ToRole="PRODUCTO_M" />
           <NavigationProperty Name="PRODUCTO_TIPO" Relationship="Self.FK_PRODUCTO_TIPO_Producto" FromRole="PRODUCTO" ToRole="PRODUCTO_TIPO" />
           <NavigationProperty Name="VENTA_D" Relationship="Self.FK_VENTA_D_Producto" FromRole="PRODUCTO" ToRole="VENTA_D" />
+          <Property Name="N_Ventas" Type="Int32" />
         </EntityType>
         <EntityType Name="PRODUCTO_M">
           <Key>
@@ -698,6 +700,7 @@
           <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Usuario" FromRole="USUARIO" ToRole="USUARIO_DIR" />
           <NavigationProperty Name="USUARIO_T" Relationship="Self.FK_USUARIO_T_Usuario" FromRole="USUARIO" ToRole="USUARIO_T" />
           <NavigationProperty Name="VENTAs" Relationship="Self.FK_VENTA_Usuario" FromRole="USUARIO" ToRole="VENTA" />
+          <Property Name="N_Compras" Type="Int32" />
         </EntityType>
         <EntityType Name="USUARIO_DIR">
           <Key>
@@ -1184,6 +1187,7 @@
           <EntitySetMapping Name="PRODUCTOes">
             <EntityTypeMapping TypeName="INTEGRAModel.PRODUCTO">
               <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="N_Ventas" ColumnName="N_Ventas" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
@@ -1239,6 +1243,7 @@
           <EntitySetMapping Name="USUARIOs">
             <EntityTypeMapping TypeName="INTEGRAModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="N_Compras" ColumnName="N_Compras" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido_P" ColumnName="Apellido_P" />
