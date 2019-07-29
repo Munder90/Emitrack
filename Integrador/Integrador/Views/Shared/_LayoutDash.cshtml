@@ -34,13 +34,53 @@
                             <i class="fa fa-shopping-cart fa-fw"></i><i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
-                            <li>
+                            @if (ViewBag.Carrito != null)
+                            {
+                                foreach (Integrador.Models.Carritos_D item in ViewBag.CarritoD)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Detalle", "Producto", new { id = item.Producto_id })">
+                                            <div>
+                                                <strong>@item.Producto</strong>
+                                                @*<span class="pull-right text-muted">
+                                                    <em>Today</em>
+                                                </span>*@
+                                            </div>
+                                        </a>
+                                        <div>@item.Cantidad</div>
+                                        <div>$@item.Total</div>
+                                    </li>
+                                    <li class="divider"></li>
+                                }
+                                <li>
+                                    <div>Total: $@ViewBag.Carrito.Total</div>
+                                    <a class="text-center" href="@Url.Action("Carrito", "Producto")">
+                                        <strong>Realizara Compra</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    @*<a href="#">*@
+                                    <div>
+                                        <strong>No hay productos</strong>
+                                        @*<span class="pull-right text-muted">
+                                            <em>Today</em>
+                                        </span>*@
+                                    </div>
+                                    @*<div>Producto 1</div>*@
+                                    @*</a>*@
+                                </li>
+                            }
+                            @*<li>
                                 <a href="#">
                                     <div>
                                         <strong>Producto 1</strong>
-                                        @*<span class="pull-right text-muted">
+                                        <span class="pull-right text-muted">
                                                 <em>Today</em>
-                                            </span>*@
+                                            </span>
                                     </div>
                                     <div>Producto 1</div>
                                 </a>
@@ -50,9 +90,9 @@
                                 <a href="#">
                                     <div>
                                         <strong>Producto 2</strong>
-                                        @*<span class="pull-right text-muted">
+                                        <span class="pull-right text-muted">
                                                 <em>Today</em>
-                                            </span>*@
+                                            </span>
                                     </div>
                                     <div>Producto 2</div>
                                 </a>
@@ -62,9 +102,9 @@
                                 <a href="#">
                                     <div>
                                         <strong>Producto 3</strong>
-                                        @*<span class="pull-right text-muted">
+                                        <span class="pull-right text-muted">
                                                 <em>Today</em>
-                                            </span>*@
+                                            </span>
                                     </div>
                                     <div>Producto 3</div>
                                 </a>
@@ -75,7 +115,7 @@
                                     <strong>Realizara Compra</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
-                            </li>
+                            </li>*@
                         </ul>
                     </li>
                 }
@@ -137,11 +177,12 @@
                     @if (ViewBag.Usuario != null)
                     {
                         <li>
-                            <a @*class="active-menu"*@ href="@Url.Action("Dashboard", "Usuario", new { id = ViewBag.usuario })"><i class="fa fa-dashboard"></i> Usuario</a>
+                            @*<a class="active-menu" href="@Url.Action("Dashboard", "Usuario", new { id = ViewBag.usuario })"><i class="fa fa-dashboard"></i> Usuario</a>*@
+                            <a href="@Url.Action("Dashboard", "Usuario", new { id = ViewBag.usuario })"><i class="fa fa-dashboard"></i> Usuario</a>
                         </li>
                         @*<li>
-                <a href="#"><i class="fa fa-edit"></i> Editar Datos</a>
-            </li>*@
+                            <a href="#"><i class="fa fa-edit"></i> Editar Datos</a>
+                        </li>*@
                         if (ViewBag.Tipo == 1)
                         {
                             @*<li>

@@ -5,40 +5,69 @@
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
 
-    <div class="container">
+<div class="container">
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-lg-2">
+        <div class="col-lg-2">
 
+        </div>
+
+        <div class="col-lg-9">
+
+            <div class="mt-4">
+                @*<img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">*@
+                <img class="img-fluid" src="@Model.Imagen" alt="" width="400" height="400">
+                <div class="card-body">
+                    <h3 class="card-title">@Html.DisplayFor(model => model.Nombre, new { htmlAttributes = new { @class = "control-label" } })</h3>
+                    <span hidden><input class="form-control" name="Producto_id" id="Producto_id" type="number" value="@Model.ID" /></span>
+                    <h4>$@Html.DisplayFor(model => model.Precio_V, new { htmlAttributes = new { @class = "control-label" } })</h4>
+                    @if (ViewBag.Usuario != null)
+                    {
+                        using (Html.BeginForm("Agregar", "Carrito", FormMethod.Post))
+                        {
+                            <input class="form-control" name="Cantidad" id="Cantidad" type="number" value="1" />
+                            @*<a href="@Url.Action("Agregar", "Carrito", new { id = Model.ID })" class="btn btn-success">Agregar <i class="fa fa-shopping-cart"></i></a>*@
+                            <a class="btn btn-success" id="Agregar">Agregar <i class="fa fa-shopping-cart"></i></a>
+                        }
+                    }
+                    <p class="card-text">@Html.DisplayFor(model => model.Descripcion, new { htmlAttributes = new { @class = "control-label" } })</p>
+                    @*<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+        4.0 stars*@
+                </div>
             </div>
 
-            <div class="col-lg-9">
-
-                <div class="mt-4">
-                    @*<img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">*@
-                    <img class="img-fluid" src="@Model.Imagen" alt="" width="400" height="400">
-                    <div class="card-body">
-                        <h3 class="card-title">@Html.DisplayFor(model => model.Nombre, new { htmlAttributes = new { @class = "control-label" } })</h3>
-                        <h4>$@Html.DisplayFor(model => model.Precio_V, new { htmlAttributes = new { @class = "control-label" } })</h4>
-                        <a href="#" class="btn btn-success">Agregar <i class="fa fa-shopping-cart"></i></a>
-                        <p class="card-text">@Html.DisplayFor(model => model.Descripcion, new { htmlAttributes = new { @class = "control-label" } })</p>
-                        @*<span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                        4.0 stars*@
-                    </div>
+            <div class="card-outline-secondary my-4">
+                <div class="card-header">
+                    Manuales
                 </div>
+                <div class="card-body">
 
-                <div class="card-outline-secondary my-4">
-                    <div class="card-header">
-                        Manuales
-                    </div>
-                    <div class="card-body">
-                        
-                    </div>
                 </div>
-
             </div>
 
         </div>
 
     </div>
+
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $('#Agregar').click(function () {
+        var cantidad = $('#Cantidad').val();
+        var ip = $('#Producto_id').val();
+        
+        $.ajax({
+            type: "POST",
+            url: '../../Carrito/Agregar',
+            dataType: "post",
+            data: { "id": ip, "Cantidad": cantidad},
+            success: function (data) {
+            }
+        });
+        location.reload();
+    });
+</script>

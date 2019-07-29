@@ -2046,13 +2046,6 @@
     <Content Include="Estilos\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Estilos\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Estilos\assets\fonts\glyphicons-halflings-regulard41d.eot" />
-    <EntityDeploy Include="Entities\INTEGRA.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>INTEGRA.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Entities\INTEGRA.edmx.diagram">
-      <DependentUpon>INTEGRA.edmx</DependentUpon>
-    </Content>
     <Content Include="libman.json" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -2235,6 +2228,13 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <EntityDeploy Include="Entities\INTEGRA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>INTEGRA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Entities\INTEGRA.edmx.diagram">
+      <DependentUpon>INTEGRA.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2261,6 +2261,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\FnCommon.cs" />
+    <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CuentasController.cs" />
     <Compile Include="Controllers\EtiquetasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2402,6 +2403,7 @@
     <Content Include="Views\Producto\Detalle.cshtml" />
     <Content Include="Views\Etiquetas\Index.cshtml" />
     <Content Include="Views\Etiquetas\Create.cshtml" />
+    <Content Include="Views\Carrito\Carrito.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

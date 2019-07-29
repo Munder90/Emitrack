@@ -1,0 +1,79 @@
+﻿@model Integrador.Models.Carritos
+
+@{
+    ViewBag.Title = "Carrito";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-2">
+
+        </div>
+
+        <div class="col-lg-9">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Usuario)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Usuario)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Total)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Total)
+                </dd>
+
+            </dl>
+            <table class="table table mdl-data-table table-striped">
+                <tr>
+                    <th>
+                        Articulo
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Precio
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.Activo)*@
+                    </th>
+                </tr>
+
+                @foreach (Integrador.Models.Carritos_D item in ViewBag.CarritoD)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Producto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </td>
+                        <td>
+                            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                            @*<a href="@Url.Action("Delete", "Etiquetas", new { id = item.ID })" id="Confirma" onclick="pop(@item.ID)">
+                                    <i class="fa fa-fw fa-trash-o"></i>
+                                </a>*@
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+
+</div>
+

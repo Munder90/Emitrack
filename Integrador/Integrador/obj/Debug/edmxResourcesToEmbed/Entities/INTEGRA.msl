@@ -83,7 +83,6 @@
     <EntitySetMapping Name="PRODUCTOes">
       <EntityTypeMapping TypeName="INTEGRAModel.PRODUCTO">
         <MappingFragment StoreEntitySet="PRODUCTO">
-          <ScalarProperty Name="N_Ventas" ColumnName="N_Ventas" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
@@ -94,6 +93,7 @@
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="Imagen" ColumnName="Imagen" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="N_Ventas" ColumnName="N_Ventas" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -139,7 +139,6 @@
     <EntitySetMapping Name="USUARIOs">
       <EntityTypeMapping TypeName="INTEGRAModel.USUARIO">
         <MappingFragment StoreEntitySet="USUARIO">
-          <ScalarProperty Name="N_Compras" ColumnName="N_Compras" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Apellido_P" ColumnName="Apellido_P" />
@@ -152,6 +151,7 @@
           <ScalarProperty Name="Imagen" ColumnName="Imagen" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="N_Compras" ColumnName="N_Compras" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

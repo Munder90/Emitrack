@@ -1,4 +1,5 @@
 ﻿using Integrador.Entities;
+using Integrador.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,23 @@ namespace Integrador.Common
             {
                 var carrito = db.CARRITOes.Where(x => x.Usuario.Equals(user.ID)).FirstOrDefault();
                 controller.ViewBag.Carrito = carrito;
-                controller.ViewBag.CarritoD = db.CARRITO_D.Where(x => x.ID_Carrito.Equals(carrito.ID)).ToList();
+                var carrito_d = db.CARRITO_D.Where(x => x.ID_Carrito == carrito.ID).ToList();
+                List<Carritos_D> carritos_Ds = new List<Carritos_D>();
+                List<PRODUCTO> pRODUCTOs = db.PRODUCTOes.Where(x => x.Activo == true).ToList();
+                foreach (CARRITO_D cARRITO_D in carrito_d)
+                {
+                    string pro = pRODUCTOs.Where(x => x.ID == cARRITO_D.Producto).Select(x => x.Nombre).FirstOrDefault();
+                    Carritos_D carritos_D = new Carritos_D
+                    {
+                        ID_Carrito = cARRITO_D.ID_Carrito.Value,
+                        Producto_id = cARRITO_D.Producto.Value,
+                        Producto = pro,
+                        Cantidad = cARRITO_D.Cantidad.Value,
+                        Total = cARRITO_D.Total.Value
+                    };
+                    carritos_Ds.Add(carritos_D);
+                }
+                controller.ViewBag.CarritoD = carritos_Ds;
             }
             catch (Exception) { }
         }

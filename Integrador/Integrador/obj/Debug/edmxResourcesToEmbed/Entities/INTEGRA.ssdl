@@ -17,7 +17,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ID_Baner" Type="int" />
     <Property Name="Producto" Type="int" />
-    <Property Name="Precio" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Precio" Type="numeric" Precision="18" Scale="0" />
     <Property Name="Cantidad" Type="int" />
   </EntityType>
   <EntityType Name="CARRITO">
@@ -26,7 +26,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Usuario" Type="varchar" MaxLength="10" />
-    <Property Name="Total" Type="int" />
+    <Property Name="Total" Type="numeric" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="CARRITO_D">
     <Key>
@@ -36,7 +36,7 @@
     <Property Name="ID_Carrito" Type="int" />
     <Property Name="Producto" Type="int" />
     <Property Name="Cantidad" Type="int" />
-    <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Total" Type="numeric" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="ESTADO">
     <Key>
@@ -80,8 +80,8 @@
     <Property Name="Cantidad" Type="int" Nullable="false" />
     <Property Name="Fecha_Mo" Type="date" />
     <Property Name="Descripcion" Type="varchar(max)" />
-    <Property Name="Precio_A" Type="decimal" Precision="18" Scale="0" />
-    <Property Name="Precio_V" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Precio_A" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Precio_V" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Activo" Type="bit" />
     <Property Name="Imagen" Type="varchar" MaxLength="50" />
     <Property Name="Codigo" Type="varchar" MaxLength="50" />
@@ -169,7 +169,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Usuario" Type="varchar" MaxLength="10" />
     <Property Name="Fecha" Type="date" />
-    <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Total" Type="numeric" Precision="18" Scale="0" />
     <Property Name="Entrega" Type="bit" />
     <Property Name="Direccion" Type="int" />
     <Property Name="Metod_Pago" Type="int" />
@@ -183,7 +183,7 @@
     <Property Name="ID_Venta" Type="int" />
     <Property Name="Producto" Type="int" />
     <Property Name="Cantidad" Type="int" />
-    <Property Name="Total" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Total" Type="numeric" Precision="18" Scale="0" />
   </EntityType>
   <Association Name="FK_BANER_D_ID_Baner">
     <End Role="BANER" Type="Self.BANER" Multiplicity="0..1" />

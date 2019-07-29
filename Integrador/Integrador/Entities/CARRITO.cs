@@ -22,7 +22,7 @@ namespace Integrador.Entities
     
         public int ID { get; set; }
         public string Usuario { get; set; }
-        public Nullable<int> Total { get; set; }
+        public Nullable<decimal> Total { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CARRITO_D> CARRITO_D { get; set; }

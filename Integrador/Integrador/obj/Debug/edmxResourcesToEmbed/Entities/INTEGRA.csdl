@@ -29,7 +29,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="Total" Type="Int32" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
     <NavigationProperty Name="CARRITO_D" Relationship="Self.FK_CARRITO_D_ID_Carrito" FromRole="CARRITO" ToRole="CARRITO_D" />
     <NavigationProperty Name="USUARIO1" Relationship="Self.FK_CARRITO_Usuario" FromRole="CARRITO" ToRole="USUARIO" />
   </EntityType>
@@ -100,12 +100,12 @@
     <Property Name="Activo" Type="Boolean" />
     <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="N_Ventas" Type="Int32" />
     <NavigationProperty Name="BANER_D" Relationship="Self.FK_BANER_D_Producto" FromRole="PRODUCTO" ToRole="BANER_D" />
     <NavigationProperty Name="CARRITO_D" Relationship="Self.FK_CARRITO_D_Producto" FromRole="PRODUCTO" ToRole="CARRITO_D" />
     <NavigationProperty Name="PRODUCTO_M" Relationship="Self.FK_PRODUCTO_M_Producto" FromRole="PRODUCTO" ToRole="PRODUCTO_M" />
     <NavigationProperty Name="PRODUCTO_TIPO" Relationship="Self.FK_PRODUCTO_TIPO_Producto" FromRole="PRODUCTO" ToRole="PRODUCTO_TIPO" />
     <NavigationProperty Name="VENTA_D" Relationship="Self.FK_VENTA_D_Producto" FromRole="PRODUCTO" ToRole="VENTA_D" />
-    <Property Name="N_Ventas" Type="Int32" />
   </EntityType>
   <EntityType Name="PRODUCTO_M">
     <Key>
@@ -162,11 +162,11 @@
     <Property Name="Imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="N_Compras" Type="Int32" />
     <NavigationProperty Name="CARRITOes" Relationship="Self.FK_CARRITO_Usuario" FromRole="USUARIO" ToRole="CARRITO" />
     <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Usuario" FromRole="USUARIO" ToRole="USUARIO_DIR" />
     <NavigationProperty Name="USUARIO_T" Relationship="Self.FK_USUARIO_T_Usuario" FromRole="USUARIO" ToRole="USUARIO_T" />
     <NavigationProperty Name="VENTAs" Relationship="Self.FK_VENTA_Usuario" FromRole="USUARIO" ToRole="VENTA" />
-    <Property Name="N_Compras" Type="Int32" />
   </EntityType>
   <EntityType Name="USUARIO_DIR">
     <Key>

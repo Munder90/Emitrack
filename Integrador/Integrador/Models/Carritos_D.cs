@@ -9,14 +9,16 @@ namespace Integrador.Models
     {
         int iD;
         int iD_Carrito;
-        int producto;
+        int producto_id;
+        string producto;
         int cantidad;
-        string total;
+        decimal total;
 
         public int ID { get => iD; set => iD = value; }
         public int ID_Carrito { get => iD_Carrito; set => iD_Carrito = value; }
-        public int Producto { get => producto; set => producto = value; }
+        public int Producto_id { get => producto_id; set => producto_id = value; }
+        public string Producto { get => producto; set => producto = value; }
         public int Cantidad { get => cantidad; set => cantidad = value; }
-        public string Total { get => total; set => total = value; }
+        public decimal Total { get => total; set => total = value; }
     }
 }
