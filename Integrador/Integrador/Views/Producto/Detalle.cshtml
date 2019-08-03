@@ -22,7 +22,7 @@
                     <h3 class="card-title">@Html.DisplayFor(model => model.Nombre, new { htmlAttributes = new { @class = "control-label" } })</h3>
                     <span hidden><input class="form-control" name="Producto_id" id="Producto_id" type="number" value="@Model.ID" /></span>
                     <h4>$@Html.DisplayFor(model => model.Precio_V, new { htmlAttributes = new { @class = "control-label" } })</h4>
-                    @if (ViewBag.Usuario != null)
+                    @if (ViewBag.Usuario != null && ViewBag.Tipo != 1)
                     {
                         using (Html.BeginForm("Agregar", "Carrito", FormMethod.Post))
                         {

@@ -8,49 +8,34 @@
 {
     @Html.AntiForgeryToken()
 
-    <div id="page-wrapper">
-        <div id="page-inner">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="page-header">
-                        <small>@ViewBag.usuario</small>
-                    </h1>
-                </div>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-2">
+
             </div>
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="row">
-                <div class="col-md-4">
+            <div class="col-lg-9">
+
+                <div class="row">
                     @if (ViewBag.Error == "")
                     {
-                    <table class="table mdl-data-table striped" id="table" style="width:100%;">
-                        @*<thead>
-                            <tr>
-                                <th id="thead_kunnr">Cliente</th>
-                                <th id="thead_bunnyt">Company Code</th>
-                                <th id="thead_puesto_id">Nivel</th>
-                                <th id="thead_id">Usuario ID</th>
-                                <th id="thead_nombre">Nombre</th>
-                                <th id="thead_apellido_p">Apellido Paterno</th>
-                                <th id="thead_apellido_m">Apellido Materno</th>
-                                <th id="thead_email">Correo</th>
-                                <th id="thead_spras_id">Idioma</th>
-                                <th id="thead_pass">Password</th>
-                                <th id="thead_mess">Mensaje</th>
-                            </tr>
-                        </thead>*@
-                        <tbody>
-                            @foreach(var item in ViewBag.Productos)
-                            { 
-                            <tr>
-                                <td onclick="document.location='@Url.Action("Details", "Producto", new { id = item.ID })'" style="cursor:pointer">
-                                @item.Imagen</td>
-                                <td>@item.Nombre</td>
-                                <td>@item.Precio_V</td>
-                            </tr>
-                            }
-                        </tbody>
-                    </table>
+                        foreach (var item in ViewBag.Productos)
+                        {
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100">
+                                    <a href="@Url.Action("Detalle", "Producto", new { id = item.ID })"><img class="card-img-top" src="@item.Imagen" alt=""></a>
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            <a href="@Url.Action("Detalle", "Producto", new { id = item.ID })">@item.Nombre</a>
+                                        </h4>
+                                        <h5>$@item.Precio_V</h5>
+                                        <p class="card-text">@item.Descripcion</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     }
                     else
                     {
@@ -58,10 +43,10 @@
                     }
                 </div>
 
-                <div class="col-md-4">
-
-                </div>
             </div>
+
         </div>
+
     </div>
 }
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

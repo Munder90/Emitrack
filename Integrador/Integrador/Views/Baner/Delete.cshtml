@@ -1,0 +1,97 @@
+﻿@model Integrador.Models.Baner
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        <small>@ViewBag.usuario</small>
+                    </h1>
+                </div>
+            </div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.LabelFor(model => model.Descripcion, "Descripcion", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", @placeholder = "Descripcion", disabled = "disabled" } })
+                        @*@Html.LabelFor(model => model.Descripcion, "Descripcion", htmlAttributes: new { @class = "control-label" })*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.LabelFor(model => model.Imagen, "Imagen", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Imagen", disabled = "disabled" } })
+                        @*@Html.LabelFor(model => model.Imagen, "Imagen", htmlAttributes: new { @class = "control-label" })*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.LabelFor(model => model.Fecha, "Fecha", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha", disabled = "disabled" } })
+                        @*@Html.LabelFor(model => model.Fecha, "Fecha", htmlAttributes: new { @class = "control-label" })*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.LabelFor(model => model.Activo, "Activo", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Activo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Activo", disabled = "disabled" } })
+                        @*@Html.LabelFor(model => model.Activo, "Activo", htmlAttributes: new { @class = "control-label" })*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @if (Model.Detalle.Count > 0)
+                        {
+                            <table class="table table mdl-data-table table-striped">
+                                <tr>
+                                    <th>
+                                        Producto
+                                    </th>
+                                    <th>
+                                        Precio
+                                    </th>
+                                    <th>
+                                        Cantidad
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model.Detalle)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Producto)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Precio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cantidad)
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-primary" />
+            </div>
+        </div>
+        </div>
+    </div>
+}
+

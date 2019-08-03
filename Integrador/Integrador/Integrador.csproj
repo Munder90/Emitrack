@@ -2261,6 +2261,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\FnCommon.cs" />
+    <Compile Include="Controllers\BanerController.cs" />
     <Compile Include="Controllers\CarritoController.cs" />
     <Compile Include="Controllers\CuentasController.cs" />
     <Compile Include="Controllers\EtiquetasController.cs" />
@@ -2341,6 +2342,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Baner.cs" />
+    <Compile Include="Models\Baner_D.cs" />
     <Compile Include="Models\Carritos.cs" />
     <Compile Include="Models\Carritos_D.cs" />
     <Compile Include="Models\Cryptography.cs" />
@@ -2404,6 +2407,12 @@
     <Content Include="Views\Etiquetas\Index.cshtml" />
     <Content Include="Views\Etiquetas\Create.cshtml" />
     <Content Include="Views\Carrito\Carrito.cshtml" />
+    <Content Include="Views\Producto\Categoria.cshtml" />
+    <Content Include="Views\Baner\Index.cshtml" />
+    <Content Include="Views\Baner\Details.cshtml" />
+    <Content Include="Views\Baner\Create.cshtml" />
+    <Content Include="Views\Baner\Edit.cshtml" />
+    <Content Include="Views\Baner\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2414,6 +2423,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Estilos\assets\img\" />
+    <Folder Include="images\Baner\" />
     <Folder Include="images\Productos\" />
     <Folder Include="Views\Venta\" />
   </ItemGroup>

@@ -36,6 +36,7 @@ namespace Integrador.Controllers
                             string pro = pRODUCTOs.Where(x => x.ID == cARRITO_D.Producto).Select(x => x.Nombre).FirstOrDefault();
                             Carritos_D carritos_D = new Carritos_D
                             {
+                                ID = cARRITO_D.ID,
                                 ID_Carrito = cARRITO_D.ID_Carrito.Value,
                                 Producto_id = cARRITO_D.Producto.Value,
                                 Producto = pro,
@@ -119,26 +120,6 @@ namespace Integrador.Controllers
                     }
                     catch (Exception)
                     {
-                        //CARRITO cARRITO = new CARRITO
-                        //{
-                        //    Usuario = Usuario,
-                        //    Total = 0
-                        //};
-                        //db.CARRITOes.Add(cARRITO);
-                        //db.SaveChanges();
-
-                        //CARRITO carrito = db.CARRITOes.Where(x => x.Usuario == Usuario).FirstOrDefault();
-                        //PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
-                        //decimal Total = pRODUCTO.Precio_V * Cantidad;
-                        //CARRITO_D cARRITO_D = new CARRITO_D
-                        //{
-                        //    ID_Carrito = carrito.ID,
-                        //    Producto = pRODUCTO.ID,
-                        //    Cantidad = Cantidad,
-                        //    Total = Total
-                        //};
-                        //db.CARRITO_D.Add(cARRITO_D);
-                        //db.SaveChanges();
                     }
                     return RedirectToAction("Detalle", "Producto", new { id = id });
                 }
@@ -148,6 +129,32 @@ namespace Integrador.Controllers
 
             }
             return RedirectToAction("Detalle", "Producto", new { id = id });
+        }
+
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                if (Usuario != null)
+                {
+                    CARRITO cARRITO = db.CARRITOes.Where(x => x.Usuario == Usuario).FirstOrDefault();
+                    CARRITO_D cARRITO_D = db.CARRITO_D.Where(x => x.ID == id).FirstOrDefault();
+                    cARRITO.Total -= cARRITO_D.Total;
+
+                    db.Entry(cARRITO).State = EntityState.Modified;
+                    db.CARRITO_D.Remove(cARRITO_D);
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Carrito");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         // GET: Carrito/Details/5

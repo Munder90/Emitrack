@@ -13,7 +13,7 @@ namespace Integrador.Controllers
 {
     public class ProductoController : Controller
     {
-        INTEGRAEntities db = new INTEGRAEntities();
+        readonly INTEGRAEntities db = new INTEGRAEntities();
         // GET: Producto
         public ActionResult Index()
         {
@@ -150,6 +150,20 @@ namespace Integrador.Controllers
                         db.PRODUCTOes.Add(pRODUCTO);
                         db.SaveChanges();
 
+                        string[] etiquetas = pro.Etiquetas.Split(';');
+                        //PRODUCTO p = db.PRODUCTOes.Where(x => x.Nombre.Equals(pRODUCTO.Nombre)).FirstOrDefault();
+                        foreach (string eti in etiquetas)
+                        {
+                            PRODUCTO_T pt = db.PRODUCTO_T.Where(x => x.Descripcion == eti && x.Activo == true).FirstOrDefault();
+                            PRODUCTO_TIPO pRODUCTO_TIPO = new PRODUCTO_TIPO
+                            {
+                                Producto = pRODUCTO.ID,
+                                Tipo = pt.ID
+                            };
+                            db.PRODUCTO_TIPO.Add(pRODUCTO_TIPO);
+                            db.SaveChanges();
+                        }
+
                         return RedirectToAction("Index");
                     }
                     catch(Exception)
@@ -241,6 +255,41 @@ namespace Integrador.Controllers
 
                         db.Entry(pRODUCTO).State = EntityState.Modified;
                         db.SaveChanges();
+
+                        string[] etiquetas = pro.Etiquetas.Split(';');
+                        //PRODUCTO p = db.PRODUCTOes.Where(x => x.Nombre.Equals(pRODUCTO.Nombre)).FirstOrDefault();
+                        List<PRODUCTO_TIPO> ps = db.PRODUCTO_TIPO.Where(x => x.Producto == pRODUCTO.ID).ToList();
+                        List<PRODUCTO_T> pro_t = db.PRODUCTO_T.Where(x => x.Activo == true).ToList();
+                        foreach (string eti in etiquetas)
+                        {
+                            PRODUCTO_T pt = pro_t.Where(x => x.Descripcion == eti).FirstOrDefault();
+                            if (ps.Count() > 0 && pt != null)
+                            {
+                                foreach (PRODUCTO_TIPO tIPO in ps)
+                                {
+                                    if (tIPO.Tipo != pt.ID)
+                                    {
+                                        PRODUCTO_TIPO pRODUCTO_TIPO = new PRODUCTO_TIPO
+                                        {
+                                            Producto = pRODUCTO.ID,
+                                            Tipo = pt.ID
+                                        };
+                                        db.PRODUCTO_TIPO.Add(pRODUCTO_TIPO);
+                                        db.SaveChanges();
+                                    }
+                                }
+                            }
+                            else if (pt != null)
+                            {
+                                PRODUCTO_TIPO pRODUCTO_TIPO = new PRODUCTO_TIPO
+                                {
+                                    Producto = pRODUCTO.ID,
+                                    Tipo = pt.ID
+                                };
+                                db.PRODUCTO_TIPO.Add(pRODUCTO_TIPO);
+                                db.SaveChanges();
+                            }
+                        }
 
                         return RedirectToAction("Index");
                     }
@@ -400,6 +449,52 @@ namespace Integrador.Controllers
                 }
 
                 return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public ActionResult Categoria(int id)
+        {
+            try
+            {
+                try
+                {
+                    FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                    string Usuario = Session["usuario"].ToString();
+                    int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                }
+                catch (Exception)
+                {
+                    //return RedirectToAction("Index", "Home");
+                }
+
+                List<PRODUCTO_TIPO> pt = db.PRODUCTO_TIPO.Where(x => x.Tipo == id).ToList();
+                List<Productos> ps = new List<Productos>();
+                foreach (PRODUCTO_TIPO pro_tip in pt)
+                {
+                    PRODUCTO productos = db.PRODUCTOes.Where(x => x.ID == pro_tip.Producto).FirstOrDefault();
+
+                    string fecha = productos.Fecha_Mo.Value.ToString("dd/MM/yyyy");
+                    Productos p = new Productos
+                    {
+                        ID = productos.ID,
+                        Nombre = productos.Nombre,
+                        Cantidad = productos.Cantidad,
+                        Fecha_Mo = fecha,
+                        Descripcion = productos.Descripcion,
+                        Precio_A = productos.Precio_A.Value,
+                        Precio_V = productos.Precio_V,
+                        Activo = productos.Activo.Value,
+                        Imagen = productos.Imagen,
+                        Codigo = productos.Codigo
+                    };
+                    ps.Add(p);
+                }
+
+                return View(ps);
             }
             catch (Exception)
             {

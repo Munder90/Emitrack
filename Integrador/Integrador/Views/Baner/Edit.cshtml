@@ -1,0 +1,170 @@
+﻿@model Integrador.Models.Baner
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        <small>@ViewBag.usuario</small>
+                    </h1>
+                </div>
+            </div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Descripcion, "Descripcion", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", @placeholder = "Descripcion", disabled = "disabled" } })
+                            @*@Html.LabelFor(model => model.Descripcion, "Descripcion", htmlAttributes: new { @class = "control-label" })*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Imagen, "Imagen", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Imagen", disabled = "disabled" } })
+                            @*@Html.LabelFor(model => model.Imagen, "Imagen", htmlAttributes: new { @class = "control-label" })*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Fecha, "Fecha", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha", disabled = "disabled" } })
+                            @*@Html.LabelFor(model => model.Fecha, "Fecha", htmlAttributes: new { @class = "control-label" })*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Activo, "Activo", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Activo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Activo", disabled = "disabled" } })
+                            @*@Html.LabelFor(model => model.Activo, "Activo", htmlAttributes: new { @class = "control-label" })*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @if (Model.Detalle.Count > 0)
+                            {
+                            <table class="table table mdl-data-table table-striped">
+                                <tr>
+                                    <th>
+                                        Producto
+                                    </th>
+                                    <th>
+                                        Precio
+                                    </th>
+                                    <th>
+                                        Cantidad
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model.Detalle)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Producto)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Precio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cantidad)
+                                        </td>
+                                    </tr>
+                                }
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <a>
+                                                <i class="fa fa-fw fa-plus-circle add-row" typeof="button"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Guardar" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/autocomplete1.10.2.js"></script>
+<script src="~/Scripts/autocomplete1.11.4.js"></script>
+<link href="~/Content/autocomplete.css" rel="stylesheet" />
+
+<script>
+    var auto = $.noConflict();
+
+    $(document).ready(function () {
+
+        $(".add-row").click(function () {
+
+            var numero = $("Detalle tr").length + 1;
+            var producto = '<input class="form-control text-box single-line Producto" data-val="true" data-val-number="El campo Producto debe ser un número." id="Detalle_' + numero + '__Producto" name="Detalle[' + numero + '].Producto" type="number" value="" />';
+            var precio = '<input class="form-control text-box single-line" data-val="true" data-val-number="El campo Precio debe ser un número." id="Detalle_' + numero + '__Precio" name="Detalle[' + numero + '].Precio" type="text" value="" />';
+            var cantidad = '<input class="form-control text-box single-line" data-val="true" data-val-number="El campo Cantidad debe ser un número." id="Detalle_' + numero + '_Cantidad" name="Detalle[' + numero + '].Cantidad" type="number" value="" />';
+
+            var markup = "<tr><td>" + producto + "</td><td>" + precio + "</td><td>" + cantidad + "</td></tr>";
+
+            $("table tbody").append(markup);
+
+        });
+    });
+
+    $('body').on('keydown.autocomplete', '.Producto', function () {
+
+        auto(this).autocomplete({
+            source: function (request, response) {
+                auto.ajax({
+                    type: "POST",
+                    url: '../BuscaProducto',
+                    dataType: "json",
+                    data: { "Prefix": request.term },
+                    success: function (data) {
+                        response(auto.map(data, function (item) {
+                            return { label: item.Producto, value: item.ID };
+                        }))
+                    }
+                })
+            },
+
+            messages: {
+                noResults: '',
+                results: function (resultsCount) { }
+            },
+
+            change: function (e, ui) {
+                if (!(ui.item)) {
+                    e.target.value = "";
+                }
+            },
+
+            select: function (event, ui) {
+            }
+        });
+    });
+
+</script>

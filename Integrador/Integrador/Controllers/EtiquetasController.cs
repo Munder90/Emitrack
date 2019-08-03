@@ -12,7 +12,7 @@ namespace Integrador.Controllers
 {
     public class EtiquetasController : Controller
     {
-        INTEGRAEntities db = new INTEGRAEntities();
+        readonly INTEGRAEntities db = new INTEGRAEntities();
         // GET: Etiquetas
         public ActionResult Index()
         {

@@ -34,7 +34,7 @@
                             <i class="fa fa-shopping-cart fa-fw"></i><i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
-                            @if (ViewBag.Carrito != null)
+                            @if (ViewBag.Carrito != null && ViewBag.CarritoD.Count > 0)
                             {
                                 foreach (Integrador.Models.Carritos_D item in ViewBag.CarritoD)
                                 {
@@ -47,14 +47,14 @@
                                                 </span>*@
                                             </div>
                                         </a>
-                                        <div>@item.Cantidad</div>
+                                        <div>Cantidad: @item.Cantidad</div>
                                         <div>$@item.Total</div>
                                     </li>
                                     <li class="divider"></li>
                                 }
                                 <li>
                                     <div>Total: $@ViewBag.Carrito.Total</div>
-                                    <a class="text-center" href="@Url.Action("Carrito", "Producto")">
+                                    <a class="text-center" href="@Url.Action("Carrito", "Carrito")">
                                         <strong>Realizara Compra</strong>
                                         <i class="fa fa-angle-right"></i>
                                     </a>
@@ -225,6 +225,9 @@
                                 <li>
                                     <a href="@Url.Action("Index", "Pagos")">Tipos de Pago</a>
                                 </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Baner")">Promociones</a>
+                                </li>
                             </ul>
                         </li>
                     }
@@ -236,7 +239,7 @@
                             {
                                 foreach (Integrador.Entities.PRODUCTO_T T in ViewBag.Categoria)
                                 {
-                                    <li><a href="#">@T.Descripcion</a></li>
+                                    <li><a href="@Url.Action("Categoria", "Producto", new { id=T.ID })">@T.Descripcion</a></li>
                                 }
                             }
                         </ul>

@@ -11,7 +11,7 @@ namespace Integrador.Controllers
 {
     public class HomeController : Controller
     {
-        INTEGRAEntities db = new INTEGRAEntities();
+        readonly INTEGRAEntities db = new INTEGRAEntities();
         // GET: Home
         public ActionResult Index()
         {
@@ -32,6 +32,25 @@ namespace Integrador.Controllers
                         p.Add(pRODUCTO[i]);
                     }
                     ViewBag.Productos = p;
+
+                    List<BANER> bANERs = db.BANERs.Where(x => x.Activo == true).OrderByDescending(x => x.Fecha).ToList();
+                    List<Baner> baners = new List<Baner>();
+                    int pos = 0;
+                    foreach(BANER b in bANERs)
+                    {
+                        Baner baner = new Baner
+                        {
+                            Id = b.ID,
+                            Descripcion = b.Descripcion,
+                            Fecha = b.Fecha.Value.ToString("dd/MM/yyyy"),
+                            Imagen = b.Imagen,
+                            Pos = pos
+                        };
+                        baners.Add(baner);
+                        pos++;
+                    }
+
+                    ViewBag.Baners = baners;
                 }
                 catch(Exception)
                 {

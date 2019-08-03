@@ -35,6 +35,7 @@ namespace Integrador.Common
                     string pro = pRODUCTOs.Where(x => x.ID == cARRITO_D.Producto).Select(x => x.Nombre).FirstOrDefault();
                     Carritos_D carritos_D = new Carritos_D
                     {
+                        ID = cARRITO_D.ID,
                         ID_Carrito = cARRITO_D.ID_Carrito.Value,
                         Producto_id = cARRITO_D.Producto.Value,
                         Producto = pro,

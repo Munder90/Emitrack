@@ -14,24 +14,6 @@
         </div>
 
         <div class="col-lg-9">
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Usuario)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Usuario)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Total)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Total)
-                </dd>
-
-            </dl>
             <table class="table table mdl-data-table table-striped">
                 <tr>
                     <th>
@@ -58,22 +40,60 @@
                             @Html.DisplayFor(modelItem => item.Cantidad)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Total)
+                            $@Html.DisplayFor(modelItem => item.Total)
                         </td>
                         <td>
                             @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-                            @*<a href="@Url.Action("Delete", "Etiquetas", new { id = item.ID })" id="Confirma" onclick="pop(@item.ID)">
-                                    <i class="fa fa-fw fa-trash-o"></i>
-                                </a>*@
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                            <a href="" id="Confirma" onclick="pop(@item.ID)">
+                                <i class="fa fa-fw fa-trash-o"></i>
+                            </a>
                         </td>
                     </tr>
                 }
 
+                <tfoot>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <strong>Total</strong>
+                        </td>
+                        <td>
+                            <strong>$@Model.Total</strong>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
             </table>
+            <div class="col-lg-9">
+                
+            </div>
         </div>
     </div>
-
 </div>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    function pop(id) {
+
+        if (confirm("Eliminar")) {
+
+            $.ajax({
+                type: "POST",
+                url: '../Carrito/DeleteConfirmed',
+                dataType: "json",
+                data: { "id": id },
+                success: function (data) {
+                    alert("Eliminado")
+                }
+            });
+        }
+        else {
+        }
+    };
+</script>
