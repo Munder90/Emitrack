@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Integrador.Models.Ventas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        <small>@ViewBag.usuario</small>
+                    </h1>
+                </div>
+            </div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-12">
+                    <p align="right" class="col-md-">
+                        @*@Html.ActionLink("Nuevo Producto", "Create", "Producto", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Cargar", "Carga", "Producto", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary" })*@
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    @if (Model.Count() > 0)
+                    {
+                        <table class="table table mdl-data-table table-striped">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Usuario)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Fecha)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Total)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Entrega)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Direccion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Metod_Pago)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Factura)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Comprobante)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Usuario)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Fecha)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Total)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Entrega)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Direccion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Metod_Pago)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Factura)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Comprobante)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Aun no has realizado compras</label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

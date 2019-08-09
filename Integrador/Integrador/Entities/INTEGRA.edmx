@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="INTEGRAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="INTEGRAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BANER">
           <Key>
             <PropertyRef Name="ID" />
@@ -117,16 +117,6 @@
           <Property Name="Producto" Type="int" />
           <Property Name="Tipo" Type="int" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="USUARIO">
           <Key>
             <PropertyRef Name="ID" />
@@ -179,6 +169,7 @@
           <Property Name="Direccion" Type="int" />
           <Property Name="Metod_Pago" Type="int" />
           <Property Name="Factura" Type="bit" />
+          <Property Name="Comprobante" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="VENTA_D">
           <Key>
@@ -443,7 +434,6 @@
           <EntitySet Name="PRODUCTO_M" EntityType="Self.PRODUCTO_M" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTO_T" EntityType="Self.PRODUCTO_T" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTO_TIPO" EntityType="Self.PRODUCTO_TIPO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO_DIR" EntityType="Self.USUARIO_DIR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO_T" EntityType="Self.USUARIO_T" Schema="dbo" store:Type="Tables" />
@@ -530,8 +520,7 @@
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="INTEGRAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -671,16 +660,6 @@
           <NavigationProperty Name="PRODUCTO1" Relationship="Self.FK_PRODUCTO_TIPO_Producto" FromRole="PRODUCTO_TIPO" ToRole="PRODUCTO" />
           <NavigationProperty Name="PRODUCTO_T" Relationship="Self.FK_PRODUCTO_TIPO_Tipo" FromRole="PRODUCTO_TIPO" ToRole="PRODUCTO_T" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="USUARIO">
           <Key>
             <PropertyRef Name="ID" />
@@ -747,6 +726,7 @@
           <NavigationProperty Name="USUARIO1" Relationship="Self.FK_VENTA_Usuario" FromRole="VENTA" ToRole="USUARIO" />
           <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_VENTA_Direccion" FromRole="VENTA" ToRole="USUARIO_DIR" />
           <NavigationProperty Name="VENTA_D" Relationship="Self.FK_VENTA_D_ID_Venta" FromRole="VENTA" ToRole="VENTA_D" />
+          <Property Name="Comprobante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VENTA_D">
           <Key>
@@ -1013,7 +993,6 @@
           <EntitySet Name="PRODUCTO_M" EntityType="Self.PRODUCTO_M" />
           <EntitySet Name="PRODUCTO_T" EntityType="Self.PRODUCTO_T" />
           <EntitySet Name="PRODUCTO_TIPO" EntityType="Self.PRODUCTO_TIPO" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="USUARIOs" EntityType="Self.USUARIO" />
           <EntitySet Name="USUARIO_DIR" EntityType="Self.USUARIO_DIR" />
           <EntitySet Name="USUARIO_T" EntityType="Self.USUARIO_T" />
@@ -1230,17 +1209,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="INTEGRAModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="USUARIOs">
             <EntityTypeMapping TypeName="INTEGRAModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
@@ -1287,6 +1255,7 @@
           <EntitySetMapping Name="VENTAs">
             <EntityTypeMapping TypeName="INTEGRAModel.VENTA">
               <MappingFragment StoreEntitySet="VENTA">
+                <ScalarProperty Name="Comprobante" ColumnName="Comprobante" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />

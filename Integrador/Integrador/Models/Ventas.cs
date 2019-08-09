@@ -8,21 +8,25 @@ namespace Integrador.Models
     public class Ventas
     {
         int iD;
-        int usuario;
-        System.DateTime fecha;
+        string usuario;
+        string fecha;
         decimal total;
         bool entrega;
-        int direccion;
-        int metod_Pago;
+        string direccion;
+        string metod_Pago;
         bool factura;
+        bool comprobante;
+        List<Ventas_D> detalle;
 
         public int ID { get => iD; set => iD = value; }
-        public int Usuario { get => usuario; set => usuario = value; }
-        public DateTime Fecha { get => fecha; set => fecha = value; }
+        public string Usuario { get => usuario; set => usuario = value; }
+        public string Fecha { get => fecha; set => fecha = value; }
         public decimal Total { get => total; set => total = value; }
         public bool Entrega { get => entrega; set => entrega = value; }
-        public int Direccion { get => direccion; set => direccion = value; }
-        public int Metod_Pago { get => metod_Pago; set => metod_Pago = value; }
+        public string Direccion { get => direccion; set => direccion = value; }
+        public string Metod_Pago { get => metod_Pago; set => metod_Pago = value; }
         public bool Factura { get => factura; set => factura = value; }
+        public bool Comprobante { get => comprobante; set => comprobante = value; }
+        public List<Ventas_D> Detalle { get => detalle; set => detalle = value; }
     }
 }

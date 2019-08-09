@@ -47,9 +47,13 @@ namespace Integrador.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        //[Required]
+        [EmailAddress]
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
+
+        [Display(Name ="Usuario")]
+        public string Usuario { get; set; }
     }
 
     public class LoginViewModel
@@ -109,10 +113,13 @@ namespace Integrador.Models
 
     public class ForgotPasswordViewModel
     {
+        [Display(Name = "Usuario")]
+        public string User { get; set; }
+        [Display(Name ="Pregunta")]
+        public string Pregunta { get; set; }
         [Required]
-        [EmailAddress]
-        [Display(Name = "Correo electrónico")]
-        public string Email { get; set; }
+        [Display(Name = "Respuesta")]
+        public string Respuesta { get; set; }
     }
     
 }

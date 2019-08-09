@@ -5,80 +5,151 @@
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
 
-<div class="container">
+@using (Html.BeginForm("Comprar", "Ventas", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-lg-2">
+            <div class="col-lg-2">
 
-        </div>
-
-        <div class="col-lg-9">
-            <table class="table table mdl-data-table table-striped">
-                <tr>
-                    <th>
-                        Articulo
-                    </th>
-                    <th>
-                        Cantidad
-                    </th>
-                    <th>
-                        Precio
-                    </th>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.Activo)*@
-                    </th>
-                </tr>
-
-                @foreach (Integrador.Models.Carritos_D item in ViewBag.CarritoD)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Producto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cantidad)
-                        </td>
-                        <td>
-                            $@Html.DisplayFor(modelItem => item.Total)
-                        </td>
-                        <td>
-                            @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-                            <a href="" id="Confirma" onclick="pop(@item.ID)">
-                                <i class="fa fa-fw fa-trash-o"></i>
-                            </a>
-                        </td>
-                    </tr>
-                }
-
-                <tfoot>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <strong>Total</strong>
-                        </td>
-                        <td>
-                            <strong>$@Model.Total</strong>
-                        </td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-            </table>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="col-lg-9">
-                
+                <table class="table table mdl-data-table table-striped">
+                    <tr>
+                        <th>
+                            Articulo
+                        </th>
+                        <th>
+                            Cantidad
+                        </th>
+                        <th>
+                            Precio
+                        </th>
+                        <th>
+                            @*@Html.DisplayNameFor(model => model.Activo)*@
+                        </th>
+                    </tr>
+
+                    @foreach (Integrador.Models.Carritos_D item in ViewBag.CarritoD)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Detalle", "Producto", new { id = item.Producto_id })">
+                                    @Html.DisplayFor(modelItem => item.Producto)
+                                </a>
+                            </td>
+                            <td>
+                                @Html.EditorFor(modelItem => item.Cantidad, new { htmlAttributes = new { @class = "form-control Cantidad", @placeholder = "Cantidad", @id = item.Producto_id, @style = "width:100px" } })
+                                @*@Html.DisplayFor(modelItem => item.Cantidad)*@
+                            </td>
+                            <td>
+                                $@Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                                <a href="" id="Confirma" onclick="pop(@item.ID)">
+                                    <i class="fa fa-fw fa-trash-o"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                    <tfoot>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Factura, "Factura", htmlAttributes: new { @class = "control-label" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Factura, new { htmlAttributes = new { @class = "", @placeholder = "Factura" } })
+                                @Html.ValidationMessageFor(model => model.Factura, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Metod_Pago, "Metodo de Pago", htmlAttributes: new { @id = "lbl_puesto" })
+                            </td>
+                            <td>
+                                <select name="Metod_Pago" id="Metod_Pago" class="comcode form-control" required style="width:150px">
+                                    @if (ViewBag.Direcciones.Count > 0)
+                                    {
+                                        <option id="" value="" disabled selected>Metodo de Pago</option>
+                                        foreach (var item in ViewBag.Pagos)
+                                        {
+                                            <option id="@item.ID" value="@item.ID">@item.Nombre</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option value="" id="no_opt">No hay opciones</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.Direccion, "Direccion de Envio", htmlAttributes: new { @id = "lbl_puesto" })
+                            </td>
+                            <td>
+                                <select name="Direccion" id="Direccion" class="comcode form-control" required style="width:150px">
+                                    @if (ViewBag.Direcciones.Count > 0)
+                                    {
+                                        <option id="0" value="0" disabled selected>Direccion</option>
+                                        foreach (var item in ViewBag.Direcciones)
+                                        {
+                                            <option id="@item.ID" value="@item.ID">@item.CP @item.Calle @item.Numero_Ext @item.Numero_Int</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option value="" id="no_opt">No hay opciones</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <strong>Total</strong>
+                            </td>
+                            <td>
+                                <strong>$@Model.Total</strong>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="form-group">
+                    <input type="submit" value="Salvar" class="btn btn-primary btn-block" />
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>
+    //var elem = document.querySelectorAll('select');
+    //var options = [];
+    //var instance = M.FormSelect.init(elem, options);
+
     function pop(id) {
 
         if (confirm("Eliminar")) {
@@ -96,4 +167,24 @@
         else {
         }
     };
+
+    //var jq=jQuery.noConflict();
+    var auto = $.noConflict();
+    jQuery(function ($) {
+        $('.Cantidad').focusout(function () {
+            var cantidad = this.value;
+            var ip = this.id;
+
+            $.ajax({
+                type: "POST",
+                url: '../../Carrito/Agregar2',
+                dataType: "post",
+                data: { "id": ip, "Cantidad": cantidad },
+                success: function (data) {
+                }
+            });
+            location.reload();
+        });
+    });
+
 </script>

@@ -145,6 +145,7 @@ namespace Integrador.Controllers
                             Fecha_Mo = DateTime.Today,
                             Imagen = ruta,
                             Activo = true,
+                            N_Ventas = 0
                         };
 
                         db.PRODUCTOes.Add(pRODUCTO);
@@ -154,14 +155,17 @@ namespace Integrador.Controllers
                         //PRODUCTO p = db.PRODUCTOes.Where(x => x.Nombre.Equals(pRODUCTO.Nombre)).FirstOrDefault();
                         foreach (string eti in etiquetas)
                         {
-                            PRODUCTO_T pt = db.PRODUCTO_T.Where(x => x.Descripcion == eti && x.Activo == true).FirstOrDefault();
-                            PRODUCTO_TIPO pRODUCTO_TIPO = new PRODUCTO_TIPO
+                            PRODUCTO_T pt = db.PRODUCTO_T.Where(x => x.Descripcion == eti.Trim() && x.Activo == true).FirstOrDefault();
+                            if (pt != null)
                             {
-                                Producto = pRODUCTO.ID,
-                                Tipo = pt.ID
-                            };
-                            db.PRODUCTO_TIPO.Add(pRODUCTO_TIPO);
-                            db.SaveChanges();
+                                PRODUCTO_TIPO pRODUCTO_TIPO = new PRODUCTO_TIPO
+                                {
+                                    Producto = pRODUCTO.ID,
+                                    Tipo = pt.ID
+                                };
+                                db.PRODUCTO_TIPO.Add(pRODUCTO_TIPO);
+                                db.SaveChanges();
+                            }
                         }
 
                         return RedirectToAction("Index");
@@ -262,7 +266,7 @@ namespace Integrador.Controllers
                         List<PRODUCTO_T> pro_t = db.PRODUCTO_T.Where(x => x.Activo == true).ToList();
                         foreach (string eti in etiquetas)
                         {
-                            PRODUCTO_T pt = pro_t.Where(x => x.Descripcion == eti).FirstOrDefault();
+                            PRODUCTO_T pt = pro_t.Where(x => x.Descripcion == eti.Trim()).FirstOrDefault();
                             if (ps.Count() > 0 && pt != null)
                             {
                                 foreach (PRODUCTO_TIPO tIPO in ps)
@@ -500,6 +504,22 @@ namespace Integrador.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        public JsonResult Etiquetas(string Prefix)
+        {
+            if (Prefix == null)
+                Prefix = "";
+
+            //List<LOCALIDAD> lOCALIDADs = db.LOCALIDADs.Where(x => x.CP.Equals(cp)).ToList();
+
+            var c = (from x in db.PRODUCTO_T
+                     where (x.Descripcion.Contains(Prefix))
+                     select new { ID = x.ID, Descripcion = x.Descripcion }).ToList();
+
+            JsonResult cc = Json(c, JsonRequestBehavior.AllowGet);
+
+            return cc;
         }
     }
 }

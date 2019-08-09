@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutDash.cshtml";
 }
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -39,12 +39,12 @@
                     </div>
 
                     @*<div class="form-group">
-                        <div class="form-label-group">
-                            @Html.LabelFor(model => model.Fecha_Mo, htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.EditorFor(model => model.Fecha_Mo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha de Modificacion" } })
-                            @Html.ValidationMessageFor(model => model.Fecha_Mo, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
+                            <div class="form-label-group">
+                                @Html.LabelFor(model => model.Fecha_Mo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.Fecha_Mo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha de Modificacion" } })
+                                @Html.ValidationMessageFor(model => model.Fecha_Mo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
 
                     <div class="form-group">
                         <div class="form-label-group">
@@ -71,14 +71,14 @@
                     </div>
 
                     @*<div class="form-group">
-                        <div class="form-label-group">
-                            @Html.LabelFor(model => model.Activo, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.Activo)
-                                @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger" })
+                            <div class="form-label-group">
+                                @Html.LabelFor(model => model.Activo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.Activo)
+                                    @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
-                    </div>*@
+                        </div>*@
 
                     <div class="form-group">
                         <div class="form-label-group">
@@ -100,7 +100,7 @@
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Etiquetas, "Etiquetas", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Etiquetas, new { htmlAttributes = new { @class = "form-control", @placeholder = "Etiquetas" } })
+                            @Html.EditorFor(model => model.Etiquetas, new { htmlAttributes = new { @class = "form-control", @placeholder = "Etiquetas", @id="Etiquetas" } })
                             @Html.ValidationMessageFor(model => model.Etiquetas, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -118,3 +118,15 @@
         </div>
     </div>
 }
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/autocomplete1.10.2.js"></script>
+<script src="~/Scripts/autocomplete1.11.4.js"></script>
+<link href="~/Content/autocomplete.css" rel="stylesheet" />
+
+<script>
+    var auto = $.noConflict();
+</script>

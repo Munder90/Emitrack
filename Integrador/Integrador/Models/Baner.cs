@@ -11,7 +11,7 @@ namespace Integrador.Models
         string descripcion;
         string imagen;
         string fecha;
-        Nullable<bool> activo;
+        bool activo;
         int pos;
         List<Baner_D> detalle;
 
@@ -19,7 +19,7 @@ namespace Integrador.Models
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public string Imagen { get => imagen; set => imagen = value; }
         public string Fecha { get => fecha; set => fecha = value; }
-        public bool? Activo { get => activo; set => activo = value; }
+        public bool Activo { get => activo; set => activo = value; }
         public int Pos { get => pos; set => pos = value; }
         public List<Baner_D> Detalle { get => detalle; set => detalle = value; }
     }

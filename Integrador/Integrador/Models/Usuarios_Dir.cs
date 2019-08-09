@@ -8,7 +8,7 @@ namespace Integrador.Models
     public class Usuarios_Dir
     {
         int iD;
-        int usuario;
+        string usuario;
         string calle;
         string numero_Ext;
         string numero_Int;
@@ -18,7 +18,7 @@ namespace Integrador.Models
         int cP;
 
         public int ID { get => iD; set => iD = value; }
-        public int Usuario { get => usuario; set => usuario = value; }
+        public string Usuario { get => usuario; set => usuario = value; }
         public string Calle { get => calle; set => calle = value; }
         public string Numero_Ext { get => numero_Ext; set => numero_Ext = value; }
         public string Numero_Int { get => numero_Int; set => numero_Int = value; }

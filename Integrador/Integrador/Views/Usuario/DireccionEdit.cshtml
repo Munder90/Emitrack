@@ -1,0 +1,152 @@
+﻿@model Integrador.Models.Usuarios_Dir
+
+@{
+    ViewBag.Title = "DireccionEdit";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        <small>@ViewBag.usuario</small>
+                    </h1>
+                </div>
+            </div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.CP, "Codigo Postal", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.CP, new { htmlAttributes = new { @class = "form-control", @placeholder = "Codigo Postal", @id = "CP", @type = "text" } })
+                            @Html.ValidationMessageFor(model => model.CP, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Estado, "Estado", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control", @placeholder = "Estado", @id = "Estado", disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Municipio, "Municipio", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Municipio, new { htmlAttributes = new { @class = "form-control", @placeholder = "Municipio", @id = "Municipio", disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Municipio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Colonia, "Colonia", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Colonia, new { htmlAttributes = new { @class = "form-control", @placeholder = "Colonia", @id = "Colonia" } })
+                            @Html.ValidationMessageFor(model => model.Colonia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Calle, "Calle", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Calle, new { htmlAttributes = new { @class = "form-control", @placeholder = "Calle" } })
+                            @Html.ValidationMessageFor(model => model.Calle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Numero_Ext, "Numero Exterior", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Numero_Ext, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero Exterior" } })
+                            @Html.ValidationMessageFor(model => model.Numero_Ext, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.LabelFor(model => model.Numero_Int, "Numero Interior", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Numero_Int, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero Interior" } })
+                            @Html.ValidationMessageFor(model => model.Numero_Int, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-primary btn-block" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.ActionLink("Datos", "Dashboard", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                        @Html.ActionLink("Direcciones de Envío", "Direccion", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary btn-block" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/autocomplete1.10.2.js"></script>
+<script src="~/Scripts/autocomplete1.11.4.js"></script>
+<link href="~/Content/autocomplete.css" rel="stylesheet" />
+
+<script>
+    var auto = $.noConflict();
+
+    $('#CP').focusout(function () {
+        var codigo = this.value;
+
+        $.ajax({
+            type: "POST",
+            url: '../EdoMun',
+            dataType: "json",
+            data: { "cp": codigo },
+
+            success: function (data) {
+                $('#Estado').val(data.estado);
+                $('#Municipio').val(data.municipio);
+            }
+        });
+    });
+
+    $('body').on('keydown.autocomplete', '#Colonia', function () {
+
+        var codigo = $('#CP').val();
+
+        auto(this).autocomplete({
+            source: function (request, response) {
+                auto.ajax({
+                    type: "POST",
+                    url: '../Colonia',
+                    dataType: "json",
+                    data: { "Prefix": request.term, "cp": codigo },
+                    success: function (data) {
+                        response(auto.map(data, function (item) {
+                            return { label: item.Colonia, value: item.Colonia };
+                        }))
+                    }
+                })
+            },
+
+            messages: {
+                noResults: '',
+                results: function (resultsCount) { }
+            },
+
+            change: function (e, ui) {
+                if (!(ui.item)) {
+                    e.target.value = "";
+                }
+            },
+
+            select: function (event, ui) {
+            }
+        });
+    });
+
+</script>

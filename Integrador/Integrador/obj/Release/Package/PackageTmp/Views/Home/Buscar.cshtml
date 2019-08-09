@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Buscar";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-2">
+
+            </div>
+
+            <div class="col-lg-9">
+
+                <div class="row">
+                    @if (ViewBag.Error == "")
+                    {
+                        foreach (var item in ViewBag.Productos)
+                        {
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100">
+                                    <a href="@Url.Action("Detalle", "Producto", new { id = item.ID })"><img class="card-img-top" src="@item.Imagen" alt=""></a>
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            <a href="@Url.Action("Detalle", "Producto", new { id = item.ID })">@item.Nombre</a>
+                                        </h4>
+                                        <h5>$@item.Precio_V</h5>
+                                        <p class="card-text">@item.Descripcion</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h1>@ViewBag.Error</h1>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

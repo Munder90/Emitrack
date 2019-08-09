@@ -1,0 +1,154 @@
+﻿@model Integrador.Models.Usuario
+
+@{
+    ViewBag.Title = "Registro";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="card card-register mx-auto mt-5">
+            <div class="card-header">Nueva cuenta</div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.ID1, new { htmlAttributes = new { @class = "form-control", @placeholder = "Usuario", required = "required", @autofocus = "autofocus" } })
+                        @Html.ValidationMessageFor(model => model.ID1, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.ID1, "Usuario", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Contraseña", required = "required", @maxlength = 16, @minlength = 5 })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Password, "Contraseña", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.PasswordFor(model => model.Manager, new { @class = "form-control", @placeholder = "Contraseña", required = "required", @maxlength = 16, @minlength = 5 })
+                        @Html.ValidationMessageFor(model => model.Manager, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Manager, "Confirmar", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Nombre, "Nombre", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Apellido_P, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Paterno", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Apellido_P, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Apellido_P, "Apellido Paterno", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Apellido_M, new { htmlAttributes = new { @class = "form-control", @placeholder = "Apellido Materno" } })
+                        @Html.ValidationMessageFor(model => model.Apellido_M, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Apellido_M, "Apellido Materno", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Fecha_N, new { htmlAttributes = new { @class = "form-control", @type = "date", @placeholder = "Fecha de Nacimiento", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Fecha_N, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Fecha_N, "Fecha de Nacimeinto", htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+            @Html.LabelFor(model => model.T_Usuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.T_Usuario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.T_Usuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.T_Usuario_l, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.T_Usuario_l, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.T_Usuario_l, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Pregunta, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pregunta", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Pregunta, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Pregunta, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Respuesta, new { htmlAttributes = new { @class = "form-control", @placeholder = "Respuesta", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Respuesta, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Respuesta, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Imagen" } })
+                        @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="submit" value="Crear" class="btn btn-primary btn-block" />
+                    </div>
+                </div>
+                <div class="text-center">
+                    @Html.ActionLink("Iniciar Sesión", "Login", "Cuentas")
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        $('#Email').on("focusout", function () {
+            var email = $('#Email').val();
+            $('#Email').removeClass("valid");
+            $('#Email').removeClass("invalid");
+            if (validateEmail(email) == true) {
+                $('#Email').addClass("valid");
+            }
+            else {
+                $('#Email').addClass("invalid");
+            }
+        });
+
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        var auto = $.noConflict();
+    </script>
+}

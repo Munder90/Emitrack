@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Estilos/Dash-Login/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Estilos/Dash-Login/css/sb-admin.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+            <a href="@Url.Action("Index", "Home")" class="brand-logo">
+                <img src="~/images/EmiTrack.png" width="130" height="65" style="padding-top: 8px; padding-left: 8px; " />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    @if (ViewBag.Usuario != null)
+                    {
+                        <li></li>
+                        <li></li>
+                    }
+                </ul>
+            </div>
+    </nav>
+    <br />
+    <hr />
+
+    <div class="container">
+
+        <div class="row">
+
+        </div>
+
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <br /><br /><br /><br /><br />
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Emitrack</p>
+        </footer>
+    </div>
+
+    <script src="~/Estilos/Dash-Login/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Estilos/Dash-Login/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Estilos/Dash-Login/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+</body>
+
+</html>

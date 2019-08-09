@@ -206,7 +206,7 @@
                         if (ViewBag.Tipo == 2)
                         {
                             <li>
-                                <a href="#"><i class="fa fa-table"></i> Mis Compras</a>
+                                <a href="@Url.Action("Index", "Ventas")"><i class="fa fa-table"></i> Mis Compras</a>
                             </li>
                         }
                     }
@@ -227,6 +227,9 @@
                                 </li>
                                 <li>
                                     <a href="@Url.Action("Index", "Baner")">Promociones</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Usuario")">Usuarios</a>
                                 </li>
                             </ul>
                         </li>

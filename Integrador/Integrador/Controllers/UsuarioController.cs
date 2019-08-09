@@ -17,14 +17,50 @@ namespace Integrador.Controllers
         // GET: Usuario
         public ActionResult Index()
         {
-            ViewBag.Usuario = Session["usuario"].ToString();
-            ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
+            try
+            {
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                string User1 = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                if (Tipo == 1)
+                {
+                    List<USUARIO> uSUARIOs = db.USUARIOs.ToList();
+                    List<Usuario> usuarios = new List<Usuario>();
+                    List<USUARIO_T> tipo = db.USUARIO_T.ToList();
+                    foreach(USUARIO u in uSUARIOs)
+                    {
+                        if (u.ID != User1)
+                        {
+                            Usuario usuario = new Usuario
+                            {
+                                ID1 = u.ID,
+                                Nombre = u.Nombre,
+                                Apellido_P = u.Apellido_P,
+                                Apellido_M = u.Apellido_M,
+                                Fecha_N = u.Fecha_N.Date.ToString("dd/MM/yyyy"),
+                                T_Usuario = u.T_Usuario,
+                                T_Usuario_l = tipo.Where(x => x.ID == u.T_Usuario).Select(x => x.Desc).FirstOrDefault(),
+                                Email = u.Email,
+                                Pregunta = u.Pregunta,
+                                Respuesta = u.Respuesta
+                            };
+                            usuarios.Add(usuario);
+                        }
+                    }
+                    return View(usuarios);
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return RedirectToAction("Index", "Home");
         }
 
         // GET: Usuario/Details/5
         public ActionResult Details(string id)
         {
+            FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
             if (id != null)
             {
                 USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
@@ -39,9 +75,6 @@ namespace Integrador.Controllers
                     Fecha_N = fecha,
                     Pregunta = u.Pregunta
                 };
-                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
-                //ViewBag.Usuario = Session["usuario"].ToString();
-                //ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 return View(us);
             }
             return RedirectToAction("Index", "Home");
@@ -50,6 +83,7 @@ namespace Integrador.Controllers
         // GET: Usuario/Create
         public ActionResult Registro()
         {
+            FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
             return View();
         }
 
@@ -58,64 +92,69 @@ namespace Integrador.Controllers
         public ActionResult Registro(Usuario usuario)
         {
             // TODO: Add insert logic here
-            int tipo;
+            FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+            int tipo = 1;
             if (ModelState.IsValid)
             {
                 if (!ExisteUsuario(usuario.ID1))
                 {
-                    if (usuario.Password == usuario.Manager)
+                    if (!ExisteEmail(usuario.Email))
                     {
-                        if (ComprobarEmail(usuario.Email) && !String.IsNullOrEmpty(usuario.Email))
+                        if (usuario.Password == usuario.Manager)
                         {
-                            try
+                            if (ComprobarEmail(usuario.Email) && !String.IsNullOrEmpty(usuario.Email))
                             {
-                                if (usuario.ID1 != null && !db.USUARIOs.Any(x => x.ID == usuario.ID1))
+                                try
                                 {
-                                    if (usuario.T_Usuario == 0)
+                                    if (usuario.ID1 != null && !db.USUARIOs.Any(x => x.ID == usuario.ID1))
                                     {
-                                        tipo = 2;
-                                    }
-                                    else
-                                    {
-                                        tipo = 1;
-                                    }
-                                    Cryptography c = new Cryptography();
-                                    usuario.Password = c.Encrypt(usuario.Password);
-                                    USUARIO u = new USUARIO
-                                    {
-                                        ID = usuario.ID1,
-                                        Nombre = usuario.Nombre,
-                                        Apellido_P = usuario.Apellido_P,
-                                        Apellido_M = usuario.Apellido_M,
-                                        Fecha_N = DateTime.Parse(usuario.Fecha_N),
-                                        Email = usuario.Email,
-                                        Password = usuario.Password,
-                                        T_Usuario = tipo,
-                                        Pregunta = usuario.Pregunta,
-                                        Respuesta = usuario.Respuesta,
-                                        Imagen = usuario.Imagen,
-                                        Activo = true
-                                    };
+                                        if (usuario.T_Usuario == 0)
+                                        {
+                                            tipo = db.USUARIO_T.Where(x => x.Desc == usuario.T_Usuario_l).Select(x => x.ID).FirstOrDefault();
+                                        }
+                                        Cryptography c = new Cryptography();
+                                        usuario.Password = c.Encrypt(usuario.Password);
+                                        USUARIO u = new USUARIO
+                                        {
+                                            ID = usuario.ID1,
+                                            Nombre = usuario.Nombre,
+                                            Apellido_P = usuario.Apellido_P,
+                                            Apellido_M = usuario.Apellido_M,
+                                            Fecha_N = DateTime.Parse(usuario.Fecha_N),
+                                            Email = usuario.Email,
+                                            Password = usuario.Password,
+                                            T_Usuario = tipo,
+                                            Pregunta = usuario.Pregunta,
+                                            Respuesta = usuario.Respuesta,
+                                            Imagen = usuario.Imagen,
+                                            Activo = true,
+                                            N_Compras = 0
+                                        };
 
-                                    db.USUARIOs.Add(u);
-                                    db.SaveChanges();
+                                        db.USUARIOs.Add(u);
+                                        db.SaveChanges();
 
-                                    return RedirectToAction("Index", "Home");
+                                        return RedirectToAction("Index", "Home");
+                                    }
+                                }
+                                catch
+                                {
+                                    return View(usuario);
                                 }
                             }
-                            catch
+                            else
                             {
-                                return View(usuario);
+                                ViewBag.Error = "El correo no es correcto";
                             }
                         }
                         else
                         {
-                            ViewBag.Error = "El correo no es correcto";
+                            TempData["MensajePass"] = "La contraseña no coincide";
                         }
                     }
                     else
                     {
-                        TempData["MensajePass"] = "La contraseña no coincide";
+                        TempData["MensajeUsuario"] = "El correo ya existe. Utilice un correo diferente";
                     }
                 }
                 else
@@ -156,7 +195,11 @@ namespace Integrador.Controllers
         {
             try
             {
-                USUARIO uSUARIO = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                string User1 = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+
+                USUARIO uSUARIO = db.USUARIOs.Where(x => x.ID == us.ID1).FirstOrDefault();
                 uSUARIO.Nombre = us.Nombre;
                 uSUARIO.Apellido_P = us.Apellido_P;
                 uSUARIO.Apellido_M = us.Apellido_M;
@@ -167,7 +210,14 @@ namespace Integrador.Controllers
 
                 ViewBag.Usuario = Session["usuario"].ToString();
                 ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                return RedirectToAction("Details", id);
+                if (Tipo == 1)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Dashboard", id);
+                }
             }
             catch
             {
@@ -175,7 +225,7 @@ namespace Integrador.Controllers
             }
         }
 
-        public ActionResult EditPass(string id)
+        public ActionResult Pass(string id)
         {
             if (id != null)
             {
@@ -193,13 +243,15 @@ namespace Integrador.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPass(string id, Pass us)
+        public ActionResult Pass(string id, Pass us)
         {
             try
             {
                 //ViewBag.Usuario = Session["usuario"].ToString();
                 //ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
 
                 USUARIO uSUARIO = db.USUARIOs.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
                 Cryptography c = new Cryptography();
@@ -213,7 +265,7 @@ namespace Integrador.Controllers
                             uSUARIO.Password = c.Encrypt(us.Npass1);
                             db.Entry(uSUARIO).State = EntityState.Modified;
                             db.SaveChanges();
-                            return RedirectToAction("Details", id);
+                            return RedirectToAction("Dashboard", new { id = Usuario });
                         }
                     }
                 }
@@ -226,7 +278,7 @@ namespace Integrador.Controllers
             }
         }
 
-        public ActionResult EditQues(string id)
+        public ActionResult Pregunta(string id)
         {
             if (id != null)
             {
@@ -239,16 +291,26 @@ namespace Integrador.Controllers
 
         // POST: Usuario/Edit/5
         [HttpPost]
-        public ActionResult EditQues(string id, FormCollection collection)
+        public ActionResult Pregunta(string id, Pregunta pregunta)
         {
             try
             {
-                //ViewBag.Usuario = Session["usuario"].ToString();
-                //ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
-                // TODO: Add update logic here
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                USUARIO uSUARIO = db.USUARIOs.Where(x => x.ID == Usuario && x.Activo == true).FirstOrDefault();
+                Cryptography c = new Cryptography();
+                pregunta.Apass = c.Encrypt(pregunta.Apass);
+                if (pregunta.Apass == uSUARIO.Password)
+                {
+                    uSUARIO.Pregunta = pregunta.Nques;
+                    uSUARIO.Respuesta = pregunta.Nress;
+                    db.Entry(uSUARIO).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Dashboard", new { id = Usuario });
+                }
 
-                return RedirectToAction("Index");
+                return View(pregunta);
             }
             catch
             {
@@ -323,24 +385,50 @@ namespace Integrador.Controllers
 
         public ActionResult Direccion(string id)
         {
-            if (id != null)
+            try
             {
-                List<USUARIO_DIR> d = db.USUARIO_DIR.Where(x => x.Usuario == id).ToList();
-                List<Usuarios_Dir> ud = new List<Usuarios_Dir>();
-
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 ViewBag.Usuario = Session["usuario"].ToString();
                 ViewBag.Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                if (ud.Count() > 0)
+                if (id != null)
                 {
-                    return View(ud);
+                    List<USUARIO_DIR> d = db.USUARIO_DIR.Where(x => x.Usuario == id).ToList();
+                    List<Usuarios_Dir> ud = new List<Usuarios_Dir>();
+                    foreach(USUARIO_DIR dIR in d)
+                    {
+                        ESTADO edo = db.ESTADOes.Where(x => x.ID == dIR.Estado).FirstOrDefault();
+                        MUNICIPIO mun = db.MUNICIPIOs.Where(x => x.ID == dIR.Municipio).FirstOrDefault();
+                        LOCALIDAD col = db.LOCALIDADs.Where(x => x.ID == dIR.Colonia).FirstOrDefault();
+                        Usuarios_Dir dir = new Usuarios_Dir
+                        {
+                            ID = dIR.ID,
+                            Usuario = dIR.Usuario,
+                            Calle = dIR.Calle,
+                            Numero_Ext = dIR.Numero_Ext,
+                            Numero_Int = dIR.Numero_Int,
+                            Colonia = col.Nombre,
+                            Municipio = mun.Nombre,
+                            Estado = edo.Nombre,
+                            CP = col.CP
+                        };
+                        ud.Add(dir);
+                    }
+                    if (ud.Count() > 0)
+                    {
+                        return View(ud);
+                    }
+                    else
+                    {
+                        ViewBag.Error = "No tienes Direcciones Registradas";
+                        return View();
+                    }
                 }
-                else
-                {
-                    ViewBag.Error = "No tienes Direcciones Registradas";
-                    return View();
-                }
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+            catch(Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult DireccionNueva(string id)
@@ -359,79 +447,136 @@ namespace Integrador.Controllers
             try
             {
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
-                // TODO: Add update logic here
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
 
-                return RedirectToAction("Index");
+                if (Tipo != 1)
+                {
+                    try
+                    {
+                        int edo = db.ESTADOes.Where(x => x.Nombre == Model.Estado).Select(x => x.ID).FirstOrDefault();
+                        int mun = db.MUNICIPIOs.Where(x => x.Estado == edo && x.Nombre == Model.Municipio).Select(x => x.ID).FirstOrDefault();
+                        int col = db.LOCALIDADs.Where(x => x.Municipio == mun && x.CP == Model.CP && x.Nombre == Model.Colonia).Select(x => x.ID).FirstOrDefault();
+                        USUARIO_DIR dIR = new USUARIO_DIR
+                        {
+                            Usuario = Usuario,
+                            Calle = Model.Calle,
+                            Numero_Ext = Model.Numero_Ext,
+                            Numero_Int = Model.Numero_Int,
+                            Colonia = col,
+                            Municipio = mun,
+                            Estado = edo,
+                            CP = Model.CP,
+                            Activo = true
+                        };
+
+                        db.USUARIO_DIR.Add(dIR);
+                        db.SaveChanges();
+
+                        return RedirectToAction("Direccion", Usuario);
+                    }
+                    catch (Exception)
+                    {
+                        return View(Model);
+                    }
+                }
+
+                return View(Model);
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 
-        public ActionResult DireccionEdit(string id)
+        public ActionResult DireccionEdit(int id)
         {
-            if (id != null)
+            FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+            string Usuario = Session["usuario"].ToString();
+            int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+            if (Tipo != 1)
             {
-                USUARIO_DIR d = db.USUARIO_DIR.Where(x => x.Usuario == id).FirstOrDefault();
-                Usuarios_Dir ud = new Usuarios_Dir();
-
-                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                USUARIO_DIR d = db.USUARIO_DIR.Where(x => x.ID == id).FirstOrDefault();
+                ESTADO edo = db.ESTADOes.Where(x => x.ID == d.Estado).FirstOrDefault();
+                MUNICIPIO mun = db.MUNICIPIOs.Where(x => x.ID == d.Municipio).FirstOrDefault();
+                LOCALIDAD col = db.LOCALIDADs.Where(x => x.ID == d.Colonia).FirstOrDefault();
+                Usuarios_Dir ud = new Usuarios_Dir
+                {
+                    ID = d.ID,
+                    Usuario = d.Usuario,
+                    Calle = d.Calle,
+                    Numero_Ext = d.Numero_Ext,
+                    Numero_Int = d.Numero_Int,
+                    Colonia = col.Nombre,
+                    Municipio = mun.Nombre,
+                    Estado = edo.Nombre,
+                    CP = col.CP,
+                };
                 return View(ud);
             }
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public ActionResult DireccionEdit(string id, FormCollection collection)
+        public ActionResult DireccionEdit(Usuarios_Dir dir)
         {
             try
             {
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
-                // TODO: Add update logic here
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                if (Tipo != 1)
+                {
+                    USUARIO_DIR d = db.USUARIO_DIR.Where(x => x.ID == dir.ID).FirstOrDefault();
+                    int edo = db.ESTADOes.Where(x => x.Nombre == dir.Estado).Select(x => x.ID).FirstOrDefault();
+                    int mun = db.MUNICIPIOs.Where(x => x.Estado == edo && x.Nombre == dir.Municipio).Select(x => x.ID).FirstOrDefault();
+                    int col = db.LOCALIDADs.Where(x => x.Municipio == mun && x.CP == dir.CP && x.Nombre == dir.Colonia).Select(x => x.ID).FirstOrDefault();
 
-                return RedirectToAction("Index");
+                    d.Usuario = dir.Usuario;
+                    d.Calle = dir.Calle;
+                    d.Numero_Ext = dir.Numero_Ext;
+                    d.Numero_Int = dir.Numero_Int;
+                    d.Colonia = col;
+                    d.Municipio = mun;
+                    d.Estado = edo;
+                    d.CP = dir.CP;
+
+                    db.Entry(d).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Direccion", Usuario);
+                }
+
+                return View(dir);
             }
             catch
             {
                 return View();
             }
-        }
-
-        public ActionResult Pass(string id)
-        {
-            if (id != null)
-            {
-                USUARIO u = db.USUARIOs.Where(x => x.ID == id).FirstOrDefault();
-                string fecha = u.Fecha_N.Date.ToString("dd/MM/yyyy");
-                Usuario us = new Usuario
-                {
-                    ID1 = u.ID,
-                    Email = u.Email,
-                    Nombre = u.Nombre,
-                    Apellido_P = u.Apellido_P,
-                    Apellido_M = u.Apellido_M,
-                    Fecha_N = fecha,
-                };
-                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
-                return View(us);
-            }
-            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public ActionResult Pass(string id, FormCollection collection)
+        public ActionResult DeleteConfirmedDir(int id)
         {
             try
             {
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
-                // TODO: Add update logic here
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                if (Tipo == 1)
+                {
+                    USUARIO_DIR dIR = db.USUARIO_DIR.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
+                    dIR.Activo = false;
+
+                    db.Entry(dIR).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -439,6 +584,15 @@ namespace Integrador.Controllers
         {
             var existeusuario = db.USUARIOs.Where(t => t.ID == user).SingleOrDefault();
             if (existeusuario == null)
+                return false;
+            else
+                return true;
+        }
+
+        public bool ExisteEmail(string email)
+        {
+            var existeemail = db.USUARIOs.Where(t => t.Email == email).SingleOrDefault();
+            if (existeemail == null)
                 return false;
             else
                 return true;
@@ -475,6 +629,22 @@ namespace Integrador.Controllers
             var c = (from x in db.LOCALIDADs
                      where (x.Nombre.Contains(Prefix) && x.CP == cp)
                      select new { ID = x.ID, Colonia = x.Nombre }).ToList();
+
+            JsonResult cc = Json(c, JsonRequestBehavior.AllowGet);
+
+            return cc;
+        }
+
+        public JsonResult Tipo(string Prefix)
+        {
+            if (Prefix == null)
+                Prefix = "";
+
+            //List<LOCALIDAD> lOCALIDADs = db.LOCALIDADs.Where(x => x.CP.Equals(cp)).ToList();
+
+            var c = (from x in db.USUARIO_T
+                     where (x.Desc.Contains(Prefix))
+                     select new { ID = x.ID, Desc = x.Desc }).ToList();
 
             JsonResult cc = Json(c, JsonRequestBehavior.AllowGet);
 

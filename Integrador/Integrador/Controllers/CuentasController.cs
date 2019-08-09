@@ -148,5 +148,51 @@ namespace Integrador.Controllers
             Session["tipo"] = null;
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(ForgotViewModel pass)
+        {
+            var existeusuario = db.USUARIOs.Where(t => t.ID == pass.Usuario || t.Email == pass.Email).SingleOrDefault();
+            if (existeusuario != null)
+            {
+                return RedirectToAction("Recuperar", existeusuario.ID);
+            }
+            else
+            {
+                ViewBag.Error = "El usuario o email no existe";
+                return View(pass);
+            }
+        }
+
+        public ActionResult Recuperar(string user)
+        {
+            try
+            {
+                USUARIO uSUARIO = db.USUARIOs.Where(x => x.ID == user && x.Activo == true).FirstOrDefault();
+                if (uSUARIO != null)
+                {
+                    ForgotPasswordViewModel pass = new ForgotPasswordViewModel
+                    {
+                        User = uSUARIO.ID,
+                        Pregunta = uSUARIO.Pregunta
+                    };
+                    return View(pass);
+                }
+            }
+            catch
+            { }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Recuperar(ForgotPasswordViewModel pass)
+        {
+            return View();
+        }
     }
 }

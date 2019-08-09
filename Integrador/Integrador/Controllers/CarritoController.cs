@@ -52,6 +52,32 @@ namespace Integrador.Controllers
                             Total = cARRITO.Total.Value,
                             Detalle = carritos_Ds
                         };
+
+                        List<USUARIO_DIR> uSUARIO_DIRs = db.USUARIO_DIR.Where(x => x.Usuario == Usuario && x.Activo == true).ToList();
+                        List<Usuarios_Dir> ud = new List<Usuarios_Dir>();
+                        foreach (USUARIO_DIR dIR in uSUARIO_DIRs)
+                        {
+                            ESTADO edo = db.ESTADOes.Where(x => x.ID == dIR.Estado).FirstOrDefault();
+                            MUNICIPIO mun = db.MUNICIPIOs.Where(x => x.ID == dIR.Municipio).FirstOrDefault();
+                            LOCALIDAD col = db.LOCALIDADs.Where(x => x.ID == dIR.Colonia).FirstOrDefault();
+                            Usuarios_Dir dir = new Usuarios_Dir
+                            {
+                                ID = dIR.ID,
+                                Usuario = dIR.Usuario,
+                                Calle = dIR.Calle,
+                                Numero_Ext = dIR.Numero_Ext,
+                                Numero_Int = dIR.Numero_Int,
+                                Colonia = col.Nombre,
+                                Municipio = mun.Nombre,
+                                Estado = edo.Nombre,
+                                CP = col.CP
+                            };
+                            ud.Add(dir);
+                        }
+                        List<PAGO_T> pAGO_Ts = db.PAGO_T.Where(x => x.Activo == true).ToList();
+                        ViewBag.Direcciones = ud;
+                        ViewBag.Pagos = pAGO_Ts;
+
                         return View(carritos);
                     }
                     catch (Exception)
@@ -157,76 +183,49 @@ namespace Integrador.Controllers
             }
         }
 
-        // GET: Carrito/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Carrito/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Carrito/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Agregar2(int id, int Cantidad)
         {
             try
             {
-                // TODO: Add insert logic here
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                if (Tipo != 1)
+                {
+                    try
+                    {
+                        CARRITO cARRITO = db.CARRITOes.Where(x => x.Usuario == Usuario).FirstOrDefault();
+                        List<CARRITO_D> pros = db.CARRITO_D.Where(x => x.ID_Carrito == cARRITO.ID).ToList();
+                        CARRITO_D pro = pros.Where(x => x.Producto == id).FirstOrDefault();
+                        PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
+                        decimal Total = pRODUCTO.Precio_V * Cantidad;
+                        decimal TotalCarro = 0;
 
-                return RedirectToAction("Index");
+                        pro.Cantidad = Cantidad;
+                        pro.Total = Total;
+                        db.Entry(pro).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        pros = db.CARRITO_D.Where(x => x.ID_Carrito == cARRITO.ID).ToList();
+                        foreach (CARRITO_D item in pros)
+                        {
+                            TotalCarro += item.Total.Value;
+                        }
+                        cARRITO.Total = TotalCarro;
+                        db.Entry(cARRITO).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    return RedirectToAction("Index");
+                }
             }
-            catch
+            catch (Exception)
             {
-                return View();
+
             }
-        }
-
-        // GET: Carrito/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Carrito/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Carrito/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Carrito/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }

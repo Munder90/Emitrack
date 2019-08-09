@@ -37,7 +37,6 @@ namespace Integrador.Entities
         public virtual DbSet<PRODUCTO_M> PRODUCTO_M { get; set; }
         public virtual DbSet<PRODUCTO_T> PRODUCTO_T { get; set; }
         public virtual DbSet<PRODUCTO_TIPO> PRODUCTO_TIPO { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<USUARIO> USUARIOs { get; set; }
         public virtual DbSet<USUARIO_DIR> USUARIO_DIR { get; set; }
         public virtual DbSet<USUARIO_T> USUARIO_T { get; set; }

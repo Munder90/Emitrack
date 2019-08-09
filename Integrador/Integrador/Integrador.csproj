@@ -1761,6 +1761,7 @@
     <Content Include="Global.asax" />
     <Content Include="images\6792532.jpg" />
     <Content Include="images\auto_loading.gif" />
+    <Content Include="images\Baner\0.PNG" />
     <Content Include="images\EmiTrack.png" />
     <Content Include="images\expandl.png" />
     <Content Include="images\expandl.svg" />
@@ -1869,6 +1870,13 @@
     <Content Include="images\play.svg" />
     <Content Include="images\playb.png" />
     <Content Include="images\playb.svg" />
+    <Content Include="images\Productos\JR-F52.PNG" />
+    <Content Include="images\Productos\JRF51.PNG" />
+    <Content Include="images\Productos\JRF52.PNG" />
+    <Content Include="images\Productos\S08-TURBO-L.PNG" />
+    <Content Include="images\Productos\S16-TURBO-L.PNG" />
+    <Content Include="images\Productos\TURBO-SHIELD-1.PNG" />
+    <Content Include="images\Productos\XGA-9011.PNG" />
     <Content Include="images\sf-logo.jpg" />
     <Content Include="images\Simple-wallpapers-HD-for-desktop.png" />
     <Content Include="Scripts\autocomplete1.10.2.js" />
@@ -2235,6 +2243,7 @@
     <Content Include="Entities\INTEGRA.edmx.diagram">
       <DependentUpon>INTEGRA.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2270,6 +2279,7 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VentasController.cs" />
     <Compile Include="Entities\BANER.cs">
       <DependentUpon>INTEGRA.tt</DependentUpon>
     </Compile>
@@ -2321,9 +2331,6 @@
     <Compile Include="Entities\PRODUCTO_TIPO.cs">
       <DependentUpon>INTEGRA.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\sysdiagram.cs">
-      <DependentUpon>INTEGRA.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\USUARIO.cs">
       <DependentUpon>INTEGRA.tt</DependentUpon>
     </Compile>
@@ -2352,6 +2359,7 @@
     <Compile Include="Models\Municipios.cs" />
     <Compile Include="Models\Pagos_T.cs" />
     <Compile Include="Models\Pass.cs" />
+    <Compile Include="Models\Pregunta.cs" />
     <Compile Include="Models\Productos.cs" />
     <Compile Include="Models\Productos_T.cs" />
     <Compile Include="Models\Productos_Tipos.cs" />
@@ -2413,6 +2421,13 @@
     <Content Include="Views\Baner\Create.cshtml" />
     <Content Include="Views\Baner\Edit.cshtml" />
     <Content Include="Views\Baner\Delete.cshtml" />
+    <Content Include="Views\Ventas\Index.cshtml" />
+    <Content Include="Views\Usuario\DireccionEdit.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Cuentas\ForgotPassword.cshtml" />
+    <Content Include="Views\Cuentas\Recuperar.cshtml" />
+    <None Include="Views\Usuario\Pass.cshtml" />
+    <Content Include="Views\Usuario\Pregunta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2423,9 +2438,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Estilos\assets\img\" />
-    <Folder Include="images\Baner\" />
-    <Folder Include="images\Productos\" />
-    <Folder Include="Views\Venta\" />
+    <Folder Include="images\Comprobante\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

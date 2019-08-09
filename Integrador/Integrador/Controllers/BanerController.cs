@@ -35,7 +35,8 @@ namespace Integrador.Controllers
                                 Id = b.ID,
                                 Descripcion = b.Descripcion,
                                 Imagen = b.Imagen,
-                                Fecha = fecha
+                                Fecha = fecha,
+                                Activo = b.Activo.Value
                             };
                             baner_Ds.Add(bd);
                         }
@@ -168,7 +169,7 @@ namespace Integrador.Controllers
                         return View(baner);
                     }
 
-                    return View("Index");
+                    return RedirectToAction("Index");
                 }
                 return RedirectToAction("Index", "Home");
             }
@@ -279,7 +280,7 @@ namespace Integrador.Controllers
                         return View(baner);
                     }
 
-                    return View("Index");
+                    return RedirectToAction("Index");
                 }
                 return RedirectToAction("Index", "Home");
             }

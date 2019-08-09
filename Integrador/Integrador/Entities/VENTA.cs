@@ -28,6 +28,7 @@ namespace Integrador.Entities
         public Nullable<int> Direccion { get; set; }
         public Nullable<int> Metod_Pago { get; set; }
         public Nullable<bool> Factura { get; set; }
+        public string Comprobante { get; set; }
     
         public virtual PAGO_T PAGO_T { get; set; }
         public virtual USUARIO USUARIO1 { get; set; }

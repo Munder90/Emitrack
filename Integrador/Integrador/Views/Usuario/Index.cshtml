@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Integrador.Models.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        <small>@ViewBag.usuario</small>
+                    </h1>
+                </div>
+            </div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-12">
+                    <p align="right" class="col-md-">
+                        @Html.ActionLink("Nuevo Usuario", "Registro", "Usuario", new { id = ViewBag.usuario }, htmlAttributes: new { @class = "btn btn-primary" })
+                    </p>
+                </div>
+                <div class="col-md-12">
+
+                    <table class="table table mdl-data-table table-striped">
+                        <tr>
+                            <th>
+                                Usuario
+                            </th>
+                            <th>
+                                Nombre
+                            </th>
+                            <th>
+                                Tipo de Usuario
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.T_Usuario_l)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td style="width: 80px;">
+                                    <a href="@Url.Action("Edit", "Usuario", new { id = item.ID1 })" id="Editar">
+                                        <i class="fa fa-fw fa-edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("Detalle", "Usuario", new { id = item.ID1 })" id="Detalle">
+                                        <i class="fa fa-fw fa-search"></i>
+                                    </a>
+                                    <a href="" id="Confirma" onclick="pop(@item.ID1)">
+                                        <i class="fa fa-fw fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    function pop(id) {
+
+        if (confirm("Eliminar")) {
+
+            $.ajax({
+                type: "POST",
+                url: '../Usuario/DeleteConfirmed',
+                dataType: "json",
+                data: { "id": id },
+                success: function (data) {
+                    alert("Eliminado")
+                }
+            });
+        }
+        else {
+        }
+    };
+</script>
