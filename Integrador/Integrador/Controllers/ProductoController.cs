@@ -253,7 +253,7 @@ namespace Integrador.Controllers
                         pRODUCTO.Descripcion = pro.Descripcion;
                         pRODUCTO.Precio_A = pro.Precio_A;
                         pRODUCTO.Precio_V = pro.Precio_V;
-                        pRODUCTO.Cantidad = pro.Cantidad;
+                        pRODUCTO.Cantidad += pro.Cantidad;
                         pRODUCTO.Fecha_Mo = DateTime.Today;
                         pRODUCTO.Imagen = imagen;
                         pRODUCTO.Activo = true;
