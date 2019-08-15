@@ -18,6 +18,7 @@ namespace Integrador.Models
         string imagen;
         string codigo;
         string etiquetas;
+        int nventas;
         FileType img;
 
         public int ID { get => iD; set => iD = value; }
@@ -32,6 +33,7 @@ namespace Integrador.Models
         public string Codigo { get => codigo; set => codigo = value; }
         public string Etiquetas { get => etiquetas; set => etiquetas = value; }
         public FileType Img { get => img; set => img = value; }
+        public int Nventas { get => nventas; set => nventas = value; }
     }
     public enum FileType
     {

@@ -156,7 +156,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '../Carrito/DeleteConfirmed',
+                url: '~/Carrito/DeleteConfirmed',
                 dataType: "json",
                 data: { "id": id },
                 success: function (data) {
@@ -177,7 +177,7 @@
 
             $.ajax({
                 type: "POST",
-                url: '../../Carrito/Agregar2',
+                url: '~/Carrito/Agregar2',
                 dataType: "post",
                 data: { "id": ip, "Cantidad": cantidad },
                 success: function (data) {
