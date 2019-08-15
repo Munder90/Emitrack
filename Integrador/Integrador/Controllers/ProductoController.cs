@@ -131,7 +131,7 @@ namespace Integrador.Controllers
                     try
                     {
                         string imagen = pro.Codigo + ".PNG";
-                        string ruta = "~/images/Productos/" + pro.Codigo + ".PNG";
+                        string ruta = "/images/Productos/" + pro.Codigo + ".PNG";
                         upload.SaveAs(Server.MapPath(ruta));
 
                         PRODUCTO pRODUCTO = new PRODUCTO
@@ -143,7 +143,7 @@ namespace Integrador.Controllers
                             Precio_V = pro.Precio_V,
                             Cantidad = pro.Cantidad,
                             Fecha_Mo = DateTime.Today,
-                            Imagen = ruta,
+                            Imagen = imagen,
                             Activo = true,
                             N_Ventas = 0
                         };
@@ -241,7 +241,7 @@ namespace Integrador.Controllers
                         {
                             imagen = pro.Codigo + ".PNG";
                             ruta = "~/images/Productos/" + pro.Codigo + ".PNG";
-                            upload.SaveAs(Server.MapPath("~" + ruta));
+                            upload.SaveAs(Server.MapPath(ruta));
                         }
                         catch (Exception)
                         {
