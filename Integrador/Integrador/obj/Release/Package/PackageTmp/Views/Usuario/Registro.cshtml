@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <div class="form-label-group">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", required = "required" } })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", required = "required", @id = "Email", @type = "email" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                         @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label" })
 
@@ -80,21 +80,16 @@
                     </div>
                 </div>
 
-                @*<div class="form-group">
-            @Html.LabelFor(model => model.T_Usuario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.T_Usuario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.T_Usuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.T_Usuario_l, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.T_Usuario_l, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.T_Usuario_l, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @if (ViewBag.Tipo == 1)
+                {
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.T_Usuario_l, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tipo", required = "required", @id = "Tipo" } })
+                            @Html.ValidationMessageFor(model => model.T_Usuario_l, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.T_Usuario_l, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                    </div>
+                }
 
                 <div class="form-group">
                     <div class="form-label-group">
@@ -113,12 +108,12 @@
                 </div>
 
                 @*<div class="form-group">
-                    <div class="form-label-group">
-                        @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Imagen" } })
-                        @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
-                        @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label" })
-                    </div>
-                </div>*@
+                        <div class="form-label-group">
+                            @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Imagen" } })
+                            @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                    </div>*@
 
                 <div class="form-group">
                     <div class="form-label-group">
@@ -132,6 +127,13 @@
         </div>
 
     </div>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/autocomplete1.10.2.js"></script>
+    <script src="~/Scripts/autocomplete1.11.4.js"></script>
+    <link href="~/Content/autocomplete.css" rel="stylesheet" />
     <script>
         $('#Email').on("focusout", function () {
             var email = $('#Email').val();
@@ -149,6 +151,40 @@
             var re = /^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(String(email).toLowerCase());
         }
+
         var auto = $.noConflict();
+
+        $('body').on('keydown.autocomplete', '#Tipo', function () {
+
+            auto(this).autocomplete({
+                source: function (request, response) {
+                    auto.ajax({
+                        type: "POST",
+                        url: '../Tipo',
+                        dataType: "json",
+                        data: { "Prefix": request.term },
+                        success: function (data) {
+                            response(auto.map(data, function (item) {
+                                return { label: item.Desc, value: item.Desc };
+                            }))
+                        }
+                    })
+                },
+
+                messages: {
+                    noResults: '',
+                    results: function (resultsCount) { }
+                },
+
+                change: function (e, ui) {
+                    if (!(ui.item)) {
+                        e.target.value = "";
+                    }
+                },
+
+                select: function (event, ui) {
+                }
+            });
+        });
     </script>
 }

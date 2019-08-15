@@ -130,8 +130,8 @@ namespace Integrador.Controllers
                 {
                     try
                     {
-                        string imagen = upload.FileName;
-                        string ruta = "/images/Productos/" + pro.Codigo + ".PNG";
+                        string imagen = pro.Codigo + ".PNG";
+                        string ruta = "~/images/Productos/" + pro.Codigo + ".PNG";
                         upload.SaveAs(Server.MapPath("~" + ruta));
 
                         PRODUCTO pRODUCTO = new PRODUCTO
@@ -235,11 +235,12 @@ namespace Integrador.Controllers
                     try
                     {
                         string ruta;
+                        string imagen = "";
                         PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
                         try
                         {
-                            string imagen = upload.FileName;
-                            ruta = "/images/Productos/" + pro.Codigo + ".PNG";
+                            imagen = pro.Codigo + ".PNG";
+                            ruta = "~/images/Productos/" + pro.Codigo + ".PNG";
                             upload.SaveAs(Server.MapPath("~" + ruta));
                         }
                         catch (Exception)
@@ -254,7 +255,7 @@ namespace Integrador.Controllers
                         pRODUCTO.Precio_V = pro.Precio_V;
                         pRODUCTO.Cantidad = pro.Cantidad;
                         pRODUCTO.Fecha_Mo = DateTime.Today;
-                        pRODUCTO.Imagen = ruta;
+                        pRODUCTO.Imagen = imagen;
                         pRODUCTO.Activo = true;
 
                         db.Entry(pRODUCTO).State = EntityState.Modified;

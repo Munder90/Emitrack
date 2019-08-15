@@ -93,7 +93,7 @@ namespace Integrador.Controllers
         {
             // TODO: Add insert logic here
             FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
-            int tipo = 1;
+            USUARIO_T tipo = new USUARIO_T();
             if (ModelState.IsValid)
             {
                 if (!ExisteUsuario(usuario.ID1))
@@ -108,9 +108,13 @@ namespace Integrador.Controllers
                                 {
                                     if (usuario.ID1 != null && !db.USUARIOs.Any(x => x.ID == usuario.ID1))
                                     {
-                                        if (usuario.T_Usuario == 0)
+                                        if (usuario.T_Usuario_l != null)
                                         {
-                                            tipo = db.USUARIO_T.Where(x => x.Desc == usuario.T_Usuario_l).Select(x => x.ID).FirstOrDefault();
+                                            tipo = db.USUARIO_T.Where(x => x.Desc == usuario.T_Usuario_l).FirstOrDefault();
+                                        }
+                                        else
+                                        {
+                                            tipo = db.USUARIO_T.Where(x => x.ID == 2).FirstOrDefault();
                                         }
                                         Cryptography c = new Cryptography();
                                         usuario.Password = c.Encrypt(usuario.Password);
@@ -123,7 +127,7 @@ namespace Integrador.Controllers
                                             Fecha_N = DateTime.Parse(usuario.Fecha_N),
                                             Email = usuario.Email,
                                             Password = usuario.Password,
-                                            T_Usuario = tipo,
+                                            T_Usuario = tipo.ID,
                                             Pregunta = usuario.Pregunta,
                                             Respuesta = usuario.Respuesta,
                                             Imagen = usuario.Imagen,
@@ -473,7 +477,7 @@ namespace Integrador.Controllers
                         db.USUARIO_DIR.Add(dIR);
                         db.SaveChanges();
 
-                        return RedirectToAction("Direccion", Usuario);
+                        return RedirectToAction("Direccion", "Usuario", new { user = Usuario });
                     }
                     catch (Exception)
                     {
@@ -532,7 +536,6 @@ namespace Integrador.Controllers
                     int mun = db.MUNICIPIOs.Where(x => x.Estado == edo && x.Nombre == dir.Municipio).Select(x => x.ID).FirstOrDefault();
                     int col = db.LOCALIDADs.Where(x => x.Municipio == mun && x.CP == dir.CP && x.Nombre == dir.Colonia).Select(x => x.ID).FirstOrDefault();
 
-                    d.Usuario = dir.Usuario;
                     d.Calle = dir.Calle;
                     d.Numero_Ext = dir.Numero_Ext;
                     d.Numero_Int = dir.Numero_Int;
@@ -544,7 +547,7 @@ namespace Integrador.Controllers
                     db.Entry(d).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    return RedirectToAction("Direccion", Usuario);
+                    return RedirectToAction("Direccion", "Usuario", new { user = Usuario });
                 }
 
                 return View(dir);

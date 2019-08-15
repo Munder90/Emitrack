@@ -156,6 +156,7 @@
     <NavigationProperty Name="CARRITOes" Relationship="Self.FK_CARRITO_Usuario" FromRole="USUARIO" ToRole="CARRITO" />
     <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_USUARIO_DIR_Usuario" FromRole="USUARIO" ToRole="USUARIO_DIR" />
     <NavigationProperty Name="USUARIO_T" Relationship="Self.FK_USUARIO_T_Usuario" FromRole="USUARIO" ToRole="USUARIO_T" />
+    <NavigationProperty Name="USUARIOLOG" Relationship="Self.FK_USUARIOLOG_USUARIO_ID" FromRole="USUARIO" ToRole="USUARIOLOG" />
     <NavigationProperty Name="VENTAs" Relationship="Self.FK_VENTA_Usuario" FromRole="USUARIO" ToRole="VENTA" />
   </EntityType>
   <EntityType Name="USUARIO_DIR">
@@ -186,6 +187,19 @@
     <Property Name="Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="USUARIOs" Relationship="Self.FK_USUARIO_T_Usuario" FromRole="USUARIO_T" ToRole="USUARIO" />
   </EntityType>
+  <EntityType Name="USUARIOLOG">
+    <Key>
+      <PropertyRef Name="USUARIO_ID" />
+    </Key>
+    <Property Name="USUARIO_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="POS" Type="Int32" />
+    <Property Name="SESION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NAVEGADOR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UBICACION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FECHA" Type="DateTime" Precision="3" />
+    <Property Name="LOGIN" Type="Boolean" />
+    <NavigationProperty Name="USUARIO" Relationship="Self.FK_USUARIOLOG_USUARIO_ID" FromRole="USUARIOLOG" ToRole="USUARIO" />
+  </EntityType>
   <EntityType Name="VENTA">
     <Key>
       <PropertyRef Name="ID" />
@@ -198,11 +212,11 @@
     <Property Name="Direccion" Type="Int32" />
     <Property Name="Metod_Pago" Type="Int32" />
     <Property Name="Factura" Type="Boolean" />
+    <Property Name="Comprobante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="PAGO_T" Relationship="Self.FK_VENTA_Metod_Pago" FromRole="VENTA" ToRole="PAGO_T" />
     <NavigationProperty Name="USUARIO1" Relationship="Self.FK_VENTA_Usuario" FromRole="VENTA" ToRole="USUARIO" />
     <NavigationProperty Name="USUARIO_DIR" Relationship="Self.FK_VENTA_Direccion" FromRole="VENTA" ToRole="USUARIO_DIR" />
     <NavigationProperty Name="VENTA_D" Relationship="Self.FK_VENTA_D_ID_Venta" FromRole="VENTA" ToRole="VENTA_D" />
-    <Property Name="Comprobante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="VENTA_D">
     <Key>
@@ -420,6 +434,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_USUARIOLOG_USUARIO_ID">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="USUARIOLOG" Type="Self.USUARIOLOG" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USUARIOLOG">
+        <PropertyRef Name="USUARIO_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_VENTA_Usuario">
     <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
     <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
@@ -472,6 +498,7 @@
     <EntitySet Name="USUARIOs" EntityType="Self.USUARIO" />
     <EntitySet Name="USUARIO_DIR" EntityType="Self.USUARIO_DIR" />
     <EntitySet Name="USUARIO_T" EntityType="Self.USUARIO_T" />
+    <EntitySet Name="USUARIOLOGs" EntityType="Self.USUARIOLOG" />
     <EntitySet Name="VENTAs" EntityType="Self.VENTA" />
     <EntitySet Name="VENTA_D" EntityType="Self.VENTA_D" />
     <AssociationSet Name="FK_BANER_D_ID_Baner" Association="Self.FK_BANER_D_ID_Baner">
@@ -541,6 +568,10 @@
     <AssociationSet Name="FK_USUARIO_T_Usuario" Association="Self.FK_USUARIO_T_Usuario">
       <End Role="USUARIO_T" EntitySet="USUARIO_T" />
       <End Role="USUARIO" EntitySet="USUARIOs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOLOG_USUARIO_ID" Association="Self.FK_USUARIOLOG_USUARIO_ID">
+      <End Role="USUARIO" EntitySet="USUARIOs" />
+      <End Role="USUARIOLOG" EntitySet="USUARIOLOGs" />
     </AssociationSet>
     <AssociationSet Name="FK_VENTA_Usuario" Association="Self.FK_VENTA_Usuario">
       <End Role="USUARIO" EntitySet="USUARIOs" />

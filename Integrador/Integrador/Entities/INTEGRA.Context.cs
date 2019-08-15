@@ -40,6 +40,7 @@ namespace Integrador.Entities
         public virtual DbSet<USUARIO> USUARIOs { get; set; }
         public virtual DbSet<USUARIO_DIR> USUARIO_DIR { get; set; }
         public virtual DbSet<USUARIO_T> USUARIO_T { get; set; }
+        public virtual DbSet<USUARIOLOG> USUARIOLOGs { get; set; }
         public virtual DbSet<VENTA> VENTAs { get; set; }
         public virtual DbSet<VENTA_D> VENTA_D { get; set; }
     }

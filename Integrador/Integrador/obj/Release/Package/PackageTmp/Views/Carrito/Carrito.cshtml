@@ -65,7 +65,7 @@
                                 @Html.LabelFor(model => model.Factura, "Factura", htmlAttributes: new { @class = "control-label" })
                             </td>
                             <td>
-                                @Html.EditorFor(model => model.Factura, new { htmlAttributes = new { @class = "form-control", @placeholder = "Factura" } })
+                                @Html.EditorFor(model => model.Factura, new { htmlAttributes = new { @class = "", @placeholder = "Factura" } })
                                 @Html.ValidationMessageFor(model => model.Factura, "", new { @class = "text-danger" })
                             </td>
                             <td>
@@ -77,9 +77,10 @@
                                 @Html.LabelFor(model => model.Metod_Pago, "Metodo de Pago", htmlAttributes: new { @id = "lbl_puesto" })
                             </td>
                             <td>
-                                <select name="Metod_Pago" id="Metod_Pago" class="comcode select_all" required>
-                                    @if (ViewBag.Direcciones.Count > 0)
+                                <select name="Metod_Pago" id="Metod_Pago" class="comcode form-control" required style="width:150px">
+                                    @if (ViewBag.Pagos.Count > 0)
                                     {
+                                        <option id="" value="" disabled selected>Metodo de Pago</option>
                                         foreach (var item in ViewBag.Pagos)
                                         {
                                             <option id="@item.ID" value="@item.ID">@item.Nombre</option>
@@ -100,9 +101,10 @@
                                 @Html.LabelFor(model => model.Direccion, "Direccion de Envio", htmlAttributes: new { @id = "lbl_puesto" })
                             </td>
                             <td>
-                                <select name="Direccion" id="Direccion" class="comcode select_all" required>
+                                <select name="Direccion" id="Direccion" class="comcode form-control" required style="width:150px">
                                     @if (ViewBag.Direcciones.Count > 0)
                                     {
+                                        <option id="0" value="0" disabled selected>Direccion</option>
                                         foreach (var item in ViewBag.Direcciones)
                                         {
                                             <option id="@item.ID" value="@item.ID">@item.CP @item.Calle @item.Numero_Ext @item.Numero_Int</option>
@@ -132,7 +134,7 @@
                     </tfoot>
                 </table>
                 <div class="form-group">
-                    <input type="submit" value="Salvar" class="btn btn-primary btn-block" />
+                    <input type="submit" value="Comprar" class="btn btn-primary btn-block" />
                 </div>
             </div>
         </div>
@@ -144,10 +146,9 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>
-    //--Inicializar combos
-    var elem = document.querySelectorAll('select');
-    var options = [];
-    var instance = M.FormSelect.init(elem, options);
+    //var elem = document.querySelectorAll('select');
+    //var options = [];
+    //var instance = M.FormSelect.init(elem, options);
 
     function pop(id) {
 
@@ -167,19 +168,23 @@
         }
     };
 
-    $('.Cantidad').focusout(function () {
-        var cantidad = this.value;
-        var ip = this.id;
+    //var jq=jQuery.noConflict();
+    var auto = $.noConflict();
+    jQuery(function ($) {
+        $('.Cantidad').focusout(function () {
+            var cantidad = this.value;
+            var ip = this.id;
 
-        $.ajax({
-            type: "POST",
-            url: '../../Carrito/Agregar2',
-            dataType: "post",
-            data: { "id": ip, "Cantidad": cantidad },
-            success: function (data) {
-            }
+            $.ajax({
+                type: "POST",
+                url: '../../Carrito/Agregar2',
+                dataType: "post",
+                data: { "id": ip, "Cantidad": cantidad },
+                success: function (data) {
+                }
+            });
+            location.reload();
         });
-        location.reload();
     });
 
 </script>

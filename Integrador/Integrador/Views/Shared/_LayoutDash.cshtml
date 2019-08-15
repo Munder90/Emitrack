@@ -74,48 +74,6 @@
                                     @*</a>*@
                                 </li>
                             }
-                            @*<li>
-                                <a href="#">
-                                    <div>
-                                        <strong>Producto 1</strong>
-                                        <span class="pull-right text-muted">
-                                                <em>Today</em>
-                                            </span>
-                                    </div>
-                                    <div>Producto 1</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <strong>Producto 2</strong>
-                                        <span class="pull-right text-muted">
-                                                <em>Today</em>
-                                            </span>
-                                    </div>
-                                    <div>Producto 2</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <strong>Producto 3</strong>
-                                        <span class="pull-right text-muted">
-                                                <em>Today</em>
-                                            </span>
-                                    </div>
-                                    <div>Producto 3</div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>Realizara Compra</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>*@
                         </ul>
                     </li>
                 }
@@ -127,18 +85,9 @@
                         <li>
                             <a href="@Url.Action("Dashboard", "Usuario", new { id=ViewBag.usuario })"><i class="fa fa-user fa-fw"></i> Perfil de Usuario</a>
                         </li>
-                        @*<li>
-                                <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>*@
                         <li class="divider"></li>
                         <li>
-                            @*@using Microsoft.AspNet.Identity*@
-                            @*@using (Html.BeginForm("LogOut", "Cuentas", FormMethod.Post, new { id = "logoutForm" }))
-                            {
-                                @Html.AntiForgeryToken()*@
-                                @*<a href="javascript:document.getElementById('logoutForm').submit()" id="lbl_loggoff"><i class="fa fa-sign-out fa-fw"></i>Salir</a>*@
-                                <a href="@Url.Action("LogOut", "Cuentas")"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-                            @*}*@
+                            <a href="@Url.Action("LogOut", "Cuentas")"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
                         </li>
                     </ul>
                 </li>
@@ -160,8 +109,6 @@
         {
         <div>
             <input type="text" name="palabra" class="form-control" placeholder="Buscar">
-            @*@Html.Editor("palabra", new { htmlAttributes = new { @class = "form-control", @placeholder = "Buscar" } })*@
-            @*<input type="submit" value="" />*@
         </div>
         }
     </nav>
@@ -177,17 +124,13 @@
                     @if (ViewBag.Usuario != null)
                     {
                         <li>
-                            @*<a class="active-menu" href="@Url.Action("Dashboard", "Usuario", new { id = ViewBag.usuario })"><i class="fa fa-dashboard"></i> Usuario</a>*@
                             <a href="@Url.Action("Dashboard", "Usuario", new { id = ViewBag.usuario })"><i class="fa fa-dashboard"></i> Usuario</a>
                         </li>
-                        @*<li>
-                            <a href="#"><i class="fa fa-edit"></i> Editar Datos</a>
-                        </li>*@
                         if (ViewBag.Tipo == 1)
                         {
-                            @*<li>
-                                <a href="#"><i class="fa fa-bar-chart-o"></i> Charts</a>
-                            </li>*@
+                            <li>
+                                <a href="@Url.Action("Index", "Ventas")"><i class="fa fa-bar-chart-o"></i> Ventas</a>
+                            </li>
                             <li>
                                 <a href="#"><i class="fa fa-qrcode"></i> Reportes<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">

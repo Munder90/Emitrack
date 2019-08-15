@@ -32,9 +32,9 @@
                     {
                         <table class="table table mdl-data-table table-striped">
                             <tr>
-                                <th>
+                                @*<th>
                                     @Html.DisplayNameFor(model => model.ID)
-                                </th>
+                                </th>*@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Fecha)
                                 </th>
@@ -48,13 +48,13 @@
                                     @Html.DisplayNameFor(model => model.Metod_Pago)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Entrega)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.Factura)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Comprobante)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Entrega)
                                 </th>
                                 <th></th>
                             </tr>
@@ -62,9 +62,9 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
+                                    @*<td>
                                         @Html.DisplayFor(modelItem => item.ID)
-                                    </td>
+                                    </td>*@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Fecha)
                                     </td>
@@ -78,18 +78,21 @@
                                         @Html.DisplayFor(modelItem => item.Metod_Pago)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Entrega)
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(modelItem => item.Factura)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Comprobante)
                                     </td>
                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Entrega)
+                                    </td>
+                                    <td>
                                         @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                                         @Html.ActionLink("Details", "Details", new { id = item.ID }) |
                                         @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                                        <a href="@Url.Action("Details", "Ventas", new { id = item.ID })" id="Detalle">
+                                            <i class="fa fa-fw fa-search"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             }

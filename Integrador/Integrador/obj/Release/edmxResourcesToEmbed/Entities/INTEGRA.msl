@@ -168,10 +168,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOLOGs">
+      <EntityTypeMapping TypeName="INTEGRAModel.USUARIOLOG">
+        <MappingFragment StoreEntitySet="USUARIOLOG">
+          <ScalarProperty Name="USUARIO_ID" ColumnName="USUARIO_ID" />
+          <ScalarProperty Name="POS" ColumnName="POS" />
+          <ScalarProperty Name="SESION" ColumnName="SESION" />
+          <ScalarProperty Name="NAVEGADOR" ColumnName="NAVEGADOR" />
+          <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="VENTAs">
       <EntityTypeMapping TypeName="INTEGRAModel.VENTA">
         <MappingFragment StoreEntitySet="VENTA">
-          <ScalarProperty Name="Comprobante" ColumnName="Comprobante" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Usuario" ColumnName="Usuario" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
@@ -180,6 +192,7 @@
           <ScalarProperty Name="Direccion" ColumnName="Direccion" />
           <ScalarProperty Name="Metod_Pago" ColumnName="Metod_Pago" />
           <ScalarProperty Name="Factura" ColumnName="Factura" />
+          <ScalarProperty Name="Comprobante" ColumnName="Comprobante" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

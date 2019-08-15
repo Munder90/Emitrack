@@ -20,7 +20,7 @@ namespace Integrador.Common
             try { controller.ViewBag.Categoria = db.PRODUCTO_T.Where(x => x.Activo == true).ToList(); } catch (Exception) { }
             if (user != null)
             {
-                controller.ViewBag.Usuario = user.ID;
+                controller.ViewBag.Usuario = user.ID.ToUpper();
                 controller.ViewBag.Tipo = user.T_Usuario;
             }
             try

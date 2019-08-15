@@ -1,0 +1,52 @@
+﻿@model Integrador.Models.Pass
+
+@{
+    ViewBag.Title = "Pass";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="card card-login mx-auto mt-5">
+            <div class="card-header">Sesión activa</div>
+            <div class="card-body">
+                @Html.AntiForgeryToken()
+                @Html.Hidden(Model.Id)
+                <div class="form-group">
+                    @*<div class="form-label-group">
+                        @Html.EditorFor(model => model.Apass, new { htmlAttributes = new { @class = "form-control", @placeholder = "Antigua Contraseña", @type = "Password" } })
+                        @Html.LabelFor(model => model.Apass, "Antigua Contraseña", htmlAttributes: new { @class = "control-label" })
+                        @Html.ValidationMessageFor(model => model.Apass, "", new { @class = "text-danger" })
+                    </div>*@
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Npass1, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nueva Contraseña", @type = "Password" } })
+                        @Html.LabelFor(model => model.Npass1, "Nueva Contraseña", htmlAttributes: new { @class = "control-label" })
+                        @Html.ValidationMessageFor(model => model.Npass1, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-label-group">
+                        @Html.EditorFor(model => model.Npass2, new { htmlAttributes = new { @class = "form-control", @placeholder = "Confirmar Contraseña", @type = "Password" } })
+                        @Html.LabelFor(model => model.Npass2, "Confirmar Contraseña", htmlAttributes: new { @class = "control-label" })
+                        @Html.ValidationMessageFor(model => model.Npass2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div>
+                    @Html.ValidationSummary(true, "", new { @class = "red-text" })
+                </div>
+            </div>
+            <div class="card-action form-group">
+                <p>¿Desea finalizar la sesión activa?</p>
+                @*<br />*@
+                <div class="text-center form-group">
+                    <div class="text-center form-group">
+                        <input type="submit" value="Continuar" class="btn btn-primary btn-block" autofocus />
+                        <a href="@Url.Action("Login", "Cuentas")" class="btn btn-secondary btn-block">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -136,15 +136,15 @@ namespace Integrador.Controllers
                 {
                     try
                     {
-                        string imagen = upload.FileName;
                         int cuenta = db.BANERs.ToList().Count;
+                        string imagen = cuenta + ".PNG";
                         string ruta = "/images/Baner/" + cuenta + ".PNG";
                         upload.SaveAs(Server.MapPath("~" + ruta));
 
                         BANER b = new BANER
                         {
                             Descripcion = baner.Descripcion,
-                            Imagen = ruta,
+                            Imagen = imagen,
                             Fecha = DateTime.Parse(baner.Fecha),
                             Activo = true
                         };
@@ -237,13 +237,13 @@ namespace Integrador.Controllers
                 {
                     try
                     {
-                        string imagen = upload.FileName;
+                        string imagen = baner.Id + ".PNG";
                         string ruta = "/images/Baner/" + baner.Id + ".PNG";
                         upload.SaveAs(Server.MapPath("~" + ruta));
 
                         BANER b = db.BANERs.Where(x => x.ID == baner.Id).FirstOrDefault();
                         b.Descripcion = baner.Descripcion;
-                        b.Imagen = ruta;
+                        b.Imagen = imagen;
                         b.Fecha = DateTime.Parse(baner.Fecha);
                         b.Activo = baner.Activo;
 

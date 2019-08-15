@@ -41,6 +41,7 @@ namespace Integrador.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_DIR> USUARIO_DIR { get; set; }
         public virtual USUARIO_T USUARIO_T { get; set; }
+        public virtual USUARIOLOG USUARIOLOG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VENTA> VENTAs { get; set; }
     }

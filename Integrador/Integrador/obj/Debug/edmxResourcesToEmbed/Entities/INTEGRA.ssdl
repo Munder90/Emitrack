@@ -152,6 +152,18 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Desc" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="USUARIOLOG">
+    <Key>
+      <PropertyRef Name="USUARIO_ID" />
+    </Key>
+    <Property Name="USUARIO_ID" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="POS" Type="int" />
+    <Property Name="SESION" Type="nvarchar(max)" />
+    <Property Name="NAVEGADOR" Type="nvarchar(max)" />
+    <Property Name="UBICACION" Type="nvarchar(max)" />
+    <Property Name="FECHA" Type="datetime" />
+    <Property Name="LOGIN" Type="bit" />
+  </EntityType>
   <EntityType Name="VENTA">
     <Key>
       <PropertyRef Name="ID" />
@@ -356,6 +368,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_USUARIOLOG_USUARIO_ID">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="USUARIOLOG" Type="Self.USUARIOLOG" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USUARIOLOG">
+        <PropertyRef Name="USUARIO_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_VENTA_D_ID_Venta">
     <End Role="VENTA" Type="Self.VENTA" Multiplicity="0..1" />
     <End Role="VENTA_D" Type="Self.VENTA_D" Multiplicity="*" />
@@ -432,6 +456,7 @@
     <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO_DIR" EntityType="Self.USUARIO_DIR" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USUARIO_T" EntityType="Self.USUARIO_T" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIOLOG" EntityType="Self.USUARIOLOG" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VENTA_D" EntityType="Self.VENTA_D" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_BANER_D_ID_Baner" Association="Self.FK_BANER_D_ID_Baner">
@@ -493,6 +518,10 @@
     <AssociationSet Name="FK_USUARIO_T_Usuario" Association="Self.FK_USUARIO_T_Usuario">
       <End Role="USUARIO_T" EntitySet="USUARIO_T" />
       <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOLOG_USUARIO_ID" Association="Self.FK_USUARIOLOG_USUARIO_ID">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="USUARIOLOG" EntitySet="USUARIOLOG" />
     </AssociationSet>
     <AssociationSet Name="FK_VENTA_D_ID_Venta" Association="Self.FK_VENTA_D_ID_Venta">
       <End Role="VENTA" EntitySet="VENTA" />

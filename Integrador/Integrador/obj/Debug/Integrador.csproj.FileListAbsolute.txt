@@ -150,7 +150,6 @@ D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Debug\Integrador.csproj.C
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Debug\Integrador.csproj.CopyComplete
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Debug\Integrador.dll
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Debug\Integrador.pdb
-D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Debug\Integrador.csprojAssemblyReference.cache
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\roslyn\Microsoft.Win32.Primitives.dll
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\roslyn\System.Globalization.Calendars.dll
@@ -178,3 +177,6 @@ D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\Microsoft.Owin.Security.x
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\Microsoft.Owin.Security.Cookies.xml
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\Newtonsoft.Json.xml
+D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\itextsharp.dll
+D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\itextsharp.xml
+D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Debug\Integrador.csprojAssemblyReference.cache

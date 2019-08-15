@@ -94,8 +94,10 @@ D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\es\System.Web.Razor.resou
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\es\System.Web.WebPages.resources.dll
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Release\Integrador.csprojAssemblyReference.cache
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Release\Integrador.csproj.CoreCompileInputs.cache
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Release\Integrador.csproj.CopyComplete
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Release\Integrador.dll
 D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Release\Integrador.pdb
+D:\Documents\GitHub\Emitrack\Integrador\Integrador\obj\Release\Integrador.csprojAssemblyReference.cache
+D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\itextsharp.dll
+D:\Documents\GitHub\Emitrack\Integrador\Integrador\bin\itextsharp.xml

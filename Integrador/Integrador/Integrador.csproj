@@ -51,6 +51,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -79,8 +82,8 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -2244,6 +2247,7 @@
       <DependentUpon>INTEGRA.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2334,6 +2338,9 @@
     <Compile Include="Entities\USUARIO.cs">
       <DependentUpon>INTEGRA.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\USUARIOLOG.cs">
+      <DependentUpon>INTEGRA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\USUARIO_DIR.cs">
       <DependentUpon>INTEGRA.tt</DependentUpon>
     </Compile>
@@ -2363,6 +2370,9 @@
     <Compile Include="Models\Productos.cs" />
     <Compile Include="Models\Productos_T.cs" />
     <Compile Include="Models\Productos_Tipos.cs" />
+    <Compile Include="Models\ReportCabecera.cs" />
+    <Compile Include="Models\ReportDetalle.cs" />
+    <Compile Include="Models\ReportEsqueleto.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Usuarios_Dir.cs" />
     <Compile Include="Models\Usuarios_T.cs" />
@@ -2426,8 +2436,12 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Cuentas\ForgotPassword.cshtml" />
     <Content Include="Views\Cuentas\Recuperar.cshtml" />
+    <Content Include="Views\Cuentas\validateLoginView.cshtml" />
+    <Content Include="Views\Cuentas\Pass.cshtml" />
+    <Content Include="Views\Report\Orden.cshtml" />
     <None Include="Views\Usuario\Pass.cshtml" />
     <Content Include="Views\Usuario\Pregunta.cshtml" />
+    <Content Include="Views\Ventas\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2439,6 +2453,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Estilos\assets\img\" />
     <Folder Include="images\Comprobante\" />
+    <Folder Include="PdfTemp\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

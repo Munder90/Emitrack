@@ -25,28 +25,29 @@
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Descripcion, "Descripcion", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", @placeholder = "Descripcion", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control", @placeholder = "Descripcion" } })
                             @*@Html.LabelFor(model => model.Descripcion, "Descripcion", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Imagen, "Imagen", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Imagen", disabled = "disabled" } })
+                            @*@Html.EditorFor(model => model.Imagen, new { htmlAttributes = new { @class = "form-control", @placeholder = "Imagen", disabled = "disabled" } })*@
+                            <input type="file" class="form-control" id="Avatar" name="upload" accept="image/png" value="@Model.Imagen" />
                             @*@Html.LabelFor(model => model.Imagen, "Imagen", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Fecha, "Fecha", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fecha", type="data" } })
                             @*@Html.LabelFor(model => model.Fecha, "Fecha", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-label-group">
                             @Html.LabelFor(model => model.Activo, "Activo", htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.Activo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Activo", disabled = "disabled" } })
+                            @Html.EditorFor(model => model.Activo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Activo" } })
                             @*@Html.LabelFor(model => model.Activo, "Activo", htmlAttributes: new { @class = "control-label" })*@
                         </div>
                     </div>
