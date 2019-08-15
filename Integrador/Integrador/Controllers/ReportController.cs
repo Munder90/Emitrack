@@ -23,7 +23,7 @@ namespace Integrador.Controllers
                 List<PRODUCTO> pRODUCTOs = db.PRODUCTOes.Where(x => x.Activo == true).ToList();
                 List<PRODUCTO_T> tipo = db.PRODUCTO_T.Where(x => x.Activo == true).ToList();
                 List<Productos> productos = new List<Productos>();
-                List<USUARIO> uSUARIOs = db.USUARIOs.Where(x => x.Activo == true).ToList();
+                List<USUARIO> uSUARIOs = db.USUARIOs.Where(x => x.Activo == true && x.T_Usuario == 2).ToList();
                 foreach (PRODUCTO p in pRODUCTOs)
                 {
                     string eti = "";
@@ -54,7 +54,7 @@ namespace Integrador.Controllers
                 ViewBag.Usuarios = uSUARIOs;
                 return View();
             }
-            catch
+            catch(Exception x)
             {
                 return RedirectToAction("Index", "Home");
             }

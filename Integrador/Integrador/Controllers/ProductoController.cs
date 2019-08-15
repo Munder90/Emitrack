@@ -132,7 +132,7 @@ namespace Integrador.Controllers
                     {
                         string imagen = pro.Codigo + ".PNG";
                         string ruta = "~/images/Productos/" + pro.Codigo + ".PNG";
-                        upload.SaveAs(Server.MapPath("~" + ruta));
+                        upload.SaveAs(Server.MapPath(ruta));
 
                         PRODUCTO pRODUCTO = new PRODUCTO
                         {

@@ -21,24 +21,78 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="row">
                 <div class="col-md-12">
-                    <select multiple name="Metod_Pago" id="Metod_Pago" class="comcode form-control" required style="width:150px">
-                        @if (ViewBag.Productos.Count > 0)
-                        {
-                            <option id="" value="" disabled selected>Metodo de Pago</option>
-                            foreach (var item in ViewBag.Productos)
+                    <div class="col-sm-2">
+                        @Html.Label("Productos", htmlAttributes: new { @id = "lbl_puesto", @class = "form-check-label" })
+                        <select name="Producto" id="Producto" class="comcode form-control" required style="width:150px">
+                            @if (ViewBag.Productos.Count > 0)
                             {
-                                <option id="@item.ID" value="@item.ID">@item.Nombre</option>
+                                <option id="" value="" disabled selected>Producto</option>
+                                <option id="Todos" value="Todos">Todos</option>
+                                foreach (var item in ViewBag.Productos)
+                                {
+                                    <option id="@item.ID" value="@item.ID">@item.Nombre</option>
+                                }
                             }
-                        }
-                        else
-                        {
-                            <option value="" id="no_opt">No hay opciones</option>
-                        }
-                    </select>
+                            else
+                            {
+                                <option value="" id="no_opt">No hay opciones</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        @Html.Label("Categoria", htmlAttributes: new { @id = "lbl_puesto" })
+                        <select name="Metod_Pago" id="Metod_Pago" class="comcode form-control" required style="width:150px">
+                            @if (ViewBag.Tipos.Count > 0)
+                            {
+                                <option id="" value="" disabled selected>Categoria</option>
+                                <option id="Todos" value="Todos">Todas</option>
+                                foreach (var item in ViewBag.Tipos)
+                                {
+                                    <option id="@item.ID" value="@item.ID">@item.Descripcion</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="" id="no_opt">No hay opciones</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        @Html.Label("Usuarios", htmlAttributes: new { @id = "lbl_puesto" })
+                        <select name="Metod_Pago" id="Metod_Pago" class="comcode form-control" required style="width:150px">
+                            @if (ViewBag.Usuarios.Count > 0)
+                            {
+                                <option id="" value="" disabled selected>Usuario</option>
+                                <option id="Todos" value="Todos">Todos</option>
+                                foreach (var item in ViewBag.Usuarios)
+                                {
+                                    <option id="@item.ID" value="@item.ID">@item.ID</option>
+                                }
+                            }
+                            else
+                            {
+                                <option value="" id="no_opt">No hay opciones</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="button" value="Aceptar" id="Aceptar" class="btn btn-primary" />
+                    </div>
                 </div>
 
                 <div class="col-md-12">
+                    <table id="table" class="table table mdl-data-table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
 
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
@@ -47,23 +101,9 @@
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
 <script>
-    var auto = $.noConflict();
-    //jQuery(function ($) {
-    //    $('.Cantidad').focusout(function () {
-    //        var cantidad = this.value;
-    //        var ip = this.id;
-
-    //        $.ajax({
-    //            type: "POST",
-    //            url: '../../Carrito/Agregar2',
-    //            dataType: "post",
-    //            data: { "id": ip, "Cantidad": cantidad },
-    //            success: function (data) {
-    //            }
-    //        });
-    //        location.reload();
-    //    });
-    //});
-
+    $('#Aceptar').click(function () {
+        
+    });
 </script>
