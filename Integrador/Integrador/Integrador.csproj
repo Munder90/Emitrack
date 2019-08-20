@@ -2442,6 +2442,7 @@
     <None Include="Views\Usuario\Pass.cshtml" />
     <Content Include="Views\Usuario\Pregunta.cshtml" />
     <Content Include="Views\Ventas\Details.cshtml" />
+    <Content Include="Views\Ventas\Ver.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

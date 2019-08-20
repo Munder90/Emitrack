@@ -28,6 +28,7 @@
                     </p>
                 </div>
                 <div class="col-md-12">
+                    <input id="doc" value="@Model.ID" hidden>
                     <table class="table mdl-data-table table-striped">
                         <tbody>
                             <tr>
@@ -55,7 +56,15 @@
                                 </td>
                                 <td>
                                     @Html.LabelFor(model => model.Comprobante, "Comprobante", htmlAttributes: new { @class = "control-label" })
-                                    @if (Model.Comprobante == true)
+                                    @if (Model.Comprobante == true && ViewBag.Tipo != 1)
+                                    {
+                                        @Html.EditorFor(model => model.Comprobante, new { htmlAttributes = new { @class = "form-control", @placeholder = "Comprobante", disabled = "disabled" } })
+                                    }
+                                    else if (Model.Comprobante == true && ViewBag.Tipo == 1)
+                                    {
+                                    <a href="@Url.Action("Ver", "Ventas", new { id = Model.ID })"><img class="card-img form-control" src="~/images/Comprobante/@Model.Comprobante1" alt="" style="width:100px; height:100px;"></a>
+                                    }
+                                    else if (ViewBag.Tipo == 1)
                                     {
                                         @Html.EditorFor(model => model.Comprobante, new { htmlAttributes = new { @class = "form-control", @placeholder = "Comprobante", disabled = "disabled" } })
                                     }
@@ -136,7 +145,7 @@
         formData.append('id', id);
         formData.append('file', files);
         $.ajax({
-            url: '~/Ventas/Comprobante',
+            url: '../../Ventas/Comprobante',
             type: 'post',
             data: formData,
             contentType: false,

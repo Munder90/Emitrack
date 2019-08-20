@@ -7,6 +7,7 @@ using System.Data.Entity;
 using Integrador.Common;
 using Integrador.Entities;
 using Integrador.Models;
+using System.Web.Routing;
 
 namespace Integrador.Controllers
 {
@@ -23,7 +24,7 @@ namespace Integrador.Controllers
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 if (Usuario != null && Tipo != 1)
                 {
-                    List<VENTA> vENTAs = db.VENTAs.Where(x => x.Usuario == Usuario).ToList();
+                    List<VENTA> vENTAs = db.VENTAs.Where(x => x.Usuario == Usuario).OrderByDescending(x=>x.Fecha).ToList();
                     List<Ventas> ventas = new List<Ventas>();
                     List<PAGO_T> pagos = db.PAGO_T.Where(x => x.Activo == true).ToList();
                     List<USUARIO_DIR> direccion = db.USUARIO_DIR.Where(x => x.Usuario == Usuario && x.Activo == true).ToList();
@@ -56,7 +57,7 @@ namespace Integrador.Controllers
                 }
                 if (Usuario != null && Tipo == 1)
                 {
-                    List<VENTA> vENTAs = db.VENTAs.ToList();
+                    List<VENTA> vENTAs = db.VENTAs.OrderByDescending(x => x.Fecha).ToList();
                     List<Ventas> ventas = new List<Ventas>();
                     List<PAGO_T> pagos = db.PAGO_T.Where(x => x.Activo == true).ToList();
                     List<USUARIO_DIR> direccion = db.USUARIO_DIR.Where(x => x.Activo == true).ToList();
@@ -103,13 +104,13 @@ namespace Integrador.Controllers
                 FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
                 string Usuario = Session["usuario"].ToString();
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
-                if (Usuario != null && Tipo != 1)
+                if (Usuario != null)
                 {
-                    VENTA vENTAs = db.VENTAs.Where(x => x.ID == id && x.Usuario == Usuario).FirstOrDefault();
+                    VENTA vENTAs = db.VENTAs.Where(x => x.ID == id).FirstOrDefault();
                     List<VENTA_D> vENTA_D = db.VENTA_D.Where(x => x.ID_Venta == vENTAs.ID).ToList();
                     List<Ventas_D> ventas_Ds = new List<Ventas_D>();
                     List<PAGO_T> pagos = db.PAGO_T.Where(x => x.Activo == true).ToList();
-                    List<USUARIO_DIR> direccion = db.USUARIO_DIR.Where(x => x.Usuario == Usuario && x.Activo == true).ToList();
+                    List<USUARIO_DIR> direccion = db.USUARIO_DIR.Where(x => x.Activo == true).ToList();
                     List<PRODUCTO> pRODUCTOs = db.PRODUCTOes.Where(x => x.Activo == true).ToList();
                     string fecha = vENTAs.Fecha.Value.ToString("dd/MM/yyyy");
                     USUARIO_DIR dir1 = direccion.Where(x => x.ID == vENTAs.Direccion.Value).FirstOrDefault();
@@ -143,6 +144,7 @@ namespace Integrador.Controllers
                         Metod_Pago = pago,
                         Factura = vENTAs.Factura.Value,
                         Comprobante = comp,
+                        Comprobante1 = vENTAs.Comprobante,
                         Detalle = ventas_Ds
                     };
 
@@ -206,10 +208,10 @@ namespace Integrador.Controllers
                             Factura = ventas.Factura
                         };
                         uSUARIO.N_Compras += 1;
-                        nventa = vENTA.ID;
                         db.Entry(uSUARIO).State = EntityState.Modified;
                         db.VENTAs.Add(vENTA);
                         db.SaveChanges();
+                        nventa = vENTA.ID;
 
                         List<Carritos_D> carritos_Ds = new List<Carritos_D>();
                         foreach (CARRITO_D cARRITO_D in cARRITO_Ds)
@@ -284,28 +286,21 @@ namespace Integrador.Controllers
                 int Tipo = Convert.ToInt32(Session["tipo"].ToString());
                 if (Tipo != 1)
                 {
+                    string ruta;
+                    string imagen = "";
                     try
                     {
-                        //CARRITO cARRITO = db.CARRITOes.Where(x => x.Usuario == Usuario).FirstOrDefault();
-                        //List<CARRITO_D> pros = db.CARRITO_D.Where(x => x.ID_Carrito == cARRITO.ID).ToList();
-                        //CARRITO_D pro = pros.Where(x => x.Producto == id).FirstOrDefault();
-                        //PRODUCTO pRODUCTO = db.PRODUCTOes.Where(x => x.ID == id && x.Activo == true).FirstOrDefault();
-                        //decimal Total = pRODUCTO.Precio_V * Cantidad;
-                        //decimal TotalCarro = 0;
+                        HttpPostedFileBase file = Request.Files["file"];
+                        int doc = Convert.ToInt32(Request.Form.GetValues("id").FirstOrDefault());
+                        VENTA vENTA = db.VENTAs.Where(x => x.ID == doc).FirstOrDefault();
 
-                        //pro.Cantidad = Cantidad;
-                        //pro.Total = Total;
-                        //db.Entry(pro).State = EntityState.Modified;
-                        //db.SaveChanges();
+                        imagen = vENTA.ID + ".PNG";
+                        ruta = "~/images/Comprobante/" + vENTA.ID + ".PNG";
+                        file.SaveAs(Server.MapPath(ruta));
 
-                        //pros = db.CARRITO_D.Where(x => x.ID_Carrito == cARRITO.ID).ToList();
-                        //foreach (CARRITO_D item in pros)
-                        //{
-                        //    TotalCarro += item.Total.Value;
-                        //}
-                        //cARRITO.Total = TotalCarro;
-                        //db.Entry(cARRITO).State = EntityState.Modified;
-                        //db.SaveChanges();
+                        vENTA.Comprobante = imagen;
+                        db.Entry(vENTA).State = EntityState.Modified;
+                        db.SaveChanges();
                     }
                     catch (Exception)
                     {
@@ -320,47 +315,59 @@ namespace Integrador.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Ventas/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Ventas/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Ver(int id)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                if (Tipo == 1)
+                {
+                    try
+                    {
+                        VENTA vENTA = db.VENTAs.Where(x => x.ID == id).FirstOrDefault();
+                        ViewBag.ID = id;
+                        ViewBag.Imagen = vENTA.Comprobante;
+                        return View();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    return RedirectToAction("Index");
+                }
             }
-            catch
+            catch (Exception)
             {
-                return View();
+
             }
+            return RedirectToAction("Index");
         }
 
-        // GET: Ventas/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Ventas/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult DeleteConfirmed(int doc)
         {
             try
             {
-                // TODO: Add delete logic here
+                FnCommon.ObtenerConfPage(db, User.Identity.Name, this.ControllerContext.Controller);
+                string Usuario = Session["usuario"].ToString();
+                int Tipo = Convert.ToInt32(Session["tipo"].ToString());
+                if (Tipo == 1)
+                {
+                    VENTA vENTA = db.VENTAs.Where(x => x.ID == doc).FirstOrDefault();
+                    vENTA.Comprobante = null;
 
-                return RedirectToAction("Index");
+                    db.Entry(vENTA).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                //return RedirectToAction("Details", "Ventas", doc);
+                //return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = doc });
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
     }

@@ -16,6 +16,7 @@ namespace Integrador.Models
         string metod_Pago;
         bool factura;
         bool comprobante;
+        string comprobante1;
         List<Ventas_D> detalle;
 
         public int ID { get => iD; set => iD = value; }
@@ -28,5 +29,6 @@ namespace Integrador.Models
         public bool Factura { get => factura; set => factura = value; }
         public bool Comprobante { get => comprobante; set => comprobante = value; }
         public List<Ventas_D> Detalle { get => detalle; set => detalle = value; }
+        public string Comprobante1 { get => comprobante1; set => comprobante1 = value; }
     }
 }

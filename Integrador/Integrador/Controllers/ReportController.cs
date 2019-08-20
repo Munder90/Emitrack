@@ -139,7 +139,7 @@ namespace Integrador.Controllers
             }
         }
 
-        [HttpPost]
+        //[HttpPost]
         public ActionResult Orden(int id)
         {
             try

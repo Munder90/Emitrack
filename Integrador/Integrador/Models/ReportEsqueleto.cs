@@ -101,10 +101,6 @@ namespace Integrador.Models
                     PdfPCell Total4 = new PdfPCell(new Paragraph("$" + RC.TOTAL, letraTabNegrita)) { Border = 1, BackgroundColor = new BaseColor(0, 53, 100), HorizontalAlignment = Element.ALIGN_RIGHT, BorderColor = new BaseColor(240, 240, 240) }; tablaDatos2.AddCell(Total4);
                     pdfDoc.Add(tablaDatos2);
                     pdfDoc.Add(new Chunk("\n"));
-                    tablaDatos3.SetWidthPercentage(new float[] { 600 }, PageSize.A4);
-                    PdfPCell Foot = new PdfPCell(new Paragraph("Al realizar tu pago sube una imagen del comprobante de pago en la seccion de 'Mis Compras' seleccionando tu numero de pedido", letraTabNegrita)) { Border = 1, BorderColor = new BaseColor(240, 240, 240) }; tablaDatos3.AddCell(Foot);
-                    pdfDoc.Add(tablaDatos3);
-                    pdfDoc.Add(new Chunk("\n"));
 
                     pdfDoc.Close();
 

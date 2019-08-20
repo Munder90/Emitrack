@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Ver";
+    Layout = "~/Views/Shared/_LayoutDash.cshtml";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">
+                    <small>@ViewBag.usuario</small>
+                </h1>
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <p align="right" class="col-md-">
+                    @Html.ActionLink("Aceptar", "Details", "Ventas", new { id = ViewBag.ID }, htmlAttributes: new { @class = "btn btn-primary" })
+                    @if (ViewBag.Imagen != null)
+                    {
+                        <a href="" id="Confirma" onclick="pop(@ViewBag.ID)" class="btn btn-primary">
+                            Eliminar
+                        </a>
+                    }
+                </p>
+            </div>
+            @if (ViewBag.Imagen != null)
+            {
+                <div class="col-md-12">
+                    <iframe src="~/images/Comprobante/@ViewBag.Imagen" width="100%" height="600px"></iframe>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-12">
+                    <h1><label class="form-label-group">Comprobante sin cargar</label></h1>
+                </div>
+            }
+            <div class="col-md-12">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    function pop(id) {
+
+        if (confirm("Eliminar")) {
+
+            $.ajax({
+                type: "POST",
+                url: '../../Ventas/DeleteConfirmed',
+                dataType: "json",
+                data: { "doc": id },
+                success: function (data) {
+                    var url = "/Ventas/Details/" + id;
+                    window.location.href = url;
+                }
+            });
+        }
+        else {
+        }
+    };
+</script>
